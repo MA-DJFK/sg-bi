@@ -256,11 +256,11 @@ var T={
   typeAir:'Airline',typeRoute:'Route',typeChan:'Client',rExcellent:'Excellent',rGood:'Good',rFair:'Fair',
   ttTicket:'Tickets',ttReceipt:'Revenue',ttProfit:'Profit',ttMargin:'Margin',ttRevenue:'Revenue',unitTk:'',baseWeek:'Base week',
   yTk:'Tickets',yAmt:function(s){return 'Amount ('+s+'0k)';},yProfit:function(s){return 'Profit ('+s+')';},yPct:'WoW (%)',yMargin:'Margin (%)',yRev:function(s){return 'Revenue ('+s+'0k)';},ySupp:function(s){return s+'0k';},
-  insUp:'EK · SIN-DXB Route Dominance',insUpD:function(r){return 'EK contributed <b>¥12,305</b> profit (26% of weekly total). SIN-DXB alone: 51 tix / ¥12,241 profit / ¥232 per ticket — the profit engine this week. Revenue '+r+'.';},
-  insDown:'Weekend Efficiency Drop',insDownD:'Friday peaked (96 tix/¥10,945) → Sunday crashed to <b>50 tix/¥1,073</b>, profit down <b>90%</b>. Analyze weekend order structure and optimize procurement rhythm.',
-  insInfo:'Own Channel Margin Leads',insInfoD:function(a,b){return 'SGD account margin <b>5.01%</b> (¥23,512/59 tix), far exceeding Ctrip Intl-1 <b>2.35%</b> (¥15,424/211 tix). Scaling own-channel share improves overall profitability.';},
+  insUp:'EK · SIN-DXB Route Dominance',insUpD:function(r){return 'EK contributed <b>S$2,334</b> profit (26% of weekly total). SIN-DXB alone: 51 tix / S$2,322 profit / S$44 per ticket — the profit engine this week. Revenue '+r+'.';},
+  insDown:'Weekend Efficiency Drop',insDownD:'Friday peaked (96 tix/S$2,076) → Sunday crashed to <b>50 tix/S$204</b>, profit down <b>90%</b>. Analyze weekend order structure and optimize procurement rhythm.',
+  insInfo:'Own Channel Margin Leads',insInfoD:function(a,b){return 'SGD account margin <b>5.01%</b> (S$4,459/59 tix), far exceeding Ctrip Intl-1 <b>2.35%</b> (S$2,925/211 tix). Scaling own-channel share improves overall profitability.';},
   pUrgent:'Urgent',pImportant:'Important',pOptimize:'Optimize',expect:'Expected: ',
-  foot:function(m){return 'SG Leading · Air-Ticket Wholesale BI Dashboard | Period: '+m.period+' | '+m.orders+' orders / '+m.tickets+' tickets | Generated '+m.generated+'<br>Source: SG-Leading-Jul.xlsx · SGD accounts at SGD→CNY 5.272450 · Dual-currency stored, zero-error switching';}}
+  foot:function(m){return 'SG Leading · Air-Ticket Wholesale BI Dashboard | Period: '+(m.period||'').replace('年','/').replace('月','/').replace('日','').replace(' — ',' - ')+' | '+m.orders+' orders / '+m.tickets+' tickets | Generated '+m.generated+'<br>Source: SG-Leading-Jul.xlsx · SGD accounts at SGD→CNY 5.272450 · Dual-currency stored, zero-error switching';}}
 };
 function tr(){return T[L];}
 function showApp(){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';if(!window.__i){init();window.__i=1;}}
@@ -269,6 +269,9 @@ document.getElementById('loginBtn').addEventListener('click',tryLogin);
 ['u','p'].forEach(function(id){document.getElementById(id).addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});});
 
 var D=window.SG, CUR='CNY';
+
+var dayEN={'周一':'Mon','周二':'Tue','周三':'Wed','周四':'Thu','周五':'Fri','周六':'Sat','周日':'Sun'};
+function dayLabel(r){return L==='zh'?r:(dayEN[r]||r);}
 function sym(){return CUR==='CNY'?'\u00a5':'S$';}
 function _nf(n,d){if(typeof Highcharts!=='undefined'&&Highcharts.numberFormat)return Highcharts.numberFormat(n,d,'.',',');var x=Number(n)||0;return x.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});}
 function fmt(n){return _nf(n,0);}
@@ -281,7 +284,7 @@ function moneyWV(v){return fmt2(v/10000)+(L==='zh'?'\u4e07':'0k');}
 // KPI等标量：传对象+基名
 function money(o,base){return moneyV(V(o,base));}
 function moneyW(o,base){return moneyWV(V(o,base));}
-function nm(o){return (L==='en'&&o.name_en)?o.name_en:o.name;}
+function nm(o){if(L==='en'){if(o.name_en)return o.name_en;if(typeof _zhMap!=='undefined'&&_zhMap[o.name])return _zhMap[o.name];} return o.name;}
 function HAS_BUBBLE(){return !!(typeof Highcharts!=='undefined'&&Highcharts.seriesTypes&&Highcharts.seriesTypes.bubble);}
 var base={chart:{backgroundColor:'transparent',style:{fontFamily:getComputedStyle(document.documentElement).getPropertyValue('--font')}},title:{text:null},credits:{enabled:false},accessibility:{enabled:true},legend:{itemStyle:{color:'#5b6b85',fontWeight:'600'}},xAxis:{labels:{style:{color:'#5b6b85'}},lineColor:'#e3e8f0',tickColor:'#e3e8f0',gridLineColor:'#eef1f6'},yAxis:{labels:{style:{color:'#94a3b8'}},gridLineColor:'#eef1f6',title:{style:{color:'#94a3b8'}}},tooltip:{backgroundColor:'#fff',borderColor:'#e3e8f0',style:{color:'#152237'},shadow:true}};
 var NAVY={linearGradient:{x1:0,x2:0,y1:0,y2:1},stops:[[0,'#3b6098'],[1,'#1e3a5f']]};
@@ -310,7 +313,7 @@ function applyStatic(){var t=tr();
   document.getElementById('t-route').textContent=t.tRoute;document.getElementById('d-route').textContent=t.dRoute;var rm=document.querySelectorAll('#routeMetric button');rm[0].textContent=t.rmTk;rm[1].textContent=t.rmRcpt;rm[2].textContent=t.rmProf;
   document.getElementById('t-tbl').textContent=t.tTbl;document.getElementById('d-tbl').textContent=t.dTbl;
   document.getElementById('t-act').textContent=t.tAct;document.getElementById('d-act').textContent=t.dAct;
-  document.getElementById('foot').innerHTML=t.foot(D.meta);
+  document.getElementById('foot').innerHTML=t.foot({period:D.meta.period,orders:D.kpi.orders,tickets:D.kpi.tickets,generated:D.meta.dataNote||''});
 }
 function renderKPI(){var k=D.kpi,t=tr();
   document.getElementById('kpis').innerHTML=[
@@ -324,7 +327,7 @@ function renderWkTrend(){var wt=D.weeklyTrend;if(!wt||!wt.length)return;var t=tr
   document.getElementById('t-wktrend').textContent=t.tWkTrend||'每周趋势';
   var el=document.getElementById('d-wktrend');if(el)el.textContent=t.dWkTrend||'';
   Highcharts.chart('c-wktrend',Highcharts.merge(base,{chart:{spacingTop:18},
-    xAxis:{categories:wt.map(function(x){return x.w+'\n('+x.range+')';}),crosshair:{width:1.5,color:'rgba(30,58,95,.15)',dashStyle:'ShortDash'}},
+    xAxis:{categories:wt.map(function(x){return x.w+'\n('+dayLabel(x.range)+')';}),crosshair:{width:1.5,color:'rgba(30,58,95,.15)',dashStyle:'ShortDash'}},
     yAxis:[
       {title:{text:(L==='zh'?'票量':'Tickets')},labels:{style:{color:'#94a3b8'}},min:0},
       {title:{text:(L==='zh'?'营收':'Revenue')+'('+sym()+(L==='zh'?'万':'0k')+')',style:{color:'#d4a017'}},opposite:true,labels:{style:{color:'#d4a017'},formatter:function(){return Highcharts.numberFormat(this.value/10000,1);}},min:0},
@@ -341,13 +344,13 @@ function renderWkTrend(){var wt=D.weeklyTrend;if(!wt||!wt.length)return;var t=tr
 }
 function renderWeekly(){var w=D.weeks,t=tr();
   Highcharts.chart('c-weekly',Highcharts.merge(base,{chart:{spacingTop:18},
-    xAxis:{categories:w.map(function(x){return x.w+'\n('+x.range+')';}),crosshair:{width:1.5,color:'rgba(30,58,95,.15)',dashStyle:'ShortDash'}},
+    xAxis:{categories:w.map(function(x){return x.w+'\n('+dayLabel(x.range)+')';}),crosshair:{width:1.5,color:'rgba(30,58,95,.15)',dashStyle:'ShortDash'}},
     yAxis:[
       {title:{text:t.yTk},labels:{style:{color:'#94a3b8'}}},
       {title:{text:t.ttReceipt+'('+sym()+(L==='zh'?'万':'0k')+')',style:{color:'#d4a017'}},opposite:true,labels:{style:{color:'#d4a017'},formatter:function(){return fmt(this.value/10000);}}},
       {title:{text:t.ttProfit+'('+sym()+(L==='zh'?'万':'0k')+')',style:{color:'#12b886'}},opposite:true,labels:{style:{color:'#12b886'},formatter:function(){return fmt1(this.value/10000);}},gridLineWidth:0}
     ],
-    tooltip:{useHTML:true,shared:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var d=w[this.points[0].point.index];return ttCard(d.w+' ('+d.range+')',[['#2b4c78',t.ttTicket,fmt(d.tickets)+' '+t.unitTk],['#d4a017',t.ttReceipt,moneyW(d,'receipt')],['#12b886',t.ttProfit,moneyW(d,'profit')]]);}},
+    tooltip:{useHTML:true,shared:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var d=w[this.points[0].point.index];return ttCard(d.w+' ('+dayLabel(d.range)+')',[['#2b4c78',t.ttTicket,fmt(d.tickets)+' '+t.unitTk],['#d4a017',t.ttReceipt,moneyW(d,'receipt')],['#12b886',t.ttProfit,moneyW(d,'profit')]]);}},
     plotOptions:{column:{borderRadius:5,pointWidth:38,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{color:'#5b6b85',fontWeight:'600',textOutline:'none',fontSize:'9px'}}},spline:{marker:{radius:5,lineWidth:2,lineColor:'#fff'},lineWidth:3}},
     legend:{enabled:true},
     series:[
@@ -443,10 +446,10 @@ function renderPL(){var ar=D.ar,t=tr();if(!ar)return;
     var loss=items.filter(function(x){return x.profit<0;}).sort(function(a,b){return a.profit-b.profit;}).slice(0,6);
     function amt(v){return sym()+fmt(CUR==='SGD'?v/D.meta.rate:v);}
     function row(x,cls){var nm=isAir?x.name:x.name;var ptCell=(x.tickets>0)?('<td class="'+(x.per_ticket<0?'neg':'pos')+'">'+amt(x.per_ticket)+'</td>'):('<td style="color:#94a3b8">—</td>');var tip='';if(!isAir&&D.routeAir&&D.routeAir[x.name]&&D.routeAir[x.name].length){nm+=' <span style="color:#94a3b8;font-weight:500;font-size:11px">('+D.routeAir[x.name].join('/')+')'+String.fromCharCode(60)+'/span>';}else{tip=' style="font-weight:600;color:#152237"';}return '<tr><td style="font-weight:600;color:#152237">'+nm+'</td><td>'+fmt(x.tickets)+'</td><td class="'+(x.profit<0?'neg':'pos')+'">'+amt(x.profit)+'</td>'+ptCell+'</tr>';}
-    var h='<thead><tr><th>'+(isAir?'航司':'航线')+'</th><th>票量</th><th>利润('+sym()+')</th><th>单票利润</th></tr></thead><tbody>';
-    h+='<tr><td colspan="4" style="background:#e9f9f2;color:#0f9d6e;font-weight:700;text-align:left;font-family:var(--font)">▲ 盈利'+(isAir?'航司':'航线')+' TOP'+prof.length+'</td></tr>';
+    var h='<thead><tr><th>'+(isAir?(L==='zh'?'航司':'Airline'):(L==='zh'?'航线':'Route'))+'</th><th>'+(L==='zh'?'票量':'Tickets')+'</th><th>'+(L==='zh'?'利润':'Profit')+'('+sym()+')</th><th>'+(L==='zh'?'单票利润':'Per Tkt')+'</th></tr></thead><tbody>';
+    h+='<tr><td colspan="4" style="background:#e9f9f2;color:#0f9d6e;font-weight:700;text-align:left;font-family:var(--font)">▲ '+(L==='zh'?'盈利':'Profit ')+''+(isAir?(L==='zh'?'航司':'Airlines'):(L==='zh'?'航线':'Routes'))+' TOP'+prof.length+'</td></tr>';
     prof.forEach(function(x){h+=row(x);});
-    h+='<tr><td colspan="4" style="background:#fdeeee;color:#dc3545;font-weight:700;text-align:left;font-family:var(--font)">▼ 亏损'+(isAir?'航司':'航线')+' TOP'+loss.length+'</td></tr>';
+    h+='<tr><td colspan="4" style="background:#fdeeee;color:#dc3545;font-weight:700;text-align:left;font-family:var(--font)">▼ '+(L==='zh'?'亏损':'Loss ')+''+(isAir?(L==='zh'?'航司':'Airlines'):(L==='zh'?'航线':'Routes'))+' TOP'+loss.length+'</td></tr>';
     loss.forEach(function(x){h+=row(x);});
     document.getElementById(id).innerHTML=h+'</tbody>';
   }
@@ -476,9 +479,54 @@ function renderActions(){var t=tr();
 }
 var viewMap={all:[0,1,2,3,4,5,6,7,8],supply:[0,1,4,7,8],market:[5,6,2,3,7,8],ops:[0,2,3,8]};
 function applyView(v){var cards=document.querySelectorAll('#grid > .card');var show=viewMap[v];cards.forEach(function(card,idx){card.style.display=(v==='all'||show.indexOf(idx)>=0)?'':'none';});setTimeout(function(){window.dispatchEvent(new Event('resize'));},50);}
-function renderAll(){var fns=[renderKPI,renderWeekly,renderWkTrend,renderSupplier,renderSeg,renderCmp,renderWkInsights,renderAir,renderChannel,renderRoute,renderPL,renderTable,renderActions];fns.forEach(function(f){try{f();}catch(e){console.error('render error:',e);}});}
+
+var _zhMap={'航司盈亏分析（利润 / 单票利润）':'Airline P&L (Profit / Per-ticket)',
+  '航线盈亏分析（利润 / 单票利润）':'Route P&L (Profit / Per-ticket)',
+  '盈利 vs 亏损航司 · 单票利润=利润/票量 · 已刨除OrderTypeName退票':'Profit vs Loss airlines · per-ticket=profit/tickets · refunds excluded',
+  '盈利 vs 亏损航线 · 单票利润=利润/票量 · 已刨除OrderTypeName退票':'Profit vs Loss routes · per-ticket=profit/tickets · refunds excluded',
+  '售前':'Pre-sale','退票利润':'Refund profit','退票损失':'Refund loss','售后净':'After net',
+  '月度经营看板':'Operations','后返':'Rebate',
+  '周一':'Mon','周二':'Tue','周三':'Wed','周四':'Thu','周五':'Fri','周六':'Sat','周日':'Sun',
+  '利润(S$)':'Profit(S$)','利润(¥)':'Profit(¥)','票量':'Tickets','单票利润':'Per Tkt',
+  '航司':'Airline','航线':'Route','盈利':'Profit','亏损':'Loss',
+  '已刨除':'excl.','已完成':'Completed','利润率':'Margin',
+  '2026年8月10日 — 8月16日':'Aug 10-16, 2026',
+  '8月10日 — 8月16日':'Aug 10-16',
+  '2026携程国际一部':'Ctrip Intl-1','新加坡引领-新币账户':'SG Leading(SGD)',
+  '2026去哪国际':'Qunar Intl','新加坡-乐飞天下(新币)':'LeFlyWorld(SGD)',
+  '2026携程国际廉航':'Ctrip LCC','2026同程国际':'Tongcheng Intl',
+  '2026飞猪国际':'Fliggy Intl','新加坡引领账户':'SG Leading(CNY)',
+  '2026易旅行':'EasyTravel','销售部于海丽':'Sales-YHL',
+  '河北差联会':'Hebei CLTA','越捷航空-VJVZ':'VietJet-VJVZ',
+  '航路flightroutes24-IYF':'FlightRoutes24-IYF'};
+var _domSaved=[];
+function translateDom(){
+  _domSaved=[];
+  var walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  var node;while(node=walk.nextNode()){
+    var orig=node.textContent,t=orig;
+    Object.keys(_zhMap).forEach(function(zh){
+      if(t.indexOf(zh)>=0)t=t.split(zh).join(_zhMap[zh]);
+    });
+    if(t!==orig){_domSaved.push({n:node,o:orig});node.textContent=t;}
+  }
+  document.querySelectorAll('text,tspan').forEach(function(el){
+    var orig=el.textContent,t=orig;
+    Object.keys(_zhMap).forEach(function(zh){
+      if(t.indexOf(zh)>=0)t=t.split(zh).join(_zhMap[zh]);
+    });
+    if(t!==orig){_domSaved.push({n:el,o:orig});el.textContent=t;}
+  });
+}
+function restoreDom(){
+  _domSaved.forEach(function(s){s.n.textContent=s.o;});
+  _domSaved=[];
+}
+
+function renderAll(){var fns=[renderKPI,renderWeekly,renderWkTrend,renderSupplier,renderSeg,renderCmp,renderWkInsights,renderAir,renderChannel,renderRoute,renderPL,renderTable,renderActions];fns.forEach(function(f){try{f();}catch(e){console.error('render error:',e);}});
+  if(L==='en')translateDom();else restoreDom();}
 function init(){applyStatic();
-  document.getElementById('curSeg').addEventListener('click',function(e){if(e.target.dataset.cur){CUR=e.target.dataset.cur;L=(CUR==='SGD')?'en':'zh';document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===CUR);});applyStatic();renderAll();}});
+  document.getElementById('curSeg').addEventListener('click',function(e){if(e.target.dataset.cur){CUR=e.target.dataset.cur;L=(CUR==='SGD')?'en':'zh';document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===CUR);});applyStatic();renderAll();document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:L},'*');}catch(e){}});}});
   document.getElementById('printBtn').addEventListener('click',function(){window.print();});
   document.getElementById('vtabs').addEventListener('click',function(e){var el=e.target.closest('.vtab');if(el){document.querySelectorAll('.vtab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');applyView(el.dataset.v);}});
   document.getElementById('cmpMode').addEventListener('click',function(e){if(e.target.dataset.m){cmpMode=e.target.dataset.m;document.querySelectorAll('#cmpMode button').forEach(function(b){b.classList.toggle('active',b.dataset.m===cmpMode);});renderCmp();}});
@@ -495,7 +543,7 @@ document.addEventListener('mouseout',function(e){var td=e.target.closest?e.targe
 _boot();
 
 // ===== 主Tab切换 =====
-(function(){function bindMain(){var tabs=document.querySelectorAll('.maintab');if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.maintab').forEach(function(x){x.classList.remove('active');});t.classList.add('active');var v=t.dataset.mt;document.querySelectorAll('.mainpage').forEach(function(p){p.classList.toggle('active',p.id==='mp-'+v);});setTimeout(function(){window.dispatchEvent(new Event('resize'));},60);});});}bindMain();})();
+(function(){function bindMain(){var tabs=document.querySelectorAll('.maintab');if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.maintab').forEach(function(x){x.classList.remove('active');});t.classList.add('active');var v=t.dataset.mt;document.querySelectorAll('.mainpage').forEach(function(p){p.classList.toggle('active',p.id==='mp-'+v);});setTimeout(function(){window.dispatchEvent(new Event('resize'));document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:L},'*');}catch(e){}});},60);});});}bindMain();})();
 </script>
 <div class="route-tip" id="routeTip"><div class="tip-label">航司 Airline</div><div class="tip-air" id="routeTipAir"></div></div>
 </body>

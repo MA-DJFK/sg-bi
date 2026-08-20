@@ -83,18 +83,18 @@ table.dt tr:hover td{background:#f8fafc}
 <body>
 <div class="hero"><div class="hero-in">
   <div class="hl"><div class="logo"><span style="font-size:inherit">⚡</span></div>
-    <div><h1>SQ 新航 · 后返 KPI 完成进度</h1><div class="sub">出票公司 SG LEADING/寻汇Sunrate · KPI周期 2026.1 — 2027.3（15个月）· 销售日期口径· 币种 SGD(新币)</div></div></div>
-  <div class="badge"><span style="font-size:inherit">✅</span> 数据截止 8.16</div>
+    <div><h1 id="hero-title">SQ 新航 · 后返 KPI 完成进度</h1><div class="sub" id="hero-sub">出票公司 SG LEADING/寻汇Sunrate · KPI周期 2026.1 — 2027.3（15个月）· 销售日期口径· 币种 SGD(新币)</div></div></div>
+  <div class="badge" id="hero-badge"><span style="font-size:inherit">✅</span> 数据截止 8.16</div>
 </div></div>
 <div class="wrap">
-  <div class="rule" id="rule"></div>
+  <div class="rule" id="rule" style="display:none"></div>
   <div class="kpis" id="kpis"></div>
     <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #f59e0b;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
       <div>
-        <div style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（8.10-8.16）</div>
+        <div style="font-size:13px;color:#5b6b85;font-weight:600" id="w3-title">📅 本周完成（8.10-8.16）</div>
         <div style="display:flex;gap:32px;margin-top:6px">
-          <div><div style="font-size:11px;color:#94a3b8">SIN始发·非K舱</div><div style="font-size:24px;font-weight:800;color:#0ea5e9;font-family:DIN,monospace" id="w3-sin"></div><div style="font-size:11px;color:#94a3b8" id="w3-sin-target"></div></div>
-          <div><div style="font-size:11px;color:#94a3b8">非SIN始发·非K舱</div><div style="font-size:24px;font-weight:800;color:#8b5cf6;font-family:DIN,monospace" id="w3-nonsin"></div><div style="font-size:11px;color:#94a3b8" id="w3-nonsin-target"></div></div>
+          <div><div style="font-size:11px;color:#94a3b8" id="w3-sin-label">SIN始发·非K舱</div><div style="font-size:24px;font-weight:800;color:#0ea5e9;font-family:DIN,monospace" id="w3-sin"></div><div style="font-size:11px;color:#94a3b8" id="w3-sin-target"></div></div>
+          <div><div style="font-size:11px;color:#94a3b8" id="w3-nonsin-label">非SIN始发·非K舱</div><div style="font-size:24px;font-weight:800;color:#8b5cf6;font-family:DIN,monospace" id="w3-nonsin"></div><div style="font-size:11px;color:#94a3b8" id="w3-nonsin-target"></div></div>
         </div>
       </div>
       <div style="text-align:right">
@@ -102,9 +102,9 @@ table.dt tr:hover td{background:#f8fafc}
       </div>
     </div>
   <div class="grid">
-    <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> SIN始发·非K舱 目标完成</h3><div class="desc">目标 1,935,000 SGD</div><div id="g-sin" class="chart"></div></div>
-    <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> 非SIN始发·非K舱 目标完成</h3><div class="desc">目标 120,000 SGD</div><div id="g-nonsin" class="chart"></div></div>
-    <div class="card col-12"><h3><span style="font-size:inherit">📊</span> 各销售月实际完成 vs 月KPI目标（含完成率）</h3><div class="desc">销售月份 2026.1-2027.3 · 柱=各类别实际，虚线=月目标</div><div id="c-month" class="chart-lg"></div></div>
+    <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="gt-sin">SIN始发·非K舱 目标完成</span></h3><div class="desc"><span id="gd-sin">目标 1,935,000 SGD</span></div><div id="g-sin" class="chart"></div></div>
+    <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="gt-nonsin">非SIN始发·非K舱 目标完成</span></h3><div class="desc"><span id="gd-nonsin">目标 120,000 SGD</span></div><div id="g-nonsin" class="chart"></div></div>
+    <div class="card col-12"><h3><span style="font-size:inherit">📊</span> <span id="h3-month">各销售月实际完成 vs 月KPI目标（含完成率）</span></h3><div class="desc">销售月份 2026.1-2027.3 · 柱=各类别实际，虚线=月目标</div><div id="c-month" class="chart-lg"></div></div>
     <div class="card col-12"><h3><span style="font-size:inherit">📈</span> 累计完成 vs 目标进度线</h3><div class="desc">按起飞月累计，虚线为等比目标进度</div><div id="c-cum" class="chart-lg"></div></div>
     <div class="card col-12"><h3><span style="font-size:inherit">📅</span> 各周实际完成 vs 周KPI目标</h3><div class="desc">按销售周（ISO周）· 橙色虚线为SIN周目标 29,769 SGD</div><div id="c-week" class="chart-lg"></div></div>
     <div class="card col-12" style="background:linear-gradient(135deg,#fff8ed,#fff);border:1px solid #f6e6c0"><h3><i class="fa-solid fa-list-check" style="color:#f59e0b"></i> 剩余任务量分解 · 截止7月已完成 → 后续每月/每周需完成</h3><div class="desc">销售日期口径 · 剩余 2026.8-2027.3（8个月）· 剩余目标均分</div><div id="remBox"></div><div style="overflow-x:auto;margin-top:14px"><table class="dt" id="remTbl"></table></div></div>
@@ -116,6 +116,7 @@ window.KPI={"targets": {"sin": 1935000, "nonsin": 120000}, "months": 15, "weeks"
 </script>
 <script>
 
+var LANG='zh';
 var D=window.KPI;
 function fmt(n){return (typeof Highcharts!=='undefined')?Highcharts.numberFormat(n,0,'.',','):Math.round(n).toLocaleString();}
 function fmt1(n){return (typeof Highcharts!=='undefined')?Highcharts.numberFormat(n,1,'.',','):(Math.round(n*10)/10).toLocaleString();}
@@ -124,77 +125,126 @@ var C={sin:'#5083fb',nonsin:'#12b886'};
 function ttCard(t,rows){var h='<div class="tt-card"><div class="tt-title">'+t+'</div>';rows.forEach(function(r){h+='<div class="tt-row"><span class="tt-dot" style="background:'+r[0]+'"></span><span class="tt-name">'+r[1]+'</span><span class="tt-val">'+r[2]+'</span></div>';});return h+'</div>';}
 function boot(){if(typeof Highcharts==='undefined'){return setTimeout(boot,60);}init();}
 function init(){
+  
+  // 月份英文映射
+  var _mEN={'8月剩余':'Aug remaining','9月':'Sep','10月':'Oct','11月':'Nov','12月':'Dec','27年1月':"'27-Jan",'27年2月':"'27-Feb",'27年3月':"'27-Mar",'剩余合计':'Total'};
+  function mLabel(s){return LANG==='zh'?s:(_mEN[s]||s);}
   var a=D.actual, mt=D.monthTarget, T=D.targets;
-  document.getElementById('rule').innerHTML='<b>KPI 口径：</b>航司 <span class="tag">SQ</span> · 出票公司 SG LEADING/寻汇Sunrate · 指标=票面 TotalFacePrice · K舱不计入 · <b>时间划分</b>：按销售日期IssueTime · <b>起飞筛选</b>：2026.4.1-2027.3.31<br><b>币种换算：</b>新币账户直接取值；其他账户 CNY×0.19002324 折SGD · <b>目标：</b>SIN始发非K舱 <b>1,935,000</b> ｜ 非SIN始发非K舱 <b>120,000</b> SGD（15个月，每月均分）· <b>时间进度 49.2%</b>（截止 2026.8.12）';
+  // rule module removed
   var SC=D.shouldComplete||{},TPg=D.timeProgress||0;
-  function gap(k){var g=a[k]-(SC[k]||0);return g>=0?'<span style="color:#12b886">超前 '+fmt(g)+'</span>':'<span style="color:#ef4444">落后 '+fmt(-g)+'</span>';}
+  function gap(k){var g=a[k]-(SC[k]||0);return g>=0?'<span style="color:#12b886">'+(LANG==='zh'?'超前 ':'Ahead ')+fmt(g)+'</span>':'<span style="color:#ef4444">'+(LANG==='zh'?'落后 ':'Behind ')+fmt(-g)+'</span>';}
   document.getElementById('kpis').innerHTML=[
-    {l:'SIN始发·非K舱 累计',c:C.sin,v:fmt(a.sin),u:'SGD',s:'完成'+fmt1(pct(a.sin,T.sin))+'% · 时间'+TPg+'% · '+gap('sin')},
-    {l:'非SIN始发·非K舱 累计',c:C.nonsin,v:fmt(a.nonsin),u:'SGD',s:'完成'+fmt1(pct(a.nonsin,T.nonsin))+'% · 时间'+TPg+'% · '+gap('nonsin')},
-    {l:'SIN 本周(8.10-8.16)',c:'#f59e0b',v:fmt(D.w3.sin),u:'SGD',s:fmt(D.w3.orders)+' 单中SIN部分'},
-    {l:'非SIN 本周(8.10-8.16)',c:'#8b5cf6',v:fmt(D.w3.nonsin),u:'SGD',s:'非SIN始发本周完成'}
+    {l:(LANG==='zh'?'SIN始发·非K舱 累计':'SIN-origin · non-K Cumulative'),c:C.sin,v:fmt(a.sin),u:'SGD',s:(LANG==='zh'?'完成':'Done ')+fmt1(pct(a.sin,T.sin))+'% · '+(LANG==='zh'?'时间':'Time ')+TPg+'% · '+gap('sin')},
+    {l:(LANG==='zh'?'非SIN始发·非K舱 累计':'non-SIN · non-K Cumulative'),c:C.nonsin,v:fmt(a.nonsin),u:'SGD',s:(LANG==='zh'?'完成':'Done ')+fmt1(pct(a.nonsin,T.nonsin))+'% · '+(LANG==='zh'?'时间':'Time ')+TPg+'% · '+gap('nonsin')},
+    {l:(LANG==='zh'?'SIN 本周(8.10-8.16)':'SIN This Week(8.10-8.16)'),c:'#f59e0b',v:fmt(D.w3.sin),u:'SGD',s:fmt(D.w3.orders)+(LANG==='zh'?' 单中SIN部分':' orders · SIN portion')},
+    {l:(LANG==='zh'?'非SIN 本周(8.10-8.16)':'non-SIN This Week(8.10-8.16)'),c:'#8b5cf6',v:fmt(D.w3.nonsin),u:'SGD',s:(LANG==='zh'?'非SIN始发本周完成':'non-SIN this week')}
   ].map(function(x){return '<div class="kpi" style="--c:'+x.c+'"><div class="l">'+x.l+'</div><div class="v">'+x.v+' <span class="u">'+x.u+'</span></div><div class="s">'+x.s+'</div></div>';}).join('');
   // 本周完成分项 + 周目标
   if(D.w3){
     var wt=D.weekTarget||{sin:0,nonsin:0};
     var e1=document.getElementById('w3-sin');if(e1)e1.textContent=fmt(D.w3.sin)+' SGD';
-    var e1t=document.getElementById('w3-sin-target');if(e1t)e1t.innerHTML='周目标 '+fmt(wt.sin)+' · <b style="color:'+(D.w3.sin>=wt.sin?'#12b886':'#ef4444')+'">'+fmt1(D.w3.sin/wt.sin*100)+'%</b>';
+    var e1t=document.getElementById('w3-sin-target');if(e1t)e1t.innerHTML=(LANG==='zh'?'周目标 ':'Wk target ')+fmt(wt.sin)+' · <b style="color:'+(D.w3.sin>=wt.sin?'#12b886':'#ef4444')+'">'+fmt1(D.w3.sin/wt.sin*100)+'%</b>';
     var e2=document.getElementById('w3-nonsin');if(e2)e2.textContent=fmt(D.w3.nonsin)+' SGD';
-    var e2t=document.getElementById('w3-nonsin-target');if(e2t)e2t.innerHTML='周目标 '+fmt(wt.nonsin)+' · <b style="color:'+(D.w3.nonsin>=wt.nonsin?'#12b886':'#ef4444')+'">'+fmt1(D.w3.nonsin/wt.nonsin*100)+'%</b>';
-    var e3=document.getElementById('w3-orders');if(e3)e3.innerHTML='<div style="font-size:11px">合计 '+fmt(D.w3.orders)+' 单</div>';
+    var e2t=document.getElementById('w3-nonsin-target');if(e2t)e2t.innerHTML=(LANG==='zh'?'周目标 ':'Wk target ')+fmt(wt.nonsin)+' · <b style="color:'+(D.w3.nonsin>=wt.nonsin?'#12b886':'#ef4444')+'">'+fmt1(D.w3.nonsin/wt.nonsin*100)+'%</b>';
+    var e3=document.getElementById('w3-orders');if(e3)e3.innerHTML='<div style="font-size:11px">'+(LANG==='zh'?'合计 ':'Total ')+fmt(D.w3.orders)+(LANG==='zh'?' 单':' orders')+'</div>';
+    // i18n: translate static HTML elements based on LANG
+    var w3t=document.getElementById('w3-title');if(w3t)w3t.textContent=LANG==='zh'?'\ud83d\udcc5 本周完成（8.10-8.16）':'\ud83d\udcc5 This Week (8.10-8.16)';
+    var w3sl=document.getElementById('w3-sin-label');if(w3sl)w3sl.textContent=LANG==='zh'?'SIN始发\u00b7非K舱':'SIN-origin \u00b7 non-K';
+    var w3nl=document.getElementById('w3-nonsin-label');if(w3nl)w3nl.textContent=LANG==='zh'?'非SIN始发\u00b7非K舱':'non-SIN \u00b7 non-K';
+    var h3m=document.getElementById('h3-month');if(h3m)h3m.textContent=LANG==='zh'?'各销售月实际完成 vs 月KPI目标（含完成率）':'Monthly Actual vs KPI Target (with %)';
   }
   function gauge(id,val,tgt,color){var p=Math.min(pct(val,tgt),100);Highcharts.chart(id,{chart:{type:'solidgauge',backgroundColor:'transparent',height:260},title:null,credits:{enabled:false},accessibility:{enabled:true},pane:{center:['50%','60%'],size:'100%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef1f6',borderWidth:0}},yAxis:{min:0,max:100,lineWidth:0,tickPositions:[],labels:{enabled:false},plotLines:[{value:(D.timeProgress||0),color:'#f59e0b',width:3,zIndex:6}]},tooltip:{enabled:false},plotOptions:{solidgauge:{dataLabels:{y:-24,borderWidth:0,useHTML:true,format:'<div style="text-align:center"><div style="font-size:30px;font-weight:800;color:'+color+';font-family:DIN,monospace">'+fmt1(pct(val,tgt))+'%</div><div style="font-size:12px;color:#5b6b85">'+fmt(val)+' / '+fmt(tgt)+'</div></div>'},rounded:true}},series:[{data:[{y:p,color:color,radius:'100%',innerRadius:'62%'}]}]});}
+  
+  // i18n: banner elements
+  var heroTitle=document.getElementById('hero-title');if(heroTitle)heroTitle.textContent=LANG==='zh'?'SQ \u65b0\u822a \u00b7 \u540e\u8fd4 KPI \u5b8c\u6210\u8fdb\u5ea6':'SQ Rebate KPI Progress';
+  var heroSub=document.getElementById('hero-sub');if(heroSub)heroSub.textContent=LANG==='zh'?'\u51fa\u7968\u516c\u53f8 SG LEADING/\u5bfb\u6c47Sunrate \u00b7 KPI\u5468\u671f 2026.1 \u2014 2027.3\uff0815\u4e2a\u6708\uff09\u00b7 \u9500\u552e\u65e5\u671f\u53e3\u5f84\u00b7 \u5e01\u79cd SGD(\u65b0\u5e01)':'Issuer: SG LEADING/Sunrate \u00b7 KPI period 2026.1-2027.3 (15 months) \u00b7 Sales date basis \u00b7 Currency SGD';
+  var heroBadge=document.getElementById('hero-badge');if(heroBadge)heroBadge.innerHTML='<span style="font-size:inherit">\u2705</span> '+(LANG==='zh'?'\u6570\u636e\u622a\u6b62 8.16':'Data as of 8.16');
+  // gauge titles i18n
+  var gts=document.getElementById('gt-sin');if(gts)gts.textContent=LANG==='zh'?'SIN始发·非K舱 目标完成':'SIN · non-K Target Progress';
+  var gtn=document.getElementById('gt-nonsin');if(gtn)gtn.textContent=LANG==='zh'?'非SIN始发·非K舱 目标完成':'non-SIN · non-K Target Progress';
+  var gds=document.getElementById('gd-sin');if(gds)gds.textContent=(LANG==='zh'?'目标 ':'Target ')+fmt(T.sin)+' SGD';
+  var gdn=document.getElementById('gd-nonsin');if(gdn)gdn.textContent=(LANG==='zh'?'目标 ':'Target ')+fmt(T.nonsin)+' SGD';
   gauge('g-sin',a.sin,T.sin,C.sin); gauge('g-nonsin',a.nonsin,T.nonsin,C.nonsin);
   // 按起飞月
   var months=Object.keys(D.byMonth).sort();
   Highcharts.chart('c-month',{chart:{backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
     xAxis:{categories:months.map(function(m){return m.slice(2);}),labels:{style:{color:'#5b6b85'}},plotBands:[{from:-0.5,to:7.5,color:'rgba(80,131,251,.04)',label:{text:'已过月份',style:{color:'#94a3b8',fontSize:'10px'}}}]},
-    yAxis:{title:{text:'票面 (SGD)',style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:mt.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:'SIN月目标 '+fmt(mt.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
+    yAxis:{title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:mt.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'SIN月目标 ':'SIN Mo target ')+fmt(mt.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
     legend:{itemStyle:{color:'#5b6b85'}},
-    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,m=months[i],v=D.byMonth[m];return ttCard(m,[[C.sin,'SIN实际','SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,mt.sin))+'%)'],[C.nonsin,'非SIN实际','SGD '+fmt(v.nonsin)+' ('+fmt1(pct(v.nonsin,mt.nonsin))+'%)'],['#f59e0b','月目标','SIN '+fmt(mt.sin)+' / 非SIN '+fmt(mt.nonsin)]]);}},
+    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,m=months[i],v=D.byMonth[m];return ttCard(m,[[C.sin,(LANG==='zh'?'SIN实际':'SIN actual'),'SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,mt.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN实际':'non-SIN actual'),'SGD '+fmt(v.nonsin)+' ('+fmt1(pct(v.nonsin,mt.nonsin))+'%)'],['#f59e0b',(LANG==='zh'?'月目标':'Mo target'),'SIN '+fmt(mt.sin)+' / '+(LANG==='zh'?'非SIN':'non-SIN')+' '+fmt(mt.nonsin)]]);}},
     plotOptions:{column:{borderRadius:3,dataLabels:{enabled:true,formatter:function(){if(this.y<=0)return'';return fmt1(pct(this.y,this.series.name==='SIN始发'?mt.sin:mt.nonsin))+'%';},style:{fontSize:'8px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},
-    series:[{name:'SIN始发',type:'column',data:months.map(function(m){return Math.round(D.byMonth[m].sin);}),color:C.sin},
-      {name:'非SIN',type:'column',data:months.map(function(m){return Math.round(D.byMonth[m].nonsin);}),color:C.nonsin}]});
+    series:[{name:(LANG==='zh'?'SIN始发':'SIN-origin'),type:'column',data:months.map(function(m){return Math.round(D.byMonth[m].sin);}),color:C.sin},
+      {name:(LANG==='zh'?'非SIN':'non-SIN'),type:'column',data:months.map(function(m){return Math.round(D.byMonth[m].nonsin);}),color:C.nonsin}]});
   // 新增：周度实际 vs 周目标
   var wl=D.weekList||[];
   Highcharts.chart('c-week',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
     xAxis:{categories:wl.map(function(w){return w.replace('2026-','').replace('2027-','\'27');}),labels:{style:{color:'#5b6b85',fontSize:'9px'},step:2}},
-    yAxis:{title:{text:'票面 (SGD)',style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.weekTarget.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:'SIN周目标 '+fmt(D.weekTarget.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
+    yAxis:{title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.weekTarget.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'SIN周目标 ':'SIN Wk target ')+fmt(D.weekTarget.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
     legend:{itemStyle:{color:'#5b6b85'}},
-    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,w=wl[i],v=D.byWeek[w];return ttCard(w+' 周',[[C.sin,'SIN实际','SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,D.weekTarget.sin))+'%)'],[C.nonsin,'非SIN实际','SGD '+fmt(v.nonsin)],['#f59e0b','SIN周目标',fmt(D.weekTarget.sin)]]);}},
+    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,w=wl[i],v=D.byWeek[w];return ttCard(w+(LANG==='zh'?' 周':' Wk'),[[C.sin,(LANG==='zh'?'SIN实际':'SIN actual'),'SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,D.weekTarget.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN实际':'non-SIN actual'),'SGD '+fmt(v.nonsin)],['#f59e0b',(LANG==='zh'?'SIN周目标':'SIN Wk target'),fmt(D.weekTarget.sin)]]);}},
     plotOptions:{column:{borderRadius:2,stacking:null}},
-    series:[{name:'SIN始发',data:wl.map(function(w){return Math.round(D.byWeek[w].sin);}),color:C.sin},{name:'非SIN',data:wl.map(function(w){return Math.round(D.byWeek[w].nonsin);}),color:C.nonsin}]});
+    series:[{name:(LANG==='zh'?'SIN始发':'SIN-origin'),data:wl.map(function(w){return Math.round(D.byWeek[w].sin);}),color:C.sin},{name:(LANG==='zh'?'非SIN':'non-SIN'),data:wl.map(function(w){return Math.round(D.byWeek[w].nonsin);}),color:C.nonsin}]});
   // 累计
   var cs=0,cn=0,sinC=[],nonC=[];
   months.forEach(function(m){cs+=D.byMonth[m].sin;cn+=D.byMonth[m].nonsin;sinC.push(Math.round(cs));nonC.push(Math.round(cn));});
   Highcharts.chart('c-cum',{chart:{backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
     xAxis:{categories:months.map(function(m){return m.slice(2);}),labels:{style:{color:'#5b6b85'}}},
-    yAxis:{title:{text:'累计票面 (SGD)',style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}}},
+    yAxis:{title:{text:(LANG==='zh'?'累计票面 (SGD)':'Cumulative (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}}},
     legend:{itemStyle:{color:'#5b6b85'}},
-    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index;return ttCard(months[i]+' 累计',[[C.sin,'SIN始发','SGD '+fmt(sinC[i])+' ('+fmt1(pct(sinC[i],D.targets.sin))+'%)'],[C.nonsin,'非SIN','SGD '+fmt(nonC[i])+' ('+fmt1(pct(nonC[i],D.targets.nonsin))+'%)']]);}},
+    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index;return ttCard(months[i]+(LANG==='zh'?' 累计':' Cumul.'),[[C.sin,(LANG==='zh'?'SIN始发':'SIN-origin'),'SGD '+fmt(sinC[i])+' ('+fmt1(pct(sinC[i],D.targets.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN':'non-SIN'),'SGD '+fmt(nonC[i])+' ('+fmt1(pct(nonC[i],D.targets.nonsin))+'%)']]);}},
     plotOptions:{areaspline:{fillOpacity:.1,marker:{radius:3}}},
-    series:[{name:'SIN累计',type:'areaspline',data:sinC,color:C.sin},{name:'非SIN累计',type:'areaspline',data:nonC,color:C.nonsin},
-      {name:'SIN目标线',type:'spline',data:months.map(function(_,i){return Math.round(D.targets.sin/months.length*(i+1));}),color:'#cbd5e1',dashStyle:'Dash',marker:{enabled:false}}]});
+    series:[{name:(LANG==='zh'?'SIN累计':'SIN Cumul.'),type:'areaspline',data:sinC,color:C.sin},{name:(LANG==='zh'?'非SIN累计':'non-SIN Cumul.'),type:'areaspline',data:nonC,color:C.nonsin},
+      {name:(LANG==='zh'?'SIN目标线':'SIN Target'),type:'spline',data:months.map(function(_,i){return Math.round(D.targets.sin/months.length*(i+1));}),color:'#cbd5e1',dashStyle:'Dash',marker:{enabled:false}}]});
   
   
   // ===== 剩余任务量分解 =====
   (function(){var rm=D.rem;if(!rm)return;var T=D.targets;
     function block(key,color,lbl){var dn=rm.done[key],rr=rm[key];var p=dn/T[key]*100;
       return '<div style="flex:1;min-width:260px;background:#fff;border-radius:12px;border:1px solid #f0e4c8;padding:16px 18px"><div style="font-weight:700;font-size:14px;margin-bottom:8px"><i class="fa-solid fa-plane" style="color:'+color+'"></i> '+lbl+'</div>'
-       +'<div style="font-size:12px;color:#94a3b8">截止7月已完成</div><div style="font-size:22px;font-weight:800;font-family:DIN,monospace;color:'+color+'">'+fmt(dn)+' <span style="font-size:12px;color:#94a3b8">/ '+fmt(T[key])+' ('+fmt1(p)+'%)</span></div>'
+       +'<div style="font-size:12px;color:#94a3b8">'+(LANG==='zh'?'截止7月已完成':'Done thru Jul')+'</div><div style="font-size:22px;font-weight:800;font-family:DIN,monospace;color:'+color+'">'+fmt(dn)+' <span style="font-size:12px;color:#94a3b8">/ '+fmt(T[key])+' ('+fmt1(p)+'%)</span></div>'
        +'<div style="height:10px;background:#eef1f6;border-radius:6px;margin:8px 0;overflow:hidden"><span style="display:block;height:100%;width:'+Math.min(p,100)+'%;background:'+color+';border-radius:6px"></span></div>'
-       +'<div style="display:flex;gap:18px;margin-top:10px"><div><div style="font-size:11px;color:#5b6b85">剩余需每月</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#ef4444">'+fmt(rr.perMonth)+'</div><div style="font-size:10px;color:#94a3b8">SGD/月</div></div>'
-       +'<div><div style="font-size:11px;color:#5b6b85">剩余需每周</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#ef4444">'+fmt(rr.perWeek)+'</div><div style="font-size:10px;color:#94a3b8">SGD/周</div></div>'
-       +'<div><div style="font-size:11px;color:#5b6b85">剩余总量</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#d4a017">'+fmt(rr.remain)+'</div><div style="font-size:10px;color:#94a3b8">SGD</div></div></div></div>';}
-    document.getElementById('remBox').innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap">'+block('sin','#5083fb','SIN始发·非K舱')+block('nonsin','#12b886','非SIN始发·非K舱')+'</div>';
-    var h='<thead><tr><th>剩余月份</th><th>天数</th><th>周数</th><th>SIN需完成/月</th><th>SIN需完成/周</th><th>非SIN需完成/月</th><th>非SIN需完成/周</th></tr></thead><tbody>';
-    rm.monthRows.forEach(function(r){h+='<tr><td style="font-weight:600;color:#152237">'+r.label+'</td><td>'+r.days+'</td><td>'+r.weeks+'</td><td style="color:#5083fb;font-weight:700">'+fmt(r.sin_month)+'</td><td>'+fmt(r.sin_week)+'</td><td style="color:#12b886;font-weight:700">'+fmt(r.nonsin_month)+'</td><td>'+fmt(r.nonsin_week)+'</td></tr>';});
-    h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>剩余合计</td><td>'+rm.remDays+'</td><td>'+fmt1(rm.remDays/7)+'</td><td style="color:#5083fb">'+fmt(rm.sin.remain)+'</td><td>—</td><td style="color:#12b886">'+fmt(rm.nonsin.remain)+'</td><td>—</td></tr>';
+       +'<div style="display:flex;gap:18px;margin-top:10px"><div><div style="font-size:11px;color:#5b6b85">'+(LANG==='zh'?'剩余Need/Mo':'Rem. Need/Mo')+'</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#ef4444">'+fmt(rr.perMonth)+'</div><div style="font-size:10px;color:#94a3b8">'+(LANG==='zh'?'SGD/月':'SGD/Mo')+'</div></div>'
+       +'<div><div style="font-size:11px;color:#5b6b85">'+(LANG==='zh'?'剩余Need/Wk':'Rem. Need/Wk')+'</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#ef4444">'+fmt(rr.perWeek)+'</div><div style="font-size:10px;color:#94a3b8">'+(LANG==='zh'?'SGD/周':'SGD/Wk')+'</div></div>'
+       +'<div><div style="font-size:11px;color:#5b6b85">'+(LANG==='zh'?'剩余Total':'Rem. Total')+'</div><div style="font-size:19px;font-weight:800;font-family:DIN,monospace;color:#d4a017">'+fmt(rr.remain)+'</div><div style="font-size:10px;color:#94a3b8">SGD</div></div></div></div>';}
+    document.getElementById('remBox').innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap">'+block('sin','#5083fb',LANG==='zh'?'SIN始发·非K舱':'SIN-origin · non-K')+block('nonsin','#12b886',LANG==='zh'?'非SIN始发·非K舱':'non-SIN · non-K')+'</div>';
+    var h='<thead><tr><th>'+(LANG==='zh'?'剩余月份':'Remaining')+'</th><th>'+(LANG==='zh'?'天数':'Days')+'</th><th>'+(LANG==='zh'?'周数':'Weeks')+'</th><th>'+(LANG==='zh'?'SIN需完成/月':'SIN Need/Mo')+'</th><th>'+(LANG==='zh'?'SIN需完成/周':'SIN Need/Wk')+'</th><th>'+(LANG==='zh'?'非SIN需完成/月':'non-SIN Need/Mo')+'</th><th>'+(LANG==='zh'?'非SIN需完成/周':'non-SIN Need/Wk')+'</th></tr></thead><tbody>';
+    rm.monthRows.forEach(function(r){h+='<tr><td style="font-weight:600;color:#152237">'+mLabel(r.label)+'</td><td>'+r.days+'</td><td>'+r.weeks+'</td><td style="color:#5083fb;font-weight:700">'+fmt(r.sin_month)+'</td><td>'+fmt(r.sin_week)+'</td><td style="color:#12b886;font-weight:700">'+fmt(r.nonsin_month)+'</td><td>'+fmt(r.nonsin_week)+'</td></tr>';});
+    h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>'+(LANG==='zh'?'剩余合计':'Remaining Total')+'</td><td>'+rm.remDays+'</td><td>'+fmt1(rm.remDays/7)+'</td><td style="color:#5083fb">'+fmt(rm.sin.remain)+'</td><td>—</td><td style="color:#12b886">'+fmt(rm.nonsin.remain)+'</td><td>—</td></tr>';
     document.getElementById('remTbl').innerHTML=h+'</tbody>';
   })();
-  document.getElementById('foot').innerHTML='SQ新航 后返KPI · 数据源：SQ后返KPI截止到26.8.9 · 销售日期口径2026.1-2027.3（15个月均分）· 起飞筛选2026.4-2027.3 · '+D.rows+'行 · K舱不计入 · 汇率 1CNY=0.19002324SGD';
+  // H3标题和desc i18n
+  if(LANG==='en'){
+    document.querySelectorAll('h3').forEach(function(el){
+      var t=el.textContent;
+      if(t.indexOf('按销售月完成')>=0)el.innerHTML=el.innerHTML.replace('按销售月完成','Monthly Actual vs Monthly KPI Target');
+      if(t.indexOf('累计完成 vs 目标进度线')>=0)el.innerHTML=el.innerHTML.replace('累计完成 vs 目标进度线','Cumulative vs Target Progress');
+      if(t.indexOf('各周实际完成 vs 周KPI目标')>=0)el.innerHTML=el.innerHTML.replace('各周实际完成 vs 周KPI目标','Weekly Actual vs Weekly KPI Target');
+      if(t.indexOf('剩余任务量分解')>=0)el.innerHTML=el.innerHTML.replace('剩余任务量分解 · 截止7月已完成 → 后续每月/每周需完成','Remaining · Done thru Jul → Mo/Wk need');
+    });
+    document.querySelectorAll('.desc').forEach(function(el){
+      var t=el.textContent;
+      if(t.indexOf('销售月份')>=0)el.textContent='Sales month 2026.1-2027.3 · bar=actual, dash=target';
+      if(t.indexOf('按起飞月累计')>=0)el.textContent='Cumulative, dash=proportional target';
+      if(t.indexOf('按销售周')>=0)el.textContent='By sales week (ISO) · orange dash=SIN weekly target '+fmt(D.weekTarget.sin)+' SGD';
+      if(t.indexOf('销售日期口径')>=0)el.textContent='Sales date basis · Remaining 2026.8-2027.3 (8 months) · evenly split';
+    });
+  }
+  document.getElementById('foot').innerHTML=LANG==='zh'?'SQ新航 后返KPI · 数据源：SQ后返KPI截止到8.16 · 销售日期口径2026.1-2027.3（15个月均分）· 起飞筛选2026.4-2027.3 · '+D.rows+'行 · K舱不计入 · 汇率 1CNY=0.190044SGD':'SQ Rebate KPI · Source: SQ KPI as of 8.16 · Sales date 2026.1-2027.3 (15 months) · Dep filter 2026.4-2027.3 · '+D.rows+' rows · K-class excluded · FX 1CNY=0.190044SGD';
 }
 boot();
 
+</script>
+
+
+
+<script>
+// i18n: 接收父窗口语言切换, 重绘所有内容
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.lang&&e.data.lang!==LANG){
+    LANG=e.data.lang;
+    window.LANG=LANG;
+    if(typeof init==='function')init();
+  }
+});
 </script>
 </body></html>

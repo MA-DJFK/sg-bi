@@ -94,20 +94,59 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 <script>window.TKKPI = {"target": 500000, "done": 338701, "remain": 161299, "done_pct": 67.7, "tp": 26.1, "perMonth": 32260, "perWeek": 8302, "remDays": 136, "remWeeks": 19.4, "byMonth": {"2026-07": 199505, "2026-08": 139196}, "remMonths": ["8月(剩余8.18-8.31)", "9月", "10月", "11月", "12月"], "monDays": [14, 30, 31, 30, 31], "period": "2026.7.1-12.31", "today": "2026-08-17"};
 </script>
 <script>
+var LANG='zh';
 function boot(){if(typeof Highcharts==='undefined')return setTimeout(boot,60);init();}
-function init(){var D=window.TKKPI,fmt=function(n){return Highcharts.numberFormat(n,0,'.',',');},fmt1=function(n){return Highcharts.numberFormat(n,1,'.',',');};
-document.getElementById('kpis').innerHTML=[
-  {l:'已完成',c:'#12b886',v:fmt(D.done),s:'占目标 '+fmt1(D.done_pct)+'%'},
-  {l:'剩余',c:'#ef4444',v:fmt(D.remain),s:'待完成 '+fmt1(100-D.done_pct)+'%'},
-  {l:'每月需完成',c:'#5083fb',v:fmt(D.perMonth),s:'剩余5个月段均分'},
-  {l:'每周需完成',c:'#f59e0b',v:fmt(D.perWeek),s:'剩余'+fmt1(D.remWeeks)+'周'}
-].map(function(x){return '<div class="kpi" style="--c:'+x.c+'"><div class="l">'+x.l+'</div><div class="v">'+x.v+' <span class="u">SGD</span></div><div class="s">'+x.s+'</div></div>';}).join('');
-Highcharts.chart('g1',{chart:{type:'solidgauge',backgroundColor:'transparent',height:240},title:null,credits:{enabled:false},accessibility:{enabled:true},pane:{center:['50%','60%'],size:'100%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef1f6',borderWidth:0}},yAxis:{min:0,max:100,lineWidth:0,tickPositions:[],labels:{enabled:false},plotLines:[{value:D.tp,color:'#f59e0b',width:3,zIndex:6}]},tooltip:{enabled:false},plotOptions:{solidgauge:{dataLabels:{y:-22,borderWidth:0,useHTML:true,format:'<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#12b886;font-family:DIN,monospace">'+fmt1(D.done_pct)+'%</div><div style="font-size:11px;color:#5b6b85">'+fmt(D.done)+' / '+fmt(D.target)+'</div><div style="font-size:10px;color:#f59e0b;margin-top:4px">时间进度 '+fmt1(D.tp)+'%</div></div>'},rounded:true}},series:[{data:[{y:Math.min(D.done_pct,100),color:'#12b886',radius:'100%',innerRadius:'62%'}]}]});
+function init(){
+var D=window.TKKPI;
+var fmt=function(n){return Highcharts.numberFormat(n,0,'.',',');};
+var fmt1=function(n){return Highcharts.numberFormat(n,1,'.',',');};
+var EN=LANG==='en';
+// --- Hero ---
+document.querySelector('.hero h1').textContent=EN?'TK Turkish Airlines · Rebate KPI Progress':'TK 土耳其航空 · 后返 KPI 完成进度';
+document.querySelector('.hero .sub').textContent=EN?'Target 500,000 SGD · Sales date 7.1-12.31 · As of 8.16':'目标 500,000 SGD · 销售日期 7.1-12.31 · 截止 8.16';
+document.querySelector('.badge').innerHTML=EN?'✅ Ahead 41.6pct':'✅ 超前 41.6pct';
+// --- KPI Cards ---
+var cards=[
+  {l:EN?'Completed':'已完成',c:'#12b886',v:fmt(D.done),s:(EN?'of target ':'占目标 ')+fmt1(D.done_pct)+'%'},
+  {l:EN?'Remaining':'剩余',c:'#ef4444',v:fmt(D.remain),s:(EN?'To complete ':'待完成 ')+fmt1(100-D.done_pct)+'%'},
+  {l:EN?'Monthly need':'每月需完成',c:'#5083fb',v:fmt(D.perMonth),s:EN?'Remaining 5 months evenly split':'剩余5个月段均分'},
+  {l:EN?'Weekly need':'每周需完成',c:'#f59e0b',v:fmt(D.perWeek),s:EN?'Remaining '+fmt1(D.remWeeks)+' weeks':'剩余'+fmt1(D.remWeeks)+'周'}
+];
+document.getElementById('kpis').innerHTML=cards.map(function(x){return '<div class="kpi" style="--c:'+x.c+'"><div class="l">'+x.l+'</div><div class="v">'+x.v+' <span class="u">SGD</span></div><div class="s">'+x.s+'</div></div>';}).join('');
+// --- Weekly Box ---
+var wkBox=document.querySelector('[style*="border:2px solid #12b886"]');
+if(wkBox){
+  wkBox.innerHTML='<div><div style="font-size:13px;color:#5b6b85;font-weight:600">📅 '+(EN?'This week (8.10-8.16)':'本周完成（8.10-8.16）')+'</div><div style="font-size:28px;font-weight:800;color:#12b886;font-family:DIN,monospace;margin-top:4px">49,127 <span style="font-size:13px;color:#5b6b85">SGD</span></div></div><div style="text-align:right"><div style="font-size:12px;color:#94a3b8">'+(EN?'Wk target 19,011':'周目标 19,011')+'</div><div style="font-size:22px;font-weight:800;color:#12b886;font-family:DIN,monospace">591.7%</div><div style="font-size:11px;color:#5b6b85">'+(EN?'7 orders · 🟢 Exceeded':'7单 · 🟢 超额')+'</div></div>';
+}
+// --- Card Titles ---
+var cardTitles=document.querySelectorAll('.card h3');
+if(cardTitles[0])cardTitles[0].innerHTML='<span style="font-size:inherit">🎯</span> '+(EN?'Target Progress':'目标完成进度');
+if(cardTitles[1])cardTitles[1].innerHTML='<span style="font-size:inherit">📊</span> '+(EN?'Monthly Completion':'按销售月完成');
+if(cardTitles[2])cardTitles[2].innerHTML='<span style="font-size:inherit">📋</span> '+(EN?'Remaining · Monthly/Weekly Need':'剩余分解 · 每月/每周需完成');
+// --- Gauge Chart ---
+Highcharts.chart('g1',{chart:{type:'solidgauge',backgroundColor:'transparent',height:240},title:null,credits:{enabled:false},accessibility:{enabled:true},pane:{center:['50%','60%'],size:'100%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef1f6',borderWidth:0}},yAxis:{min:0,max:100,lineWidth:0,tickPositions:[],labels:{enabled:false},plotLines:[{value:D.tp,color:'#f59e0b',width:3,zIndex:6}]},tooltip:{enabled:false},plotOptions:{solidgauge:{dataLabels:{y:-22,borderWidth:0,useHTML:true,format:'<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#12b886;font-family:DIN,monospace">'+fmt1(D.done_pct)+'%</div><div style="font-size:11px;color:#5b6b85">'+fmt(D.done)+' / '+fmt(D.target)+'</div><div style="font-size:10px;color:#f59e0b;margin-top:4px">'+(EN?'Time progress ':'时间进度 ')+fmt1(D.tp)+'%</div></div>'},rounded:true}},series:[{data:[{y:Math.min(D.done_pct,100),color:'#12b886',radius:'100%',innerRadius:'62%'}]}]});
+// --- Monthly Chart ---
 var ms=Object.keys(D.byMonth).sort();
-Highcharts.chart('c1',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},xAxis:{categories:ms.map(function(m){return m.slice(5)+'月';}),labels:{style:{color:'#5b6b85'}}},yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.perMonth,color:'#f59e0b',width:2,dashStyle:'Dash',label:{text:'月目标 '+fmt(D.perMonth),style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},tooltip:{valuePrefix:'SGD '},plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{fontSize:'10px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},series:[{name:'已完成',data:ms.map(function(m){return Math.round(D.byMonth[m]);}),color:'#12b886'}]});
-var h='<thead><tr><th>剩余月份</th><th>天数</th><th>周数</th><th>需完成/月(SGD)</th><th>需完成/周(SGD)</th></tr></thead><tbody>';
-D.remMonths.forEach(function(m,i){h+='<tr><td style="font-weight:600;color:#152237">'+m+'</td><td>'+D.monDays[i]+'</td><td>'+fmt1(D.monDays[i]/7)+'</td><td style="color:#5083fb;font-weight:700">'+fmt(D.perMonth)+'</td><td>'+fmt(D.perWeek)+'</td></tr>';});
-h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>合计</td><td>'+D.remDays+'</td><td>'+fmt1(D.remWeeks)+'</td><td style="color:#ef4444">'+fmt(D.remain)+'</td><td>—</td></tr>';
-document.getElementById('tbl').innerHTML=h+'</tbody>';}
+var monthEN={'07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'};
+Highcharts.chart('c1',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},xAxis:{categories:ms.map(function(m){var mm=m.slice(5);return EN?(monthEN[mm]||mm):mm+'月';}),labels:{style:{color:'#5b6b85'}}},yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.perMonth,color:'#f59e0b',width:2,dashStyle:'Dash',label:{text:(EN?'Mo target ':'月目标 ')+fmt(D.perMonth),style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},tooltip:{valuePrefix:'SGD '},plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{fontSize:'10px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},series:[{name:EN?'Completed':'已完成',data:ms.map(function(m){return Math.round(D.byMonth[m]);}),color:'#12b886'}]});
+// --- Remaining Table ---
+var remMonthsEN=['Aug remaining (8.18-8.31)','Sep','Oct','Nov','Dec'];
+var th=EN?['Remaining','Days','Weeks','Need/Mo(SGD)','Need/Wk(SGD)']:['剩余月份','天数','周数','需完成/月(SGD)','需完成/周(SGD)'];
+var h='<thead><tr>';th.forEach(function(t){h+='<th>'+t+'</th>';});h+='</tr></thead><tbody>';
+D.remMonths.forEach(function(m,i){
+  var label=EN?remMonthsEN[i]:m;
+  h+='<tr><td style="font-weight:600;color:#152237">'+label+'</td><td>'+D.monDays[i]+'</td><td>'+fmt1(D.monDays[i]/7)+'</td><td style="color:#5083fb;font-weight:700">'+fmt(D.perMonth)+'</td><td>'+fmt(D.perWeek)+'</td></tr>';
+});
+h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>'+(EN?'Total':'合计')+'</td><td>'+D.remDays+'</td><td>'+fmt1(D.remWeeks)+'</td><td style="color:#ef4444">'+fmt(D.remain)+'</td><td>—</td></tr>';
+document.getElementById('tbl').innerHTML=h+'</tbody>';
+// --- Footer ---
+document.querySelector('.footer').textContent=EN?'TK Rebate KPI · Source: TK Rebate KPI as of 8.9 · Sales date 7.1-12.31 · Ctrip CNY×0.19002324→SGD · SGD account direct value':'TK后返KPI · 数据源:TK后返KPI截止到8.9 · 销售日期口径7.1-12.31 · 携程CNY×0.19002324→SGD · 新币账户直接取值';
+// --- Title ---
+document.title=EN?'TK Turkish Airlines · KPI Progress':'TK 土耳其航空 · KPI 完成进度';
+}
 boot();
-</script></body></html>
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.lang){LANG=e.data.lang;init();}
+});
+</script>
+</body></html>
