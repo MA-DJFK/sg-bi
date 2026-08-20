@@ -105,8 +105,7 @@ table.dt tr:hover td{background:#f8fafc}
     <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="gt-sin">SIN始发·非K舱 目标完成</span></h3><div class="desc"><span id="gd-sin">目标 1,935,000 SGD</span></div><div id="g-sin" class="chart"></div></div>
     <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="gt-nonsin">非SIN始发·非K舱 目标完成</span></h3><div class="desc"><span id="gd-nonsin">目标 120,000 SGD</span></div><div id="g-nonsin" class="chart"></div></div>
     <div class="card col-12"><h3><span style="font-size:inherit">📊</span> <span id="h3-month">各销售月实际完成 vs 月KPI目标（含完成率）</span></h3><div class="desc">销售月份 2026.1-2027.3 · 柱=各类别实际，虚线=月目标</div><div id="c-month" class="chart-lg"></div></div>
-    <div class="card col-12"><h3><span style="font-size:inherit">📈</span> 累计完成 vs 目标进度线</h3><div class="desc">按起飞月累计，虚线为等比目标进度</div><div id="c-cum" class="chart-lg"></div></div>
-    <div class="card col-12"><h3><span style="font-size:inherit">📅</span> 各周实际完成 vs 周KPI目标</h3><div class="desc">按销售周（ISO周）· 橙色虚线为SIN周目标 29,769 SGD</div><div id="c-week" class="chart-lg"></div></div>
+    <div class="card col-12"><h3><span style="font-size:inherit">📅</span> 各周实际完成 vs 周KPI目标</h3><div class="desc">按销售周（ISO周）· 橙色虚线=SIN周目标 29,815 SGD · 绿色虚线=非SIN周目标 1,849 SGD</div><div id="c-week" class="chart-lg"></div></div>
     <div class="card col-12" style="background:linear-gradient(135deg,#fff8ed,#fff);border:1px solid #f6e6c0"><h3><i class="fa-solid fa-list-check" style="color:#f59e0b"></i> 剩余任务量分解 · 截止7月已完成 → 后续每月/每周需完成</h3><div class="desc">销售日期口径 · 剩余 2026.8-2027.3（8个月）· 剩余目标均分</div><div id="remBox"></div><div style="overflow-x:auto;margin-top:14px"><table class="dt" id="remTbl"></table></div></div>
   </div>
   <div class="footer" id="foot"></div>
@@ -166,10 +165,10 @@ function init(){
   var gdn=document.getElementById('gd-nonsin');if(gdn)gdn.textContent=(LANG==='zh'?'目标 ':'Target ')+fmt(T.nonsin)+' SGD';
   gauge('g-sin',a.sin,T.sin,C.sin); gauge('g-nonsin',a.nonsin,T.nonsin,C.nonsin);
   // 按起飞月
-  var months=Object.keys(D.byMonth).sort();
+  var months=Object.keys(D.byMonth).sort().filter(function(m){return D.byMonth[m].sin>0||D.byMonth[m].nonsin>0;});
   Highcharts.chart('c-month',{chart:{backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
-    xAxis:{categories:months.map(function(m){return m.slice(2);}),labels:{style:{color:'#5b6b85'}},plotBands:[{from:-0.5,to:7.5,color:'rgba(80,131,251,.04)',label:{text:'已过月份',style:{color:'#94a3b8',fontSize:'10px'}}}]},
-    yAxis:{title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:mt.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'SIN月目标 ':'SIN Mo target ')+fmt(mt.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
+    xAxis:{categories:months.map(function(m){return m.slice(2).replace('-','/');}),labels:{style:{color:'#5b6b85'}},plotBands:[{from:-0.5,to:months.length-0.5,color:'rgba(80,131,251,.04)',label:{text:(LANG==='zh'?'已过月份':'Past months'),style:{color:'#94a3b8',fontSize:'10px'}}}]},
+    yAxis:{softMax:Math.round(D.monthTarget.sin*1.08),title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.monthTarget.sin,color:'#0ea5e9',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'▬ SIN月目标 ':'▬ SIN Mo target ')+fmt(D.monthTarget.sin),align:'right',x:-10,style:{color:'#0ea5e9',fontSize:'11px',fontWeight:'700',backgroundColor:'rgba(255,255,255,0.85)',padding:'2px 4px'}}},{value:D.monthTarget.nonsin,color:'#10b981',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'▬ 非SIN月目标 ':'▬ non-SIN Mo target ')+fmt(D.monthTarget.nonsin),align:'right',x:-10,y:-12,style:{color:'#10b981',fontSize:'11px',fontWeight:'700',backgroundColor:'rgba(255,255,255,0.85)',padding:'2px 4px'}}}]},
     legend:{itemStyle:{color:'#5b6b85'}},
     tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,m=months[i],v=D.byMonth[m];return ttCard(m,[[C.sin,(LANG==='zh'?'SIN实际':'SIN actual'),'SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,mt.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN实际':'non-SIN actual'),'SGD '+fmt(v.nonsin)+' ('+fmt1(pct(v.nonsin,mt.nonsin))+'%)'],['#f59e0b',(LANG==='zh'?'月目标':'Mo target'),'SIN '+fmt(mt.sin)+' / '+(LANG==='zh'?'非SIN':'non-SIN')+' '+fmt(mt.nonsin)]]);}},
     plotOptions:{column:{borderRadius:3,dataLabels:{enabled:true,formatter:function(){if(this.y<=0)return'';return fmt1(pct(this.y,this.series.name==='SIN始发'?mt.sin:mt.nonsin))+'%';},style:{fontSize:'8px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},
@@ -179,22 +178,11 @@ function init(){
   var wl=D.weekList||[];
   Highcharts.chart('c-week',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
     xAxis:{categories:wl.map(function(w){return w.replace('2026-','').replace('2027-','\'27');}),labels:{style:{color:'#5b6b85',fontSize:'9px'},step:2}},
-    yAxis:{title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.weekTarget.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'SIN周目标 ':'SIN Wk target ')+fmt(D.weekTarget.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
+    yAxis:{title:{text:(LANG==='zh'?'票面 (SGD)':'Face Value (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.weekTarget.sin,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'SIN周目标 ':'SIN Wk target ')+fmt(D.weekTarget.sin),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}},{value:D.weekTarget.nonsin,color:'#10b981',width:2,dashStyle:'Dash',zIndex:5,label:{text:(LANG==='zh'?'非SIN周目标 ':'non-SIN Wk target ')+fmt(D.weekTarget.nonsin),align:'right',y:12,style:{color:'#10b981',fontSize:'10px',fontWeight:'600'}}}]},
     legend:{itemStyle:{color:'#5b6b85'}},
-    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,w=wl[i],v=D.byWeek[w];return ttCard(w+(LANG==='zh'?' 周':' Wk'),[[C.sin,(LANG==='zh'?'SIN实际':'SIN actual'),'SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,D.weekTarget.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN实际':'non-SIN actual'),'SGD '+fmt(v.nonsin)],['#f59e0b',(LANG==='zh'?'SIN周目标':'SIN Wk target'),fmt(D.weekTarget.sin)]]);}},
+    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index,w=wl[i],v=D.byWeek[w];return ttCard(w+(LANG==='zh'?' 周':' Wk'),[[C.sin,(LANG==='zh'?'SIN实际':'SIN actual'),'SGD '+fmt(v.sin)+' ('+fmt1(pct(v.sin,D.weekTarget.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN实际':'non-SIN actual'),'SGD '+fmt(v.nonsin)+' ('+fmt1(pct(v.nonsin,D.weekTarget.nonsin))+'%)'],['#f59e0b',(LANG==='zh'?'SIN周目标':'SIN Wk target'),fmt(D.weekTarget.sin)],['#10b981',(LANG==='zh'?'非SIN周目标':'non-SIN Wk target'),fmt(D.weekTarget.nonsin)]]);}},
     plotOptions:{column:{borderRadius:2,stacking:null}},
     series:[{name:(LANG==='zh'?'SIN始发':'SIN-origin'),data:wl.map(function(w){return Math.round(D.byWeek[w].sin);}),color:C.sin},{name:(LANG==='zh'?'非SIN':'non-SIN'),data:wl.map(function(w){return Math.round(D.byWeek[w].nonsin);}),color:C.nonsin}]});
-  // 累计
-  var cs=0,cn=0,sinC=[],nonC=[];
-  months.forEach(function(m){cs+=D.byMonth[m].sin;cn+=D.byMonth[m].nonsin;sinC.push(Math.round(cs));nonC.push(Math.round(cn));});
-  Highcharts.chart('c-cum',{chart:{backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},
-    xAxis:{categories:months.map(function(m){return m.slice(2);}),labels:{style:{color:'#5b6b85'}}},
-    yAxis:{title:{text:(LANG==='zh'?'累计票面 (SGD)':'Cumulative (SGD)'),style:{color:'#94a3b8'}},labels:{style:{color:'#94a3b8'}}},
-    legend:{itemStyle:{color:'#5b6b85'}},
-    tooltip:{shared:true,useHTML:true,borderWidth:0,backgroundColor:'rgba(0,0,0,0)',shadow:false,padding:0,formatter:function(){var i=this.points[0].point.index;return ttCard(months[i]+(LANG==='zh'?' 累计':' Cumul.'),[[C.sin,(LANG==='zh'?'SIN始发':'SIN-origin'),'SGD '+fmt(sinC[i])+' ('+fmt1(pct(sinC[i],D.targets.sin))+'%)'],[C.nonsin,(LANG==='zh'?'非SIN':'non-SIN'),'SGD '+fmt(nonC[i])+' ('+fmt1(pct(nonC[i],D.targets.nonsin))+'%)']]);}},
-    plotOptions:{areaspline:{fillOpacity:.1,marker:{radius:3}}},
-    series:[{name:(LANG==='zh'?'SIN累计':'SIN Cumul.'),type:'areaspline',data:sinC,color:C.sin},{name:(LANG==='zh'?'非SIN累计':'non-SIN Cumul.'),type:'areaspline',data:nonC,color:C.nonsin},
-      {name:(LANG==='zh'?'SIN目标线':'SIN Target'),type:'spline',data:months.map(function(_,i){return Math.round(D.targets.sin/months.length*(i+1));}),color:'#cbd5e1',dashStyle:'Dash',marker:{enabled:false}}]});
   
   
   // ===== 剩余任务量分解 =====
@@ -217,7 +205,6 @@ function init(){
     document.querySelectorAll('h3').forEach(function(el){
       var t=el.textContent;
       if(t.indexOf('按销售月完成')>=0)el.innerHTML=el.innerHTML.replace('按销售月完成','Monthly Actual vs Monthly KPI Target');
-      if(t.indexOf('累计完成 vs 目标进度线')>=0)el.innerHTML=el.innerHTML.replace('累计完成 vs 目标进度线','Cumulative vs Target Progress');
       if(t.indexOf('各周实际完成 vs 周KPI目标')>=0)el.innerHTML=el.innerHTML.replace('各周实际完成 vs 周KPI目标','Weekly Actual vs Weekly KPI Target');
       if(t.indexOf('剩余任务量分解')>=0)el.innerHTML=el.innerHTML.replace('剩余任务量分解 · 截止7月已完成 → 后续每月/每周需完成','Remaining · Done thru Jul → Mo/Wk need');
     });

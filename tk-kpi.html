@@ -87,6 +87,7 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 <div class="grid">
   <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> 目标完成进度</h3><div id="g1" class="chart"></div></div>
   <div class="card col-6"><h3><span style="font-size:inherit">📊</span> 按销售月完成</h3><div id="c1" class="chart"></div></div>
+  <div class="card col-12" id="week-card" style="display:none"><h3><span style="font-size:inherit">📅</span> <span id="h3-week">各周实际完成 vs 周KPI目标</span></h3><div class="desc" id="desc-week">按销售周 · 虚线为周目标</div><div id="c-week" class="chart-lg"></div></div>
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> 剩余分解 · 每月/每周需完成</h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
 </div>
 <div class="footer">TK后返KPI · 数据源:TK后返KPI截止到8.9 · 销售日期口径7.1-12.31 · 携程CNY×0.19002324→SGD · 新币账户直接取值</div>
@@ -129,6 +130,34 @@ Highcharts.chart('g1',{chart:{type:'solidgauge',backgroundColor:'transparent',he
 var ms=Object.keys(D.byMonth).sort();
 var monthEN={'07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'};
 Highcharts.chart('c1',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},xAxis:{categories:ms.map(function(m){var mm=m.slice(5);return EN?(monthEN[mm]||mm):mm+'月';}),labels:{style:{color:'#5b6b85'}}},yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.perMonth,color:'#f59e0b',width:2,dashStyle:'Dash',label:{text:(EN?'Mo target ':'月目标 ')+fmt(D.perMonth),style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},tooltip:{valuePrefix:'SGD '},plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{fontSize:'10px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},series:[{name:EN?'Completed':'已完成',data:ms.map(function(m){return Math.round(D.byMonth[m]);}),color:'#12b886'}]});
+
+// Weekly chart — only render if byWeek data exists
+var weekCard = document.getElementById('week-card');
+if(D.byWeek && D.weekList && D.weekList.length > 0) {
+  weekCard.style.display = '';
+  // i18n for title
+  var h3w = document.getElementById('h3-week');
+  if(h3w) h3w.textContent = EN ? 'Weekly Actual vs Weekly KPI Target' : '各周实际完成 vs 周KPI目标';
+  var descw = document.getElementById('desc-week');
+  if(descw) descw.textContent = EN ? 'By sales week \u00b7 Dashed line = weekly target '+fmt(D.perWeek)+' SGD' : '按销售周 \u00b7 虚线为周目标 '+fmt(D.perWeek)+' SGD';
+  
+  Highcharts.chart('c-week',{
+    chart:{type:'column',backgroundColor:'transparent'},
+    title:null,
+    credits:{enabled:false},
+    accessibility:{enabled:true},
+    xAxis:{categories:D.weekList, labels:{style:{color:'#5b6b85',fontSize:'9px'},rotation:-45}},
+    yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},
+      plotLines:[{value:D.perWeek,color:'#f59e0b',width:2,dashStyle:'Dash',zIndex:5,
+        label:{text:(EN?'Wk target ':'周目标 ')+fmt(D.perWeek),align:'right',style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},
+    tooltip:{valuePrefix:'SGD '},
+    plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return this.y>0?fmt(this.y):'';},style:{fontSize:'9px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},
+    series:[{name:EN?'Completed':'已完成',data:D.weekList.map(function(w){return Math.round(D.byWeek[w]||0);}),color:'#12b886'}]
+  });
+} else {
+  weekCard.style.display = 'none';
+}
+
 // --- Remaining Table ---
 var remMonthsEN=['Aug remaining (8.18-8.31)','Sep','Oct','Nov','Dec'];
 var th=EN?['Remaining','Days','Weeks','Need/Mo(SGD)','Need/Wk(SGD)']:['剩余月份','天数','周数','需完成/月(SGD)','需完成/周(SGD)'];
