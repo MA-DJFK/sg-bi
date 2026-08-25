@@ -224,7 +224,7 @@ var T={
   tSupplier:'供应链渠道 · 流水与利润',tSeg:'售前 vs 售后 利润对比',dSeg:'售前=外采+改期+BSP · 售后=退票+废票（含退票/废票对比）',dSupplier:'出票公司（供应商）营收对比',
   tCmp:'日环比变化',dCmp:'正增长绿、负增长红 · 相邻日百分比变化',cmpTotal:'总量环比',cmpAvg:'日均环比',
   tIns:'本周洞察',dIns:'关键趋势解读',
-  tAir:'航司利润排行',dAir:'SQ新航利润居首，MU东航刨退票后转盈',all:'全部',
+  tAir:'航司利润排行',dAir:'EK利润领跑（占34%），仅NX亏损',all:'全部',
   tCh:'市场客户 · 流水 vs 利润率',dCh:'气泡=票量 · 识别高量低毛利客户',tRoute:'热门航线对比（TOP10）',dRoute:'按票量 / 营收 / 利润 多维对比航线表现',rmTk:'票量',rmRcpt:'营收',rmProf:'利润',
   tTbl:'维度明细与评级',dTbl:'航司 / 航线 / 渠道 综合表现',
   tAct:'行动建议',dAct:'基于数据洞察的优先级行动项（P0 紧急 · P1 重要 · P2 优化）',
@@ -232,9 +232,9 @@ var T={
   typeAir:'航司',typeRoute:'航线',typeChan:'客户',rExcellent:'优秀',rGood:'良好',rFair:'一般',
   ttTicket:'票量',ttReceipt:'实收',ttProfit:'利润',ttMargin:'毛利率',ttRevenue:'营收',unitTk:'张',baseWeek:'基准周',
   yTk:'票量(张)',yAmt:function(s){return '金额('+s+'万)';},yProfit:function(s){return '利润('+s+')';},yPct:'环比(%)',yMargin:'毛利率(%)',yRev:function(s){return '营收('+s+'万)';},ySupp:function(s){return s+'万';},
-  insUp:'EK航司·SIN-DXB航线突出',insUpD:function(r){return 'EK航司本周贡献利润<b>¥12,305</b>（占全周26%），其中SIN-DXB单航线51票/利润¥12,241，单票利润¥232，为全周利润核心。实收 '+r+'。';},
-  insDown:'周末效率骤降',insDownD:'周五达峰（96票/¥10,945）→ 周日断崖至<b>50票/¥1,073</b>，利润缩水<b>90%</b>。需分析周末低效订单结构，优化采购节奏。',
-  insInfo:'自有渠道毛利领先',insInfoD:function(a,b){return '新币账户毛利率<b>5.01%</b>（¥23,512/59票），远超携程一部<b>2.35%</b>（¥15,424/211票）。提升自有渠道占比可有效改善整体利润率。';},
+  insUp:'EK航司·SIN-DXB航线突出',insUpD:function(r){return 'EK航司本周贡献利润<b>¥12,859</b>（占全周34%），其中SIN-DXB单航线61票/利润¥10,846，单票利润¥178，为全周利润核心。实收 '+r+'。';},
+  insDown:'周末效率骤降',insDownD:'周二达峰（118票/¥11,308）→ 周日断崖至<b>41票/¥1,310</b>，利润缩水<b>88%</b>。需分析周末低效订单结构，优化采购节奏。',
+  insInfo:'UOB渠道毛利领先',insInfoD:function(a,b){return 'SG LEADING UOB渠道毛利率<b>5.68%</b>（¥11,203/52票，单票¥215），远超主力SG LEADING<b>2.26%</b>（302票）。提升UOB渠道占比可有效改善整体利润率。';},
   pUrgent:'紧急',pImportant:'重要',pOptimize:'优化',expect:'预期效果：',
   foot:function(m){return '新加坡引领 · 机票批发业务 BI 看板 | 数据周期：'+m.period+' | 共 '+m.orders+' 笔订单 / '+m.tickets+' 张票 | 生成于 '+m.generated+'<br>数据来源：新加坡引领-8月.xlsx · 新币账户按 SGD→CNY 5.296650 换算 · 双币种真实值存储，切换零误差';}},
  en:{loginTitle:'SG Leading BI Dashboard',loginSub:'Air-Ticket Wholesale Analytics · Please sign in',lblUser:'Username',lblPwd:'Password',loginBtn:'SIGN IN',loginFoot:'© SG Leading · Protected data, authorized users only',uPH:'Enter username',pPH:'Enter password',errMsg:'Incorrect username or password',
@@ -248,7 +248,7 @@ var T={
   tSupplier:'Supply Chain · Revenue & Profit',tSeg:'Pre-sale vs After-sale Profit',dSeg:'Pre=Purchase+Reschedule · After=Refund profit + Refund loss (with refund comparison)',dSupplier:'Ticketing company (supplier) revenue',
   tCmp:'Day-over-Day Change',dCmp:'Growth green, decline red · DoD % change',cmpTotal:'Total DoD',cmpAvg:'Daily-avg DoD',
   tIns:'Weekly Insights',dIns:'Key trend interpretation',
-  tAir:'Airline Profit Ranking',dAir:'SQ leads; MU turns profitable after excluding refunds',all:'All',
+  tAir:'Airline Profit Ranking',dAir:'EK leads profit (34%); only NX at loss',all:'All',
   tCh:'Market Clients · Revenue vs Margin',dCh:'Bubble=tickets · spot high-volume low-margin customers',tRoute:'Top Routes Comparison (TOP10)',dRoute:'Compare routes by tickets / revenue / profit',rmTk:'Tickets',rmRcpt:'Revenue',rmProf:'Profit',
   tTbl:'Dimension Details & Rating',dTbl:'Airline / Route / Channel performance',
   tAct:'Action Recommendations',dAct:'Prioritized actions from insights (P0 urgent · P1 important · P2 optimize)',
@@ -256,10 +256,9 @@ var T={
   typeAir:'Airline',typeRoute:'Route',typeChan:'Client',rExcellent:'Excellent',rGood:'Good',rFair:'Fair',
   ttTicket:'Tickets',ttReceipt:'Revenue',ttProfit:'Profit',ttMargin:'Margin',ttRevenue:'Revenue',unitTk:'',baseWeek:'Base week',
   yTk:'Tickets',yAmt:function(s){return 'Amount ('+s+'0k)';},yProfit:function(s){return 'Profit ('+s+')';},yPct:'WoW (%)',yMargin:'Margin (%)',yRev:function(s){return 'Revenue ('+s+'0k)';},ySupp:function(s){return s+'0k';},
-  insUp:'EK · SIN-DXB Route Dominance',insUpD:function(r){return 'EK contributed <b>S$2,334</b> profit (26% of weekly total). SIN-DXB alone: 51 tix / S$2,322 profit / S$44 per ticket — the profit engine this week. Revenue '+r+'.';},
-  insDown:'Weekend Efficiency Drop',insDownD:'Friday peaked (96 tix/S$2,076) → Sunday crashed to <b>50 tix/S$204</b>, profit down <b>90%</b>. Analyze weekend order structure and optimize procurement rhythm.',
-  insInfo:'Own Channel Margin Leads',insInfoD:function(a,b){return 'SGD account margin <b>5.01%</b> (S$4,459/59 tix), far exceeding Ctrip Intl-1 <b>2.35%</b> (S$2,925/211 tix). Scaling own-channel share improves overall profitability.';},
-  pUrgent:'Urgent',pImportant:'Important',pOptimize:'Optimize',expect:'Expected: ',
+  insUp:'EK · SIN-DXB Route Dominance',insUpD:function(r){return 'EK contributed <b>S$2,428</b> profit (34% of weekly total). SIN-DXB alone: 61 tix / S$2,048 profit / S$34 per ticket — the profit engine this week. Revenue '+r+'.';},
+  insDown:'Weekend Efficiency Drop',insDownD:'Tuesday peaked (118 tix/S$2,135) → Sunday crashed to <b>41 tix/S$247</b>, profit down <b>88%</b>. Analyze weekend order structure and optimize procurement rhythm.',
+  insInfo:'UOB Channel Margin Leads',insInfoD:function(a,b){return 'SG LEADING UOB margin <b>5.68%</b> (S$2,115/52 tix, S$41 per tkt), far exceeding main SG LEADING <b>2.26%</b> (302 tix). Scaling UOB improves overall profitability.';}',
   foot:function(m){return 'SG Leading · Air-Ticket Wholesale BI Dashboard | Period: '+(m.period||'').replace('年','/').replace('月','/').replace('日','').replace(' — ',' - ')+' | '+m.orders+' orders / '+m.tickets+' tickets | Generated '+m.generated+'<br>Source: SG-Leading-Jul.xlsx · SGD accounts at SGD→CNY 5.296650 · Dual-currency stored, zero-error switching';}}
 };
 function tr(){return T[L];}
@@ -467,12 +466,12 @@ function renderTable(){var t=tr();var rows=[];
   document.getElementById('dtTable').innerHTML=h+'</tbody>';
 }
 function renderActions(){var t=tr();
-  var ZH={p0:[{t:'压降亏损单（占17.4%）',d:'本周70笔亏损订单，亏损约'+moneyWV(CUR==='SGD'?D.kpi.loss_amount_sgd:D.kpi.loss_amount)+'。建议核查高亏损订单、设置最低毛利约束。',e:'亏损率降至15%以下'},{t:'巩固EK/TK高利润航司',d:'EK阿联酋航空本周利润<b>¥12,305</b>（利润率8.4%）,TK土耳其<b>¥9,428</b>。加大投放，锁定利润源头。',e:'EK+TK贡献稳步增长'}],
-    p1:[{t:'提升平台渠道毛利率',d:'平台渠道贡献512票（占94.5%）但毛利率仅<b>2.29%</b>，运价接口虽量小（31票）但毛利率<b>10.62%</b>。推动平台提价或调整产品。',e:'平台毛利率提升至2.5%+'},{t:'关注周末下滑趋势',d:'周五高峰96票/¥10,945利润，周六77票/¥6,145，<b>周日骤降至50票/¥1,073</b>。分析周末低效订单、调整采购节奏。',e:'周末利润率企稳'}],
-    p2:[{t:'拓展Sunrate-VCC渠道',d:'Sunrate-VCC本周仅26票但毛利率<b>4.25%</b>，高于主力SG LEADING的2.58%。拓量可改善整体利润结构。',e:'VCC渠道出票量翻倍'},{t:'MU东航持续增利',d:'MU东航47票¥7,777利润，利润率3.57%，表现稳定。继续保持良好势头。',e:'MU稳定在TOP3'}]};
-  var EN={p0:[{t:'Cut Loss Orders (17.4%)',d:'70 loss orders this week, ~'+moneyWV(CUR==='SGD'?D.kpi.loss_amount_sgd:D.kpi.loss_amount)+' loss. Review high-loss orders and set minimum margin constraints.',e:'Loss ratio < 15%'},{t:'Leverage EK/TK High-Profit Airlines',d:'EK profit <b>¥12,305</b> (8.4% margin), TK <b>¥9,428</b>. Increase allocation to lock in profit sources.',e:'EK+TK steady growth'}],
-    p1:[{t:'Improve Platform Channel Margin',d:'Platform: 512 tickets (94.5%) but only <b>2.29%</b> margin; API channel: 31 tickets but <b>10.62%</b> margin. Push for higher platform pricing.',e:'Platform margin > 2.5%'},{t:'Address Weekend Decline',d:'Fri peak: 96 tix/¥10,945 profit → Sun drops to 50 tix/<b>¥1,073</b>. Analyze weekend inefficiency.',e:'Weekend profit stabilized'}],
-    p2:[{t:'Expand Sunrate-VCC Channel',d:'Sunrate-VCC: only 26 tickets but <b>4.25%</b> margin, vs SG LEADING 2.58%. Scale up to improve overall mix.',e:'VCC volume doubled'},{t:'MU Sustained Growth',d:'MU: 47 tix ¥7,777 profit, 3.57% margin. Maintain momentum.',e:'MU stays in TOP3'}]};
+    var ZH={p0:[{t:'巩固EK高利润航线（贡献33%利润）',d:'EK阿联酋航空本周利润<b>¥12,859</b>（利润率4.57%），占总利润33.5%。SIN-DXB为核心航线，加大投放锁定份额。',e:'EK贡献占比维持30%+'},{t:'提升SG LEADING UOB渠道出票量',d:'UOB渠道52票利润率<b>5.68%</b>，是主力SG LEADING(2.26%)的2.5倍。推动UOB渠道放量可显著提升整体利润。',e:'UOB周出票量突破80票'}],
+    p1:[{t:'持续压降亏损（已降至14.2%）',d:'本周'+k['loss_orders']+'笔亏损单，亏损仅<b>'+moneyWV(CUR==='SGD'?D.kpi.loss_amount_sgd:D.kpi.loss_amount)+'</b>（较W3大幅改善）。继续核查高亏损订单。',e:'亏损率稳定在13%以下'},{t:'关注周日业务下滑',d:'周二峰值利润¥11,308 → <b>周日骤降至¥1,310</b>（仅41票）。分析周末采购策略，提升周末效率。',e:'周末单日利润≥¥3,000'}],
+    p2:[{t:'深耕同程国际高毛利渠道',d:'同程国际42票利润率<b>5.65%</b>，远超携程一部(2.81%)和去哪(2.84%)。增加同程合作深度。',e:'同程周出票量翻倍'},{t:'关注NX澳门航空亏损',d:'NX本周8票亏损<b>¥223</b>（利润率-1.89%）。评估是否调整NX采购策略。',e:'NX扭亏为盈或减少投放'}]}
+  var EN={p0:[{t:'Maximize EK (33% of total profit)',d:'EK profit <b>S$'+fmt(Math.round(12859/D.meta.rate))+'</b> (4.57% margin), contributing 33.5% of weekly profit. SIN-DXB is the core route — increase allocation.',e:'EK share stays above 30%'},{t:'Scale SG LEADING UOB Channel',d:'UOB: 52 tickets at <b>5.68%</b> margin vs main SG LEADING at 2.26%. Scaling UOB would significantly boost overall profit.',e:'UOB weekly volume > 80 tickets'}],
+    p1:[{t:'Sustain Loss Reduction (now 14.2%)',d:D.kpi.loss_orders+' loss orders, only <b>'+moneyWV(CUR==='SGD'?D.kpi.loss_amount_sgd:D.kpi.loss_amount)+'</b> loss (improved from W3). Continue monitoring high-loss orders.',e:'Loss ratio stable < 13%'},{t:'Address Sunday Drop',d:'Tue peak profit S$'+fmt(Math.round(11308/D.meta.rate))+' → <b>Sun drops to S$'+fmt(Math.round(1310/D.meta.rate))+'</b> (41 tickets). Review weekend procurement.',e:'Weekend daily profit ≥ S$600'}],
+    p2:[{t:'Deepen Tongcheng (5.65% margin)',d:'Tongcheng: 42 tickets at <b>5.65%</b> margin, far above Ctrip (2.81%) and Qunar (2.84%). Increase partnership.',e:'Tongcheng volume doubled'},{t:'Review NX Air Macau (loss)',d:'NX: 8 tickets, <b>-S$'+fmt(Math.round(223/D.meta.rate))+'</b> loss (-1.89% margin). Evaluate procurement strategy.',e:'NX break-even or reduce'}]}
   var A=L==='en'?EN:ZH;var lbl={P0:t.pUrgent,P1:t.pImportant,P2:t.pOptimize};
   function col(p,label){return '<div class="acol '+p.toLowerCase()+'"><h4><span class="pbadge">'+label+'</span> '+lbl[label]+'</h4>'+A[p.toLowerCase()].map(function(a){return '<div class="acard"><div class="at">'+a.t+'</div><div class="ad">'+a.d+'</div><div class="ae"><span style="font-size:inherit">🎯</span> '+t.expect+a.e+'</div></div>';}).join('')+'</div>';}
   document.getElementById('acts').innerHTML=col('p0','P0')+col('p1','P1')+col('p2','P2');
