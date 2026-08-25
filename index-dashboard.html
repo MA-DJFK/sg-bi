@@ -258,7 +258,7 @@ var T={
   yTk:'Tickets',yAmt:function(s){return 'Amount ('+s+'0k)';},yProfit:function(s){return 'Profit ('+s+')';},yPct:'WoW (%)',yMargin:'Margin (%)',yRev:function(s){return 'Revenue ('+s+'0k)';},ySupp:function(s){return s+'0k';},
   insUp:'EK · SIN-DXB Route Dominance',insUpD:function(r){return 'EK contributed <b>S$2,428</b> profit (34% of weekly total). SIN-DXB alone: 61 tix / S$2,048 profit / S$34 per ticket — the profit engine this week. Revenue '+r+'.';},
   insDown:'Weekend Efficiency Drop',insDownD:'Tuesday peaked (118 tix/S$2,135) → Sunday crashed to <b>41 tix/S$247</b>, profit down <b>88%</b>. Analyze weekend order structure and optimize procurement rhythm.',
-  insInfo:'UOB Channel Margin Leads',insInfoD:function(a,b){return 'SG LEADING UOB margin <b>5.68%</b> (S$2,115/52 tix, S$41 per tkt), far exceeding main SG LEADING <b>2.26%</b> (302 tix). Scaling UOB improves overall profitability.';}',
+  insInfo:'UOB Channel Margin Leads',insInfoD:function(a,b){return 'SG LEADING UOB margin <b>5.68%</b> (S$2,115/52 tix, S$41 per tkt), far exceeding main SG LEADING <b>2.26%</b> (302 tix). Scaling UOB improves overall profitability.';},
   foot:function(m){return 'SG Leading · Air-Ticket Wholesale BI Dashboard | Period: '+(m.period||'').replace('年','/').replace('月','/').replace('日','').replace(' — ',' - ')+' | '+m.orders+' orders / '+m.tickets+' tickets | Generated '+m.generated+'<br>Source: SG-Leading-Jul.xlsx · SGD accounts at SGD→CNY 5.296650 · Dual-currency stored, zero-error switching';}}
 };
 function tr(){return T[L];}
