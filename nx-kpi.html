@@ -69,13 +69,13 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
 </style></head><body>
 <div class="hero"><div class="hero-in"><div class="logo"><span style="font-size:inherit">⚡</span></div>
-<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 8.16</div></div>
-<div class="badge"><span style="font-size:inherit">ℹ️</span> 超前 1.7pct</div></div></div>
+<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD (26年7月-26年9月) · 销售日期 7.1-9.30 · 截止 8.23</div></div>
+<div class="badge"><span style="font-size:inherit">ℹ️</span> 超前 2.2pct</div></div></div>
 <div class="wrap">
 <div class="kpis" id="kpis"></div>
     <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #f59e0b;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
       <div>
-        <div style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（8.10-8.16）</div>
+        <div style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（8.17-8.23）</div>
         <div style="font-size:28px;font-weight:800;color:#f59e0b;font-family:DIN,monospace;margin-top:4px">3,423 <span style="font-size:13px;color:#5b6b85">SGD</span></div>
       </div>
       <div style="text-align:right">
@@ -85,14 +85,14 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
       </div>
     </div>
 <div class="grid">
-  <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> 目标完成进度</h3><div id="g1" class="chart"></div></div>
+  <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="h3-gauge">目标完成进度</span></h3><div class="desc" id="gauge-desc">目标 51,360 SGD (26年7月-26年9月)</div><div id="g1" class="chart"></div></div>
   <div class="card col-6"><h3><span style="font-size:inherit">📊</span> 按销售月完成</h3><div id="c1" class="chart"></div></div>
   <div class="card col-12" id="week-card" style="display:none"><h3><span style="font-size:inherit">📅</span> <span id="h3-week">各周实际完成 vs 周KPI目标</span></h3><div class="desc" id="desc-week">按销售周 · 虚线为周目标</div><div id="c-week" class="chart-lg"></div></div>
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> 剩余分解 · 每月/每周需完成</h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
 </div>
-<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到8.9 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.19002324→SGD · 新币账户直接取值</div>
+<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到8.23 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.189176→SGD · 新币账户直接取值</div>
 </div>
-<script>window.NXKPI = {"target": 51360, "done": 27667, "remain": 23693, "done_pct": 53.9, "tp": 52.2, "perMonth": 11847, "perWeek": 3769, "remDays": 44, "remWeeks": 6.3, "byMonth": {"2026-07": 19453, "2026-08": 8214}, "remMonths": ["8月(剩余8.18-8.31)", "9月"], "monDays": [14, 30], "period": "2026.7.1-9.30", "today": "2026-08-17"};
+<script>window.NXKPI = {"target": 51360, "done": 28773, "remain": 22587, "done_pct": 56.0, "tp": 58.2, "perMonth": 18093, "perWeek": 4161, "remDays": 38, "remWeeks": 5.4, "byMonth": {"2026-07": 19379, "2026-08": 9394}, "byWeek": {"07/01-07/05": 6304, "07/06-07/12": 7091, "07/13-07/19": 4218, "07/20-07/26": 0, "07/27-08/02": 2896, "08/03-08/09": 3639, "08/10-08/16": 3408, "08/17-08/23": 1217}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23"], "remMonths": ["8月(剩余8.24-8.31)", "9月"], "monDays": [8, 30], "period": "2026.7.1-9.30", "today": "2026-08-23", "w3": {"amount": 1217, "orders": 5}, "status": "落后", "gap": 1140};
 </script>
 <script>
 var LANG='zh';
@@ -103,9 +103,11 @@ var fmt=function(n){return Highcharts.numberFormat(n,0,'.',',');};
 var fmt1=function(n){return Highcharts.numberFormat(n,1,'.',',');};
 var EN=LANG==='en';
 // --- Hero ---
-document.querySelector('.hero h1').textContent=EN?'NX Air Macau · Rebate KPI Progress':'NX 澳门航空 · 后返 KPI 完成进度';
-document.querySelector('.hero .sub').textContent=EN?'Target 51,360 SGD · Sales date 7.1-9.30 · As of 8.16':'目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 8.16';
-document.querySelector('.badge').innerHTML=EN?'ℹ️ Ahead 1.7pct':'ℹ️ 超前 1.7pct';
+document.querySelector('.hero h1').textContent=EN?'NX Air Macau · Back-end Incentive KPI Progress':'NX 澳门航空 · 后返 KPI 完成进度';
+  var gd=document.getElementById('gauge-desc');if(gd)gd.textContent=EN?'Target 51,360 SGD (Jul26 - Sep26)':'目标 51,360 SGD (26年7月-26年9月)';
+  var gh=document.getElementById('h3-gauge');if(gh)gh.textContent=EN?'Target Progress':'目标完成进度';
+document.querySelector('.hero .sub').textContent=EN?'Target 51,360 SGD (Jul26 - Sep26) · Sales date 7.1-9.30 · As of 8.23':'目标 51,360 SGD (26年7月-26年9月) · 销售日期 7.1-9.30 · 截止 8.23';
+document.querySelector('.badge').innerHTML=EN?'ℹ️ Behind 2.2pct':'ℹ️ 超前 2.2pct';
 // --- KPI Cards ---
 var cards=[
   {l:EN?'Completed':'已完成',c:'#12b886',v:fmt(D.done),s:(EN?'of target ':'占目标 ')+fmt1(D.done_pct)+'%'},
@@ -117,7 +119,7 @@ document.getElementById('kpis').innerHTML=cards.map(function(x){return '<div cla
 // --- Weekly Box ---
 var wkBox=document.querySelector('[style*="border:2px solid #f59e0b"]');
 if(wkBox){
-  wkBox.innerHTML='<div><div style="font-size:13px;color:#5b6b85;font-weight:600">📅 '+(EN?'This week (8.10-8.16)':'本周完成（8.10-8.16）')+'</div><div style="font-size:28px;font-weight:800;color:#f59e0b;font-family:DIN,monospace;margin-top:4px">3,423 <span style="font-size:13px;color:#5b6b85">SGD</span></div></div><div style="text-align:right"><div style="font-size:12px;color:#94a3b8">'+(EN?'Wk target 3,921':'周目标 3,921')+'</div><div style="font-size:22px;font-weight:800;color:#f59e0b;font-family:DIN,monospace">90.8%</div><div style="font-size:11px;color:#5b6b85">'+(EN?'10 orders · 🟡 Close':'10单 · 🟡 接近')+'</div></div>';
+  wkBox.innerHTML='<div><div style="font-size:13px;color:#5b6b85;font-weight:600">📅 '+(EN?'This week (8.17-8.23)':'本周完成（8.17-8.23）')+'</div><div style="font-size:28px;font-weight:800;color:#ef4444;font-family:DIN,monospace;margin-top:4px">1,217 <span style="font-size:13px;color:#5b6b85">SGD</span></div></div><div style="text-align:right"><div style="font-size:12px;color:#94a3b8">'+(EN?'Wk target 4,161':'周目标 4,161')+'</div><div style="font-size:22px;font-weight:800;color:#ef4444;font-family:DIN,monospace">29.3%</div><div style="font-size:11px;color:#5b6b85">'+(EN?'5 orders · 🔴 Behind':'5单 · 🔴 落后')+'</div></div>';
 }
 // --- Card Titles ---
 var cardTitles=document.querySelectorAll('.card h3');
@@ -169,7 +171,7 @@ D.remMonths.forEach(function(m,i){
 h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>'+(EN?'Total':'合计')+'</td><td>'+D.remDays+'</td><td>'+fmt1(D.remWeeks)+'</td><td style="color:#ef4444">'+fmt(D.remain)+'</td><td>—</td></tr>';
 document.getElementById('tbl').innerHTML=h+'</tbody>';
 // --- Footer ---
-document.querySelector('.footer').textContent=EN?'NX Rebate KPI · Source: NX Rebate KPI as of 8.9 · Sales date 7.1-9.30 · Ctrip/Qunar/Tongcheng CNY×0.19002324→SGD · SGD account direct value':'NX后返KPI · 数据源:NX后返KPI截止到8.9 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.19002324→SGD · 新币账户直接取值';
+document.querySelector('.footer').textContent=EN?'NX Back-end Incentive KPI · Source: NX Back-end Incentive KPI as of 8.23 · Sales date 7.1-9.30 · Ctrip/Qunar/Tongcheng CNY×0.189176→SGD · SGD account direct value':'NX后返KPI · 数据源:NX后返KPI截止到8.23 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.189176→SGD · 新币账户直接取值';
 // --- Title ---
 document.title=EN?'NX Air Macau · KPI Progress':'NX 澳门航空 · KPI 完成进度';
 }
