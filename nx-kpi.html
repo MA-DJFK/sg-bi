@@ -69,7 +69,7 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
 </style></head><body>
 <div class="hero"><div class="hero-in"><div class="logo"><span style="font-size:inherit">⚡</span></div>
-<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 8.31</div></div>
+<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 8.9</div></div>
 <div class="badge"><span style="font-size:inherit">ℹ️</span> 基本持平</div></div></div>
 <div class="wrap">
 <div class="kpis" id="kpis"></div>
@@ -78,24 +78,46 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
   <div class="card col-6"><h3><span style="font-size:inherit">📊</span> 按销售月完成</h3><div id="c1" class="chart"></div></div>
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> 剩余分解 · 每月/每周需完成</h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
 </div>
-<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到8.31 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.19002324→SGD · 新币账户直接取值</div>
+<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到8.9 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.19002324→SGD · 新币账户直接取值</div>
 </div>
-<script>window.NXKPI = {"target": 51360, "done": 28849, "remain": 22511, "done_pct": 56.2, "tp": 66.7, "perMonth": 22511, "perWeek": 5252, "remDays": 30, "remWeeks": 4.3, "byMonth": {"2026-07": 19428, "2026-08": 9422}, "byWeek": {"07/01-07/05": 6323, "07/06-07/12": 7104, "07/13-07/19": 4231, "07/20-07/26": 0, "07/27-08/02": 2904, "08/03-08/09": 3649, "08/10-08/16": 3418, "08/17-08/23": 1221, "08/24-08/31": 0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23", "08/24-08/31"], "remMonths": ["9月"], "monDays": [30], "period": "2026.7.1-9.30", "today": "2026-08-31", "w3": {"amount": 0, "orders": 2}, "status": "behind", "gap": 10.5, "meta": {"rate": 0.189733, "asOf": "8.31", "totalRows": 115}};</script>
+<script>window.NXKPI = {"target": 51360, "done": 28759, "remain": 22601, "done_pct": 56.0, "tp": 74.7, "perMonth": 29352, "perWeek": 6849, "remDays": 23, "remWeeks": 3.3, "byMonth": {"2026-07": 19370, "2026-08": 9389}, "byWeek": {"07/01-07/05": 6301, "07/06-07/12": 7088, "07/13-07/19": 4216, "07/20-07/26": 0, "07/27-08/02": 2895, "08/03-08/09": 3637, "08/10-08/16": 3406, "08/17-08/23": 1217, "08/24-08/30": 0, "08/31-09/06": 0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23", "08/24-08/30", "08/31-09/06"], "remMonths": ["9月"], "monDays": [23], "period": "2026.7.1-9.30", "today": "2026-09-06", "w3": {"amount": 0, "orders": 1}, "status": "behind", "gap": 18.7, "meta": {"rate": 0.189073, "asOf": "9.6", "totalRows": 115}};</script>
 <script>
+var LANG='zh';
+window.LANG=LANG;
 function boot(){if(typeof Highcharts==='undefined')return setTimeout(boot,60);init();}
 function init(){var D=window.NXKPI,fmt=function(n){return Highcharts.numberFormat(n,0,'.',',');},fmt1=function(n){return Highcharts.numberFormat(n,1,'.',',');};
+var zh=LANG==='zh';
+document.querySelector('#g1').parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83c\udfaf</span> '+(zh?'\u76ee\u6807\u5b8c\u6210\u8fdb\u5ea6':'Target Progress');
+var g1Desc=document.querySelector('#g1').parentElement.querySelector('.desc');if(!g1Desc){g1Desc=document.createElement('p');g1Desc.className='desc';document.querySelector('#g1').parentElement.querySelector('h3').after(g1Desc);}g1Desc.textContent=zh?'\u76ee\u6807 '+fmt(D.target)+' SGD (26\u5e747\u6708-26\u5e749\u6708)':'Target '+fmt(D.target)+' SGD (Jul26 - Sep26)';
+document.querySelector('#c1').parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83d\udcca</span> '+(zh?'\u6309\u9500\u552e\u6708\u5b8c\u6210':'Monthly Completion');
+document.querySelector('#tbl').parentElement.parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83d\udccb</span> '+(zh?'\u5269\u4f59\u5206\u89e3 \u00b7 \u6bcf\u6708/\u6bcf\u5468\u9700\u5b8c\u6210':'Remaining Breakdown \u00b7 Monthly/Weekly Target');
 document.getElementById('kpis').innerHTML=[
-  {l:'已完成',c:'#12b886',v:fmt(D.done),s:'占目标 '+fmt1(D.done_pct)+'%'},
-  {l:'剩余',c:'#ef4444',v:fmt(D.remain),s:'待完成 '+fmt1(100-D.done_pct)+'%'},
-  {l:'每月需完成',c:'#5083fb',v:fmt(D.perMonth),s:'剩余2个月段均分'},
-  {l:'每周需完成',c:'#f59e0b',v:fmt(D.perWeek),s:'剩余'+fmt1(D.remWeeks)+'周'}
+  {l:zh?'\u5df2\u5b8c\u6210':'Done',c:'#12b886',v:fmt(D.done),s:(zh?'\u5360\u76ee\u6807 ':'of target ')+fmt1(D.done_pct)+'%'},
+  {l:zh?'\u5269\u4f59':'Remaining',c:'#ef4444',v:fmt(D.remain),s:(zh?'\u5f85\u5b8c\u6210 ':'to go ')+fmt1(100-D.done_pct)+'%'},
+  {l:zh?'\u6bcf\u6708\u9700\u5b8c\u6210':'Monthly Target',c:'#5083fb',v:fmt(D.perMonth),s:zh?'\u5269\u4f591\u4e2a\u6708\u6bb5\u5747\u5206':'Split across remaining months'},
+  {l:zh?'\u6bcf\u5468\u9700\u5b8c\u6210':'Weekly Target',c:'#f59e0b',v:fmt(D.perWeek),s:(zh?'\u5269\u4f59':'Remaining ')+fmt1(D.remWeeks)+(zh?'\u5468':' weeks')}
 ].map(function(x){return '<div class="kpi" style="--c:'+x.c+'"><div class="l">'+x.l+'</div><div class="v">'+x.v+' <span class="u">SGD</span></div><div class="s">'+x.s+'</div></div>';}).join('');
-Highcharts.chart('g1',{chart:{type:'solidgauge',backgroundColor:'transparent',height:240},title:null,credits:{enabled:false},accessibility:{enabled:true},pane:{center:['50%','60%'],size:'100%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef1f6',borderWidth:0}},yAxis:{min:0,max:100,lineWidth:0,tickPositions:[],labels:{enabled:false},plotLines:[{value:D.tp,color:'#f59e0b',width:3,zIndex:6}]},tooltip:{enabled:false},plotOptions:{solidgauge:{dataLabels:{y:-22,borderWidth:0,useHTML:true,format:'<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#f59e0b;font-family:DIN,monospace">'+fmt1(D.done_pct)+'%</div><div style="font-size:11px;color:#5b6b85">'+fmt(D.done)+' / '+fmt(D.target)+'</div><div style="font-size:10px;color:#f59e0b;margin-top:4px">时间进度 '+fmt1(D.tp)+'%</div></div>'},rounded:true}},series:[{data:[{y:Math.min(D.done_pct,100),color:'#f59e0b',radius:'100%',innerRadius:'62%'}]}]});
+Highcharts.chart('g1',{chart:{type:'solidgauge',backgroundColor:'transparent',height:240},title:null,credits:{enabled:false},accessibility:{enabled:true},pane:{center:['50%','60%'],size:'100%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef1f6',borderWidth:0}},yAxis:{min:0,max:100,lineWidth:0,tickPositions:[],labels:{enabled:false},plotLines:[{value:D.tp,color:'#f59e0b',width:3,zIndex:6}]},tooltip:{enabled:false},plotOptions:{solidgauge:{dataLabels:{y:-22,borderWidth:0,useHTML:true,format:'<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#f59e0b;font-family:DIN,monospace">'+fmt1(D.done_pct)+'%</div><div style="font-size:11px;color:#5b6b85">'+fmt(D.done)+' / '+fmt(D.target)+'</div><div style="font-size:10px;color:#f59e0b;margin-top:4px">'+(zh?'\u65f6\u95f4\u8fdb\u5ea6 ':'Time Progress ')+fmt1(D.tp)+'%</div></div>'},rounded:true}},series:[{data:[{y:Math.min(D.done_pct,100),color:'#f59e0b',radius:'100%',innerRadius:'62%'}]}]});
 var ms=Object.keys(D.byMonth).sort();
-Highcharts.chart('c1',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},xAxis:{categories:ms.map(function(m){return m.slice(5)+'月';}),labels:{style:{color:'#5b6b85'}}},yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.perMonth,color:'#f59e0b',width:2,dashStyle:'Dash',label:{text:'月目标 '+fmt(D.perMonth),style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},tooltip:{valuePrefix:'SGD '},plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{fontSize:'10px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},series:[{name:'已完成',data:ms.map(function(m){return Math.round(D.byMonth[m]);}),color:'#f59e0b'}]});
-var h='<thead><tr><th>剩余月份</th><th>天数</th><th>周数</th><th>需完成/月(SGD)</th><th>需完成/周(SGD)</th></tr></thead><tbody>';
-D.remMonths.forEach(function(m,i){h+='<tr><td style="font-weight:600;color:#152237">'+m+'</td><td>'+D.monDays[i]+'</td><td>'+fmt1(D.monDays[i]/7)+'</td><td style="color:#5083fb;font-weight:700">'+fmt(D.perMonth)+'</td><td>'+fmt(D.perWeek)+'</td></tr>';});
-h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>合计</td><td>'+D.remDays+'</td><td>'+fmt1(D.remWeeks)+'</td><td style="color:#ef4444">'+fmt(D.remain)+'</td><td>—</td></tr>';
-document.getElementById('tbl').innerHTML=h+'</tbody>';}
+var _mo={'01':'Jan','02':'Feb','03':'Mar','04':'Apr','05':'May','06':'Jun','07':'Jul','08':'Aug','09':'Sep','10':'Oct','11':'Nov','12':'Dec'};
+Highcharts.chart('c1',{chart:{type:'column',backgroundColor:'transparent'},title:null,credits:{enabled:false},accessibility:{enabled:true},xAxis:{categories:ms.map(function(m){var mm=m.slice(5);return zh?(mm+'\u6708'):(_mo[mm]||mm);}),labels:{style:{color:'#5b6b85'}}},yAxis:{title:{text:'SGD'},labels:{style:{color:'#94a3b8'}},plotLines:[{value:D.perMonth,color:'#f59e0b',width:2,dashStyle:'Dash',label:{text:(zh?'\u6708\u76ee\u6807 ':'Monthly Target ')+fmt(D.perMonth),style:{color:'#f59e0b',fontSize:'10px',fontWeight:'600'}}}]},tooltip:{valuePrefix:'SGD '},plotOptions:{column:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return fmt(this.y);},style:{fontSize:'10px',fontWeight:'600',color:'#5b6b85',textOutline:'none'}}}},series:[{name:zh?'\u5df2\u5b8c\u6210':'Done',data:ms.map(function(m){return Math.round(D.byMonth[m]);}),color:'#f59e0b'}]});
+var h='<thead><tr><th>'+(zh?'\u5269\u4f59\u6708\u4efd':'Remaining Month')+'</th><th>'+(zh?'\u5929\u6570':'Days')+'</th><th>'+(zh?'\u5468\u6570':'Weeks')+'</th><th>'+(zh?'\u9700\u5b8c\u6210/\u6708(SGD)':'Monthly Need(SGD)')+'</th><th>'+(zh?'\u9700\u5b8c\u6210/\u5468(SGD)':'Weekly Need(SGD)')+'</th></tr></thead><tbody>';
+var _moTbl={'1\u6708':'Jan','2\u6708':'Feb','3\u6708':'Mar','4\u6708':'Apr','5\u6708':'May','6\u6708':'Jun','7\u6708':'Jul','8\u6708':'Aug','9\u6708':'Sep','10\u6708':'Oct','11\u6708':'Nov','12\u6708':'Dec'};
+D.remMonths.forEach(function(m,i){var ml=zh?m:(_moTbl[m]||m);h+='<tr><td style="font-weight:600;color:#152237">'+ml+'</td><td>'+D.monDays[i]+'</td><td>'+fmt1(D.monDays[i]/7)+'</td><td style="color:#5083fb;font-weight:700">'+fmt(D.perMonth)+'</td><td>'+fmt(D.perWeek)+'</td></tr>';
+h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>'+(zh?'\u5408\u8ba1':'Total')+'</td><td>'+D.remDays+'</td><td>'+fmt1(D.remWeeks)+'</td><td style="color:#ef4444">'+fmt(D.remain)+'</td><td>\u2014</td></tr>';
+});
+document.getElementById('tbl').innerHTML=h+'</tbody>';
+var heroEl=document.querySelector('.hero h1');if(heroEl)heroEl.textContent=zh?'NX \u6fb3\u95e8\u822a\u7a7a \u00b7 \u540e\u8fd4 KPI \u5b8c\u6210\u8fdb\u5ea6':'NX Macau Airlines \u00b7 Back-end Incentive KPI Progress';
+var subEl=document.querySelector('.hero .sub');if(subEl)subEl.textContent=zh?('\u76ee\u6807 '+fmt(D.target)+' SGD \u00b7 \u9500\u552e\u65e5\u671f '+D.period+' \u00b7 \u622a\u6b62 '+D.meta.asOf):('Target '+fmt(D.target)+' SGD \u00b7 Sales Period '+D.period+' \u00b7 As of '+D.meta.asOf);
+var badgeEl=document.querySelector('.badge');if(badgeEl){var st=D.status;badgeEl.innerHTML='<span style="font-size:inherit">\u2139\ufe0f</span> '+(zh?(st==='ahead'?'\u8d85\u524d':st==='behind'?'\u843d\u540e':'\u57fa\u672c\u6301\u5e73'):(st==='ahead'?'Ahead':st==='behind'?'Behind':'On Track'));}
+var footEl=document.querySelector('.footer');if(footEl)footEl.textContent=zh?'NX\u540e\u8fd4KPI \u00b7 \u6570\u636e\u6e90:NX\u540e\u8fd4KPI\u622a\u6b62\u5230'+D.meta.asOf+' \u00b7 \u9500\u552e\u65e5\u671f\u53e3\u5f84'+D.period+' \u00b7 \u643a\u7a0b/\u53bb\u54ea/\u540c\u7a0bCNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 \u65b0\u5e01\u8d26\u6237\u76f4\u63a5\u53d6\u503c':'NX Back-end Incentive KPI \u00b7 Data as of '+D.meta.asOf+' \u00b7 Sales period '+D.period+' \u00b7 Ctrip/Qunar/Tongcheng CNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 SGD accounts direct value';
+}
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.lang&&e.data.lang!==LANG){
+    LANG=e.data.lang;
+    window.LANG=LANG;
+    if(typeof init==='function')init();
+  }
+});
 boot();
 </script></body></html>

@@ -139,6 +139,7 @@ table.dt tr:hover td{background:#f8fafc}
 .route-tip .tip-air{font-weight:700;font-size:14px;color:#5083fb;display:flex;align-items:center;gap:6px}
 .route-tip .tip-air i{font-size:12px}
 </style>
+<style>#rateBadge{display:none!important}</style>
 </head>
 <body>
 <div id="login">
@@ -165,36 +166,15 @@ table.dt tr:hover td{background:#f8fafc}
   </div></div>
   <div class="wrap">
     <div class="maintabs">
-      <div class="maintab active" data-mt="biz"><span style="font-size:inherit">📈</span> 月度经营看板</div>
+      <div class="maintab active" data-mt="septdash"><span style="font-size:inherit">📈</span> 9月经营看板</div>
       <div class="maintab" data-mt="sqkpi"><span style="font-size:inherit">⚡</span> SQ 后返 KPI</div>
       <div class="maintab" data-mt="tkkpi"><span style="font-size:inherit">✈️</span> TK 后返 KPI</div>
       <div class="maintab" data-mt="nxkpi"><span style="font-size:inherit">✈️</span> NX 后返 KPI</div>
       <div class="maintab" data-mt="julydash"><span style="font-size:inherit">📅</span> 7月经营看板</div>
+      <div class="maintab" data-mt="augdash"><span style="font-size:inherit">📊</span> 8月经营看板</div>
     </div>
-    <div class="mainpage active" id="mp-biz">
-    <div class="vtabs" id="vtabs">
-      <div class="vtab active" data-v="all"></div><div class="vtab" data-v="supply"></div>
-      <div class="vtab" data-v="market"></div><div class="vtab" data-v="ops"></div>
-    </div>
-    <div class="kpis" id="kpis"></div>
-    <div class="grid" id="grid">
-      <div class="card col-12"><h3 class="between"><span><span style="font-size:inherit">📊</span> <span id="t-weekly"></span></span><span style="font-size:11.5px;color:#94a3b8" id="wkTip"></span></h3><div class="desc" id="d-weekly"></div><div id="c-weekly" class="chart"></div></div>
-      <div class="card col-12"><h3><span style="font-size:inherit">📈</span> <span id="t-wktrend"></span></h3><div class="desc" id="d-wktrend"></div><div id="c-wktrend" class="chart"></div></div>
-      <div class="card col-12" id="card-ticket-vol"><h3><span style="font-size:inherit">🎫</span> <span id="t-tickvol">出票量趋势</span></h3><div class="desc" id="d-tickvol">月度出票量分析 · 周度与每日出票量</div><div style="display:flex;gap:12px"><div id="c-ticket-weekly" class="chart" style="flex:1;min-height:260px"></div><div id="c-ticket-daily" class="chart" style="flex:2;min-height:260px"></div></div></div>
-      <div class="card col-6"><h3><span>•</span> <span id="t-seg"></span></h3><div class="desc" id="d-seg"></div><div id="c-seg" class="chart"></div></div>
-      <div class="card col-6"><h3 class="between"><span><span style="font-size:inherit">⚖️</span> <span id="t-cmp"></span></span><span class="seg" id="cmpMode"><button data-m="total" class="active"></button><button data-m="avg"></button></span></h3><div class="desc" id="d-cmp"></div><div id="c-cmp" class="chart"></div><div class="wchips" id="wchips"></div></div>
-      <div class="card col-5"><h3><span>•</span> <span id="t-ins"></span></h3><div class="desc" id="d-ins"></div><div class="insights" id="wkInsights"></div></div>
-      <div class="card col-7"><h3 class="between"><span><span style="font-size:inherit">✈️</span> <span id="t-air"></span></span><span class="seg" id="airMode"><button data-n="5" class="active">TOP5</button><button data-n="99"></button></span></h3><div class="desc" id="d-air"></div><div id="c-air" class="chart-lg"></div></div>
-      <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="t-ch"></span></h3><div class="desc" id="d-ch"></div><div id="c-channel" class="chart-lg"></div></div>
-      <div class="card col-6"><h3><span>•</span> <span id="t-supplier"></span></h3><div class="desc" id="d-supplier"></div><div id="c-supplier" class="chart"></div></div>
-      <div class="card col-12"><h3 class="between"><span><span style="font-size:inherit">🗺️</span> <span id="t-route"></span></span><span class="seg" id="routeMetric"><button data-rm="tickets" class="active"></button><button data-rm="receipt"></button><button data-rm="profit"></button></span></h3><div class="desc" id="d-route"></div><div id="c-route" class="chart-lg"></div></div>
-<div class="card col-6"><h3><span style="font-size:inherit">✈️</span> 航司盈亏分析（利润 / 单票利润）</h3><div class="desc">盈利 vs 亏损航司 · 单票利润=利润/票量 · 已刨除OrderTypeName退票</div><div class="tbl-wrap"><table class="dt" id="airPL"></table></div></div>
-      <div class="card col-6"><h3><span style="font-size:inherit">🗺️</span> 航线盈亏分析（利润 / 单票利润）</h3><div class="desc">盈利 vs 亏损航线 · 单票利润=利润/票量 · 已刨除OrderTypeName退票</div><div class="tbl-wrap"><table class="dt" id="routePL"></table></div></div>
-      <div class="card col-12" id="card-cust-table"><h3>📋 客户账户明细</h3><p class="desc">按CustomerAccountName统计 · 新币账户已换算人民币 · 排除退票</p><div id="cust-table-wrap" style="overflow-x:auto"></div></div>
-      <div class="card col-12"><h3><span>•</span> <span id="t-tbl"></span></h3><div class="desc" id="d-tbl"></div><div class="tbl-wrap"><table class="dt" id="dtTable"></table></div></div>
-      <div class="card col-12"><h3><span>•</span> <span id="t-act"></span></h3><div class="desc" id="d-act"></div><div class="acts" id="acts"></div></div>
-    </div>
-    <div class="footer" id="foot"></div>
+    <div class="mainpage active" id="mp-septdash">
+      <iframe class="sqframe" src="september-dashboard.html" title="9月经营看板"></iframe>
     </div>
     <div class="mainpage" id="mp-sqkpi">
       <iframe class="sqframe" src="sq-kpi.html" title="SQ后返KPI"></iframe>
@@ -207,6 +187,9 @@ table.dt tr:hover td{background:#f8fafc}
     </div>
     <div class="mainpage" id="mp-julydash">
       <iframe class="sqframe" src="july-dashboard.html" title="7月经营看板"></iframe>
+    </div>
+    <div class="mainpage" id="mp-augdash">
+      <iframe class="sqframe" src="august-dashboard.html" title="8月经营看板"></iframe>
     </div>
   </div>
 </div>
@@ -244,7 +227,7 @@ var T={
   pUrgent:'紧急',pImportant:'重要',pOptimize:'优化',expect:'预期效果：',
   foot:function(m){return '新加坡引领 · 机票批发业务 BI 看板 | 数据周期：'+m.period+' | 共 '+m.orders+' 笔订单 / '+m.tickets+' 张票 | 生成于 '+m.generated+'<br>数据来源：新加坡引领销售看板8月_2.xlsx · 新币账户按周分段汇率换算(W1/2:5.2644 W3:5.2725 W4:5.2967 W5:5.2811) · 双币种真实值存储，切换零误差';}},
  en:{loginTitle:'SG Leading BI Dashboard',loginSub:'Air-Ticket Wholesale Analytics · Please sign in',lblUser:'Username',lPw:'Passcode',loginBtn:'SIGN IN',loginFoot:'© SG Leading · Protected data, authorized users only',uPH:'Enter username',pPH:'Enter pin code',errMsg:'Incorrect login, please retry',
-  heroTitle:'SG Leading · Air-Ticket Wholesale BI Dashboard',heroSub:'Supply Chain / Operations / Market — Multi-view Analytics · Aug 2026 (Full Month)',print:'Print PDF',logout:'Sign out',
+heroSub:'Supply Chain / Operations / Market — Monthly Ops & Back-end Incentive Multi-dashboard'
   rateBadge:'FX applied to SGD accounts (SGD→CNY 5.281100)',
   vAll:'All',vSupply:'Supply',vMarket:'Market',vOps:'Ops',
   kReceipt:'Total Revenue',kProfit:'Actual Profit',kMargin:'Gross Margin',kLoss:'Loss-Order Ratio',
@@ -295,30 +278,31 @@ var base={chart:{backgroundColor:'transparent',style:{fontFamily:getComputedStyl
 var NAVY={linearGradient:{x1:0,x2:0,y1:0,y2:1},stops:[[0,'#3b6098'],[1,'#1e3a5f']]};
 function ttCard(title,rows){var h='<div class="tt-card"><div class="tt-title">'+title+'</div>';rows.forEach(function(r){h+='<div class="tt-row"><span class="tt-dot" style="background:'+r[0]+'"></span><span class="tt-name">'+r[1]+'</span><span class="tt-val">'+r[2]+'</span></div>';});return h+'</div>';}
 
-function applyStatic(){var t=tr();
+function applyStatic(){
+  var g=function(id){return document.getElementById(id)||{set textContent(v){},set innerHTML(v){},set placeholder(v){},style:{},classList:{add:function(){},remove:function(){},toggle:function(){}},addEventListener:function(){},querySelectorAll:function(){return[];}};};var t=tr();
   document.documentElement.lang=L==='zh'?'zh-CN':'en';
-  document.getElementById('loginTitle').textContent=t.loginTitle;document.getElementById('loginSub').textContent=t.loginSub;
-  document.getElementById('lblUser').textContent=t.lblUser;document.getElementById('lPw').textContent=t.lPw;
-  document.getElementById('loginBtn').textContent=t.loginBtn;document.getElementById('loginFoot').textContent=t.loginFoot;
-  document.getElementById('u').placeholder=t.uPH;document.getElementById('p').placeholder=t.pPH;
-  document.getElementById('heroTitle').textContent=t.heroTitle;document.getElementById('heroSub').textContent=t.heroSub;
-  document.getElementById('rateBadge').innerHTML='<span style="font-size:inherit">✅</span> '+t.rateBadge;
-  document.getElementById('printBtn').innerHTML='<span>•</span> '+t.print;
+  g('loginTitle').textContent=t.loginTitle;g('loginSub').textContent=t.loginSub;
+  g('lblUser').textContent=t.lblUser;g('lPw').textContent=t.lPw;
+  g('loginBtn').textContent=t.loginBtn;g('loginFoot').textContent=t.loginFoot;
+  g('u').placeholder=t.uPH;g('p').placeholder=t.pPH;
+  g('heroTitle').textContent=t.heroTitle;g('heroSub').textContent=t.heroSub;
+  g('rateBadge').innerHTML='<span style="font-size:inherit">✅</span> '+t.rateBadge;
+  g('printBtn').innerHTML='<span>•</span> '+t.print;
   
-  var vt=document.querySelectorAll('.vtab');vt[0].textContent=t.vAll;vt[1].textContent=t.vSupply;vt[2].textContent=t.vMarket;vt[3].textContent=t.vOps;
-  document.getElementById('t-weekly').textContent=t.tWeekly;document.getElementById('d-weekly').textContent=t.dWeekly;document.getElementById('wkTip').textContent=t.wkTip;
-  document.getElementById('t-supplier').textContent=t.tSupplier;document.getElementById('d-supplier').textContent=t.dSupplier;
-  if(document.getElementById('t-seg')){document.getElementById('t-seg').textContent=t.tSeg;document.getElementById('d-seg').textContent=t.dSeg;}
-  document.getElementById('t-cmp').textContent=t.tCmp;document.getElementById('d-cmp').textContent=t.dCmp;
-  var cm=document.querySelectorAll('#cmpMode button');cm[0].textContent=t.cmpTotal;cm[1].textContent=t.cmpAvg;
-  document.getElementById('t-ins').textContent=t.tIns;document.getElementById('d-ins').textContent=t.dIns;
-  document.getElementById('t-air').textContent=t.tAir;document.getElementById('d-air').textContent=t.dAir;
-  document.querySelectorAll('#airMode button')[1].textContent=t.all;
-  document.getElementById('t-ch').textContent=t.tCh;document.getElementById('d-ch').textContent=t.dCh;
-  document.getElementById('t-route').textContent=t.tRoute;document.getElementById('d-route').textContent=t.dRoute;var rm=document.querySelectorAll('#routeMetric button');rm[0].textContent=t.rmTk;rm[1].textContent=t.rmRcpt;rm[2].textContent=t.rmProf;
-  document.getElementById('t-tbl').textContent=t.tTbl;document.getElementById('d-tbl').textContent=t.dTbl;
-  document.getElementById('t-act').textContent=t.tAct;document.getElementById('d-act').textContent=t.dAct;
-  document.getElementById('foot').innerHTML=t.foot({period:D.meta.period,orders:D.kpi.orders,tickets:D.kpi.tickets,generated:D.meta.dataNote||''});
+  var vt=document.querySelectorAll('.vtab');if(vt.length>=4){vt[0].textContent=t.vAll;vt[1].textContent=t.vSupply;vt[2].textContent=t.vMarket;vt[3].textContent=t.vOps;}
+  g('t-weekly').textContent=t.tWeekly;g('d-weekly').textContent=t.dWeekly;g('wkTip').textContent=t.wkTip;
+  g('t-supplier').textContent=t.tSupplier;g('d-supplier').textContent=t.dSupplier;
+  if(g('t-seg')){g('t-seg').textContent=t.tSeg;g('d-seg').textContent=t.dSeg;}
+  g('t-cmp').textContent=t.tCmp;g('d-cmp').textContent=t.dCmp;
+  var cm=document.querySelectorAll('#cmpMode button');if(cm.length>=2){if(cm[0]){cm[0].textContent=t.cmpTotal;}if(cm[1]){cm[1].textContent=t.cmpAvg;}}
+  g('t-ins').textContent=t.tIns;g('d-ins').textContent=t.dIns;
+  g('t-air').textContent=t.tAir;g('d-air').textContent=t.dAir;
+  var _am=document.querySelectorAll('#airMode button');if(_am[1]){_am[1].textContent=t.all;}
+  g('t-ch').textContent=t.tCh;g('d-ch').textContent=t.dCh;
+  g('t-route').textContent=t.tRoute;g('d-route').textContent=t.dRoute;var rm=document.querySelectorAll('#routeMetric button');if(rm.length>=3){if(rm[0]){rm[0].textContent=t.rmTk;}if(rm[1]){rm[1].textContent=t.rmRcpt;}if(rm[2]){rm[2].textContent=t.rmProf;}}
+  g('t-tbl').textContent=t.tTbl;g('d-tbl').textContent=t.dTbl;
+  g('t-act').textContent=t.tAct;g('d-act').textContent=t.dAct;
+  g('foot').innerHTML=t.foot({period:D.meta.period,orders:D.kpi.orders,tickets:D.kpi.tickets,generated:D.meta.dataNote||''});
 }
 function renderKPI(){var k=D.kpi,t=tr();
   document.getElementById('kpis').innerHTML=[
@@ -585,25 +569,26 @@ function renderCustomerTable(){
 function renderAll(){var fns=[renderKPI,renderWeekly,renderWkTrend,renderSupplier,renderSeg,renderCmp,renderWkInsights,renderAir,renderChannel,renderRoute,renderPL,renderTable,renderActions,renderTicketVolume,renderCustomerTable];fns.forEach(function(f){try{f();}catch(e){console.error('render error:',e);}});
   if(L==='en')translateDom();else restoreDom();}
 function init(){applyStatic();
-  document.getElementById('curSeg').addEventListener('click',function(e){if(e.target.dataset.cur){CUR=e.target.dataset.cur;L=(CUR==='SGD')?'en':'zh';document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===CUR);});applyStatic();renderAll();document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:L},'*');}catch(e){}});}});
-  document.getElementById('printBtn').addEventListener('click',function(){window.print();});
-  document.getElementById('vtabs').addEventListener('click',function(e){var el=e.target.closest('.vtab');if(el){document.querySelectorAll('.vtab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');applyView(el.dataset.v);}});
-  document.getElementById('cmpMode').addEventListener('click',function(e){if(e.target.dataset.m){cmpMode=e.target.dataset.m;document.querySelectorAll('#cmpMode button').forEach(function(b){b.classList.toggle('active',b.dataset.m===cmpMode);});renderCmp();}});
-  document.getElementById('airMode').addEventListener('click',function(e){if(e.target.dataset.n){airN=+e.target.dataset.n;document.querySelectorAll('#airMode button').forEach(function(b){b.classList.toggle('active',+b.dataset.n===airN);});renderAir();}});
-  document.getElementById('routeMetric').addEventListener('click',function(e){if(e.target.dataset.rm){routeMetric=e.target.dataset.rm;document.querySelectorAll('#routeMetric button').forEach(function(b){b.classList.toggle('active',b.dataset.rm===routeMetric);});renderRoute();}});
-  renderAll();
+  var curSeg=document.getElementById('curSeg');
+  if(curSeg)curSeg.addEventListener('click',function(e){if(e.target.dataset.cur){CUR=e.target.dataset.cur;L=(CUR==='SGD')?'en':'zh';document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===CUR);});applyStatic();document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:L},'*');}catch(e){}});}});
+  var printBtn=document.getElementById('printBtn');
+  if(printBtn)printBtn.addEventListener('click',function(){window.print();});
 }
 function _boot(){if(typeof Highcharts!=='undefined'){showApp();}else{setTimeout(_boot,60);}}
-(function(){var tip=document.getElementById('routeTip'),tipAir=document.getElementById('routeTipAir');
+(function(){var tip=document.getElementById('routeTip'),tipAir=document.getElementById('routeTipAir');if(!tip||!tipAir)return;
 document.addEventListener('mouseover',function(e){var td=e.target.closest?e.target.closest('td[data-route]'):null;if(!td){if(tip)tip.classList.remove('show');return;}
 var rt=td.getAttribute('data-route'),airs=(window.SG&&window.SG.routeAir&&window.SG.routeAir[rt])||[];if(!airs.length){tip.classList.remove('show');return;}
 tipAir.innerHTML='<span style="font-size:inherit">✈️</span> '+airs.join(' / ');var rect=td.getBoundingClientRect();tip.style.left=(rect.right+10)+'px';tip.style.top=rect.top+'px';tip.classList.add('show');});
 document.addEventListener('mouseout',function(e){var td=e.target.closest?e.target.closest('td[data-route]'):null;if(td&&tip)tip.classList.remove('show');});})();
 _boot();
 
-// ===== 主Tab切换 =====
-(function(){function bindMain(){var tabs=document.querySelectorAll('.maintab');if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.maintab').forEach(function(x){x.classList.remove('active');});t.classList.add('active');var v=t.dataset.mt;document.querySelectorAll('.mainpage').forEach(function(p){p.classList.toggle('active',p.id==='mp-'+v);});setTimeout(function(){window.dispatchEvent(new Event('resize'));document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:L},'*');}catch(e){}});},60);});});}bindMain();})();
+
 </script>
 <div class="route-tip" id="routeTip"><div class="tip-label">航司 Airline</div><div class="tip-air" id="routeTipAir"></div></div>
+
+<script>
+window.L=window.L||'zh';window.CUR=window.CUR||'CNY';
+(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
+</script>
 </body>
 </html>

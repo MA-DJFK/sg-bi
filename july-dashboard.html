@@ -140,7 +140,7 @@ table.dt tr:hover td{background:#f8fafc}
 .route-tip .tip-air i{font-size:12px}
 </style>
 <script>if(window!==window.top){document.documentElement.classList.add('in-iframe')}</script>
-<style>.in-iframe .hero,.in-iframe .maintabs{display:none!important}.in-iframe .mainpage.active{padding-top:0}</style>
+<style>.in-iframe .maintabs{display:none!important}.in-iframe .hero{padding:8px 0!important;background:transparent!important;box-shadow:none!important}.in-iframe .hero .h-left,.in-iframe .hero .cur-seg,.in-iframe .hero .h-btn{display:none!important}.in-iframe .hero .hero-in{justify-content:flex-end;padding-top:0;padding-bottom:0}.in-iframe .hero .h-right{justify-content:flex-end}.in-iframe .mainpage.active{padding-top:0}</style>
 </head>
 <body>
 <div id="login">
@@ -572,6 +572,19 @@ document.addEventListener('mouseover',function(e){var td=e.target.closest?e.targ
 var rt=td.getAttribute('data-route'),airs=(window.SG&&window.SG.routeAir&&window.SG.routeAir[rt])||[];if(!airs.length){tip.classList.remove('show');return;}
 tipAir.innerHTML='<span style="font-size:inherit">✈️</span> '+airs.join(' / ');var rect=td.getBoundingClientRect();tip.style.left=(rect.right+10)+'px';tip.style.top=rect.top+'px';tip.classList.add('show');});
 document.addEventListener('mouseout',function(e){var td=e.target.closest?e.target.closest('td[data-route]'):null;if(td&&tip)tip.classList.remove('show');});})();
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.lang){
+    var newL=e.data.lang==='en'?'en':'zh';
+    if(newL!==L){
+      L=newL;
+      CUR=(L==='en')?'SGD':'CNY';
+      document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===CUR);});
+      applyStatic();
+      renderAll();
+    }
+  }
+});
+
 _boot();
 
 // ===== 主Tab切换 =====
