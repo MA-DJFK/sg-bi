@@ -176,7 +176,7 @@ table.dt tr:hover td{background:#f8fafc}
     <div class="mainpage active" id="mp-biz">
     <div class="vtabs" id="vtabs">
       <div class="vtab active" data-v="all"></div><div class="vtab" data-v="supply"></div>
-      <div class="vtab" data-v="market"></div><div class="vtab" data-v="ops"></div>
+      <div class="vtab" data-v="market"></div><div class="vtab" data-v="ops"></div><span id="datePeriod" style="margin-left:16px;font-size:12px;color:#94a3b8;line-height:34px"></span>
     </div>
     <div class="kpis" id="kpis"></div>
     <div class="grid" id="grid">
@@ -308,6 +308,7 @@ function applyStatic(){var t=tr();
   document.getElementById('printBtn').innerHTML='<span>•</span> '+t.print;
   
   var vt=document.querySelectorAll('.vtab');vt[0].textContent=t.vAll;vt[1].textContent=t.vSupply;vt[2].textContent=t.vMarket;vt[3].textContent=t.vOps;
+  var dp=document.getElementById('datePeriod');if(dp)dp.textContent=(L==='en'?'Data: Sep 1-13, 2026':'数据：9.1-9.13');
   document.getElementById('t-weekly').textContent=t.tWeekly;document.getElementById('d-weekly').textContent=t.dWeekly;document.getElementById('wkTip').textContent=t.wkTip;
   document.getElementById('t-supplier').textContent=t.tSupplier;document.getElementById('d-supplier').textContent=t.dSupplier;
   if(document.getElementById('t-seg')){document.getElementById('t-seg').textContent=t.tSeg;document.getElementById('d-seg').textContent=t.dSeg;}
