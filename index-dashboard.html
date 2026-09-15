@@ -163,9 +163,6 @@ table.dt tr:hover td{background:#f8fafc}
       <button class="h-btn" id="printBtn"></button>
       
     </div>
-    <div class="mainpage" id="mp-nzairkpi">
-      <iframe class="sqframe" src="nz-airlines-kpi.html?v=2" id="nzairkpiFrame"></iframe>
-    </div>
   </div></div>
   <div class="wrap">
     <div class="maintabs">
@@ -189,6 +186,9 @@ table.dt tr:hover td{background:#f8fafc}
     <div class="mainpage" id="mp-nxkpi">
       <iframe class="sqframe" src="nx-kpi.html" title="NX后返KPI"></iframe>
     </div>
+    <div class="mainpage" id="mp-nzairkpi">
+      <iframe class="sqframe" src="nz-airlines-kpi.html" title="NZ航空后返KPI"></iframe>
+    </div>
     <div class="mainpage" id="mp-julydash">
       <iframe class="sqframe" src="july-dashboard.html" title="7月经营看板"></iframe>
     </div>
@@ -207,7 +207,7 @@ var CRED={u:String.fromCharCode(121,108,57,54,57),p:String.fromCharCode(121,105,
 var L='zh';
 var T={
  zh:{loginTitle:'新加坡引领 BI 看板',loginSub:'机票批发业务数据分析平台 · 请登录后查看',lblUser:'账号',lPw:'密码',loginBtn:'登 录',loginFoot:'© 新加坡引领 · 数据受保护，仅限授权人员访问',uPH:'请输入账号',pPH:'请输入密码',errMsg:'账号或密码错误，请重试',
-  heroTitle:'新加坡引领 · 机票批发业务 BI 看板',heroSub:'供应链 / 运营 / 市场 三视角数据可视化分析 · 2026年8月全月(8.1-8.31) · 已刨除退票',print:'打印PDF',logout:'退出',
+heroSub:'供应链 / 运营 / 市场 三视角数据可视化分析 · 月度经营 & 后返 KPI 多看板平台',print:'打印PDF',logout:'退出',
   rateBadge:'已修正新币账户汇率（SGD→CNY 5.281100）',
   vAll:'全部',vSupply:'供应链',vMarket:'市场',vOps:'运营',
   kReceipt:'总实收',kProfit:'实际利润',kMargin:'整体毛利率',kLoss:'亏损订单占比',
@@ -231,7 +231,7 @@ var T={
   pUrgent:'紧急',pImportant:'重要',pOptimize:'优化',expect:'预期效果：',
   foot:function(m){return '新加坡引领 · 机票批发业务 BI 看板 | 数据周期：'+m.period+' | 共 '+m.orders+' 笔订单 / '+m.tickets+' 张票 | 生成于 '+m.generated+'<br>数据来源：新加坡引领销售看板8月_2.xlsx · 新币账户按周分段汇率换算(W1/2:5.2644 W3:5.2725 W4:5.2967 W5:5.2811) · 双币种真实值存储，切换零误差';}},
  en:{loginTitle:'SG Leading BI Dashboard',loginSub:'Air-Ticket Wholesale Analytics · Please sign in',lblUser:'Username',lPw:'Passcode',loginBtn:'SIGN IN',loginFoot:'© SG Leading · Protected data, authorized users only',uPH:'Enter username',pPH:'Enter pin code',errMsg:'Incorrect login, please retry',
-heroSub:'Supply Chain / Operations / Market — Monthly Ops & Back-end Incentive Multi-dashboard',
+heroTitle:'SG Leading · Air-Ticket Wholesale BI Dashboard',heroSub:'Supply Chain / Operations / Market — Monthly Ops & Back-end Incentive Multi-dashboard',print:'Print PDF',
   rateBadge:'FX applied to SGD accounts (SGD→CNY 5.281100)',
   vAll:'All',vSupply:'Supply',vMarket:'Market',vOps:'Ops',
   kReceipt:'Total Revenue',kProfit:'Actual Profit',kMargin:'Gross Margin',kLoss:'Loss-Order Ratio',
@@ -473,7 +473,7 @@ function renderActions(){var t=tr();
 var viewMap={all:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],supply:[0,1,6,8,10],market:[7,8,3,4,9,12],ops:[0,3,4,10]};
 function applyView(v){var cards=document.querySelectorAll('#grid > .card');var show=viewMap[v];cards.forEach(function(card,idx){card.style.display=(v==='all'||show.indexOf(idx)>=0)?'':'none';});setTimeout(function(){window.dispatchEvent(new Event('resize'));},50);}
 
-_zhMap={'NZ航空 后返 KPI':'NZ Airlines Back-end Incentive KPI','客户账户明细':'Customer Account Details','按CustomerAccountName统计 · 新币账户已换算人民币 · 排除退票':'By account · SGD converted to CNY · Excl. refunds','航司盈亏分析（利润 / 单票利润）':'Airline P&L (Profit / Per-ticket)',
+_zhMap={'客户账户明细':'Customer Account Details','按CustomerAccountName统计 · 新币账户已换算人民币 · 排除退票':'By account · SGD converted to CNY · Excl. refunds','航司盈亏分析（利润 / 单票利润）':'Airline P&L (Profit / Per-ticket)',
   '航线盈亏分析（利润 / 单票利润）':'Route P&L (Profit / Per-ticket)',
   '盈利 vs 亏损航司 · 单票利润=利润/票量 · 已刨除OrderTypeName退票':'Profit vs Loss airlines · per-ticket=profit/tickets · refunds excluded',
   '盈利 vs 亏损航线 · 单票利润=利润/票量 · 已刨除OrderTypeName退票':'Profit vs Loss routes · per-ticket=profit/tickets · refunds excluded',
@@ -493,7 +493,7 @@ _zhMap={'NZ航空 后返 KPI':'NZ Airlines Back-end Incentive KPI','客户账户
   '河北差联会':'Hebei CLTA','越捷航空-VJVZ':'VietJet-VJVZ',
   '航路flightroutes24-IYF':'FlightRoutes24-IYF',
   '销售部李桂丹':'Sales-LGD','新加坡-悦途(新币)':'Yuetu(SGD)','PT15010400285':'PT15010400285',
-  '新加坡-去哪(新币)':'Qunar(SGD)','2025携程国际一部':'Ctrip Intl-1(2025)','7月经营看板':'Jul Operations'};
+  '新加坡-去哪(新币)':'Qunar(SGD)','2025携程国际一部':'Ctrip Intl-1(2025)','NZ航空 后返 KPI':'NZ Air Back-end KPI','7月经营看板':'Jul Operations'};
 var _domSaved=[];
 function translateDom(){
   _domSaved=[];
@@ -592,7 +592,7 @@ _boot();
 
 <script>
 window.L=window.L||'zh';window.CUR=window.CUR||'CNY';
-(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
+(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});document.querySelectorAll('.maintab').forEach(function(t){var mt=t.dataset.mt;var map={septdash:{zh:'9月经营看板',en:'Sep Operations'},sqkpi:{zh:'SQ 后返 KPI',en:'SQ Back-end Incentive KPI'},tkkpi:{zh:'TK 后返 KPI',en:'TK Back-end Incentive KPI'},nxkpi:{zh:'NX 后返 KPI',en:'NX Back-end Incentive KPI'},nzairkpi:{zh:'NZ航空 后返 KPI',en:'NZ Airlines Back-end Incentive KPI'},julydash:{zh:'7月经营看板',en:'Jul Operations'},augdash:{zh:'8月经营看板',en:'Aug Operations'}};if(map[mt]){var sp=t.querySelector('span');var prefix=sp?sp.outerHTML:'';t.innerHTML=prefix+' '+(map[mt][window.L]||map[mt].zh);}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
 </script>
 </body>
 </html>

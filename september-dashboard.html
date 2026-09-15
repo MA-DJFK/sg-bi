@@ -308,7 +308,7 @@ function applyStatic(){var t=tr();
   document.getElementById('printBtn').innerHTML='<span>•</span> '+t.print;
   
   var vt=document.querySelectorAll('.vtab');vt[0].textContent=t.vAll;vt[1].textContent=t.vSupply;vt[2].textContent=t.vMarket;vt[3].textContent=t.vOps;
-  var dp=document.getElementById('datePeriod');if(dp)dp.textContent=(L==='en'?'Data: Sep 1-13, 2026':'数据：9.1-9.13');
+  var dp=document.getElementById('datePeriod');if(dp){var dn=D.meta.dataNote||'';var m=dn.match(/IssueTime\s+([\d.]+-[\d.]+)/);var rng=m?m[1]:'';dp.textContent=L==='en'?'Data: '+rng:'数据：'+rng;}
   document.getElementById('t-weekly').textContent=t.tWeekly;document.getElementById('d-weekly').textContent=t.dWeekly;document.getElementById('wkTip').textContent=t.wkTip;
   document.getElementById('t-supplier').textContent=t.tSupplier;document.getElementById('d-supplier').textContent=t.dSupplier;
   if(document.getElementById('t-seg')){document.getElementById('t-seg').textContent=t.tSeg;document.getElementById('d-seg').textContent=t.dSeg;}
