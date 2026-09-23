@@ -69,18 +69,29 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
 </style></head><body>
 <div class="hero"><div class="hero-in"><div class="logo"><span style="font-size:inherit">⚡</span></div>
-<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 9.13</div></div>
+<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 9.20</div></div>
 <div class="badge"><span style="font-size:inherit">ℹ️</span> 基本持平</div></div></div>
 <div class="wrap">
 <div class="kpis" id="kpis"></div>
+    <div id="w3box" style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #12b886;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div id="w3-title" style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（9.14-9.20）</div>
+        <div id="w3-amount" style="font-size:28px;font-weight:800;color:#94a3b8;font-family:DIN,monospace;margin-top:4px">0 <span style="font-size:13px;color:#5b6b85">SGD</span></div>
+      </div>
+      <div style="text-align:right">
+        <div id="w3-target" style="font-size:12px;color:#94a3b8">周目标 15,970</div>
+        <div id="w3-pct" style="font-size:22px;font-weight:800;color:#94a3b8;font-family:DIN,monospace">0%</div>
+        <div id="w3-note" style="font-size:11px;color:#5b6b85">本周无出票</div>
+      </div>
+    </div>
 <div class="grid">
   <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> 目标完成进度</h3><div id="g1" class="chart"></div></div>
   <div class="card col-6"><h3><span style="font-size:inherit">📊</span> 按销售月完成</h3><div id="c1" class="chart"></div></div>
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> 剩余分解 · 每月/每周需完成</h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
 </div>
-<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到9.13 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.18873166→SGD · 新币账户直接取值</div>
+<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到9.20 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.190843→SGD · 新币账户直接取值</div>
 </div>
-<script>window.NXKPI = {"target": 51360, "done": 28711.87, "remain": 22648.13, "done_pct": 55.9, "tp": 82.4, "perMonth": 39733.56, "perWeek": 9436.72, "remDays": 17, "remWeeks": 2.4, "byMonth": {"2026-07": 19340.03, "2026-08": 9371.85, "2026-09": 0.0}, "byWeek": {"07/01-07/05": 6289.29, "07/06-07/12": 7079.63, "07/13-07/19": 4208.86, "07/20-07/26": 0.0, "07/27-08/02": 2889.92, "08/03-08/09": 3630.06, "08/10-08/16": 3399.62, "08/17-08/23": 1214.49, "08/24-08/30": 0.0, "08/31-09/06": 0.0, "09/07-09/13": 0.0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23", "08/24-08/30", "08/31-09/06", "09/07-09/13"], "remMonths": ["9月"], "monDays": [17], "period": "2026.7.1-9.30", "today": "2026-09-13", "w3": {"amount": 0.0, "orders": 1}, "status": "behind", "gap": 26.5, "meta": {"rate": 0.18873166, "asOf": "9.13", "totalRows": 116}};</script>
+<script>window.NXKPI = {"target": 51360, "done": 29001.72, "remain": 22358.28, "done_pct": 56.5, "tp": 89.1, "perMonth": 67969.17, "perWeek": 15970.2, "remDays": 10, "remWeeks": 1.4, "byMonth": {"2026-07": 19525.03, "2026-08": 9476.69, "2026-09": 0.0}, "byWeek": {"07/01-07/05": 6359.65, "07/06-07/12": 7132.05, "07/13-07/19": 4254.66, "07/20-07/26": 0.0, "07/27-08/02": 2918.95, "08/03-08/09": 3670.67, "08/10-08/16": 3437.65, "08/17-08/23": 1228.07, "08/24-08/30": 0.0, "08/31-09/06": 0.0, "09/07-09/13": 0.0, "09/14-09/20": 0.0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23", "08/24-08/30", "08/31-09/06", "09/07-09/13", "09/14-09/20"], "remMonths": ["9月"], "monDays": [10], "period": "2026.7.1-9.30", "today": "2026-09-20", "w3": {"amount": 0.0, "orders": 0}, "status": "behind", "gap": 32.6, "meta": {"rate": 0.190843, "asOf": "9.20", "totalRows": 116}};</script>
 <script>
 var LANG='zh';
 window.LANG=LANG;
@@ -111,6 +122,16 @@ var heroEl=document.querySelector('.hero h1');if(heroEl)heroEl.textContent=zh?'N
 var subEl=document.querySelector('.hero .sub');if(subEl)subEl.textContent=zh?('\u76ee\u6807 '+fmt(D.target)+' SGD \u00b7 \u9500\u552e\u65e5\u671f '+D.period+' \u00b7 \u622a\u6b62 '+D.meta.asOf):('Target '+fmt(D.target)+' SGD \u00b7 Sales Period '+D.period+' \u00b7 As of '+D.meta.asOf);
 var badgeEl=document.querySelector('.badge');if(badgeEl){var st=D.status;badgeEl.innerHTML='<span style="font-size:inherit">\u2139\ufe0f</span> '+(zh?(st==='ahead'?'\u8d85\u524d':st==='behind'?'\u843d\u540e':'\u57fa\u672c\u6301\u5e73'):(st==='ahead'?'Ahead':st==='behind'?'Behind':'On Track'));}
 var footEl=document.querySelector('.footer');if(footEl)footEl.textContent=zh?'NX\u540e\u8fd4KPI \u00b7 \u6570\u636e\u6e90:NX\u540e\u8fd4KPI\u622a\u6b62\u5230'+D.meta.asOf+' \u00b7 \u9500\u552e\u65e5\u671f\u53e3\u5f84'+D.period+' \u00b7 \u643a\u7a0b/\u53bb\u54ea/\u540c\u7a0bCNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 \u65b0\u5e01\u8d26\u6237\u76f4\u63a5\u53d6\u503c':'NX Back-end Incentive KPI \u00b7 Data as of '+D.meta.asOf+' \u00b7 Sales period '+D.period+' \u00b7 Ctrip/Qunar/Tongcheng CNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 SGD accounts direct value';
+  // 本周完成横条 (参照TK) - 动态更新
+  var w3=D.w3||{amount:0,orders:0};
+  var wkTarget=D.perWeek||0;
+  var w3pct=wkTarget>0?Math.round(w3.amount/wkTarget*1000)/10:0;
+  var w3color=w3.amount>0?'#12b886':'#94a3b8';
+  var _t=document.getElementById('w3-title');if(_t)_t.textContent=(zh?'📅 本周完成（9.14-9.20）':'📅 This Week (9.14-9.20)');
+  var _a=document.getElementById('w3-amount');if(_a){_a.innerHTML=fmt(w3.amount)+' <span style="font-size:13px;color:#5b6b85">SGD</span>';_a.style.color=w3color;}
+  var _tg=document.getElementById('w3-target');if(_tg)_tg.textContent=(zh?'周目标 ':'Wk target ')+fmt(wkTarget);
+  var _p=document.getElementById('w3-pct');if(_p){_p.textContent=w3pct+'%';_p.style.color=w3color;}
+  var _n=document.getElementById('w3-note');if(_n)_n.textContent=w3.orders>0?(w3.orders+(zh?'单':' orders')+(w3.amount>=wkTarget?(zh?' · 达标':' · Met'):(zh?' · 未达标':' · Below'))):(zh?'本周无出票':'No tickets this week');
 }
 window.addEventListener('message',function(e){
   if(e.data&&e.data.lang&&e.data.lang!==LANG){
