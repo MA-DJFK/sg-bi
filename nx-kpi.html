@@ -75,7 +75,7 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 <div class="kpis" id="kpis"></div>
     <div id="w3box" style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #12b886;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
       <div>
-        <div id="w3-title" style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（9.14-9.20）</div>
+        <div id="w3-title" style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（9.21-9.27）</div>
         <div id="w3-amount" style="font-size:28px;font-weight:800;color:#94a3b8;font-family:DIN,monospace;margin-top:4px">0 <span style="font-size:13px;color:#5b6b85">SGD</span></div>
       </div>
       <div style="text-align:right">
@@ -127,7 +127,7 @@ var footEl=document.querySelector('.footer');if(footEl)footEl.textContent=zh?'NX
   var wkTarget=D.perWeek||0;
   var w3pct=wkTarget>0?Math.round(w3.amount/wkTarget*1000)/10:0;
   var w3color=w3.amount>0?'#12b886':'#94a3b8';
-  var _t=document.getElementById('w3-title');if(_t)_t.textContent=(zh?'📅 本周完成（9.14-9.20）':'📅 This Week (9.14-9.20)');
+  var _t=document.getElementById('w3-title');if(_t)_t.textContent=(zh?'📅 本周完成（9.21-9.27）':'📅 This Week (9.21-9.27)');
   var _a=document.getElementById('w3-amount');if(_a){_a.innerHTML=fmt(w3.amount)+' <span style="font-size:13px;color:#5b6b85">SGD</span>';_a.style.color=w3color;}
   var _tg=document.getElementById('w3-target');if(_tg)_tg.textContent=(zh?'周目标 ':'Wk target ')+fmt(wkTarget);
   var _p=document.getElementById('w3-pct');if(_p){_p.textContent=w3pct+'%';_p.style.color=w3color;}
