@@ -166,16 +166,21 @@ table.dt tr:hover td{background:#f8fafc}
   </div></div>
   <div class="wrap">
     <div class="maintabs">
-      <div class="maintab active" data-mt="septdash"><span style="font-size:inherit">📈</span> 9月经营看板</div>
+      <div class="maintab active" data-mt="octdash"><span style="font-size:inherit">📈</span> 10月经营看板</div>
+      <div class="maintab" data-mt="septdash"><span style="font-size:inherit">📈</span> 9月经营看板</div>
       <div class="maintab" data-mt="sqkpi"><span style="font-size:inherit">⚡</span> SQ 后返 KPI</div>
       <div class="maintab" data-mt="tkkpi"><span style="font-size:inherit">✈️</span> TK 后返 KPI</div>
       <div class="maintab" data-mt="nxkpi"><span style="font-size:inherit">✈️</span> NX 后返 KPI</div>
       <div class="maintab" data-mt="nzairkpi"><span style="font-size:inherit">✈️</span> NZ航空 后返 KPI</div>
+      <div class="maintab" data-mt="mukpi"><span style="font-size:inherit">✈️</span> MU 后返 KPI</div>
       <div class="maintab" data-mt="julydash"><span style="font-size:inherit">📅</span> 7月经营看板</div>
       <div class="maintab" data-mt="augdash"><span style="font-size:inherit">📊</span> 8月经营看板</div>
     </div>
-    <div class="mainpage active" id="mp-septdash">
+    <div class="mainpage" id="mp-septdash">
       <iframe class="sqframe" src="september-dashboard.html" title="9月经营看板"></iframe>
+    </div>
+    <div class="mainpage active" id="mp-octdash">
+      <iframe class="sqframe" src="october-dashboard.html" title="10月经营看板"></iframe>
     </div>
     <div class="mainpage" id="mp-sqkpi">
       <iframe class="sqframe" src="sq-kpi.html" title="SQ后返KPI"></iframe>
@@ -188,6 +193,9 @@ table.dt tr:hover td{background:#f8fafc}
     </div>
     <div class="mainpage" id="mp-nzairkpi">
       <iframe class="sqframe" src="nz-airlines-kpi.html" title="NZ航空后返KPI"></iframe>
+    </div>
+    <div class="mainpage" id="mp-mukpi">
+      <iframe class="sqframe" src="mu-kpi.html" title="MU后返KPI"></iframe>
     </div>
     <div class="mainpage" id="mp-julydash">
       <iframe class="sqframe" src="july-dashboard.html" title="7月经营看板"></iframe>
@@ -493,7 +501,7 @@ _zhMap={'客户账户明细':'Customer Account Details','按CustomerAccountName�
   '河北差联会':'Hebei CLTA','越捷航空-VJVZ':'VietJet-VJVZ',
   '航路flightroutes24-IYF':'FlightRoutes24-IYF',
   '销售部李桂丹':'Sales-LGD','新加坡-悦途(新币)':'Yuetu(SGD)','PT15010400285':'PT15010400285',
-  '新加坡-去哪(新币)':'Qunar(SGD)','2025携程国际一部':'Ctrip Intl-1(2025)','NZ航空 后返 KPI':'NZ Air Back-end KPI','7月经营看板':'Jul Operations'};
+'新加坡-去哪(新币)':'Qunar(SGD)','2025携程国际一部':'Ctrip Intl-1(2025)','NZ航空 后返 KPI':'NZ Air Back-end KPI','MU 后返 KPI':'MU Back-end KPI','7月经营看板':'Jul Operations
 var _domSaved=[];
 function translateDom(){
   _domSaved=[];
@@ -592,7 +600,7 @@ _boot();
 
 <script>
 window.L=window.L||'zh';window.CUR=window.CUR||'CNY';
-(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});document.querySelectorAll('.maintab').forEach(function(t){var mt=t.dataset.mt;var map={septdash:{zh:'9月经营看板',en:'Sep Operations'},sqkpi:{zh:'SQ 后返 KPI',en:'SQ Back-end Incentive KPI'},tkkpi:{zh:'TK 后返 KPI',en:'TK Back-end Incentive KPI'},nxkpi:{zh:'NX 后返 KPI',en:'NX Back-end Incentive KPI'},nzairkpi:{zh:'NZ航空 后返 KPI',en:'NZ Airlines Back-end Incentive KPI'},julydash:{zh:'7月经营看板',en:'Jul Operations'},augdash:{zh:'8月经营看板',en:'Aug Operations'}};if(map[mt]){var sp=t.querySelector('span');var prefix=sp?sp.outerHTML:'';t.innerHTML=prefix+' '+(map[mt][window.L]||map[mt].zh);}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
+(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});document.querySelectorAll('.maintab').forEach(function(t){var mt=t.dataset.mt;var map={octdash:{zh:'10月经营看板',en:'Oct Operations'},septdash:{zh:'9月经营看板',en:'Sep Operations'},sqkpi:{zh:'SQ 后返 KPI',en:'SQ Back-end Incentive KPI'},tkkpi:{zh:'TK 后返 KPI',en:'TK Back-end Incentive KPI'},nxkpi:{zh:'NX 后返 KPI',en:'NX Back-end Incentive KPI'},nzairkpi:{zh:'NZ航空 后返 KPI',en:'NZ Airlines Back-end Incentive KPI'},mukpi:{zh:'MU 后返 KPI',en:'MU Back-end Incentive KPI'},julydash:{zh:'7月经营看板',en:'Jul Operations'},augdash:{zh:'8月经营看板',en:'Aug Operations'}};if(map[mt]){var sp=t.querySelector('span');var prefix=sp?sp.outerHTML:'';t.innerHTML=prefix+' '+(map[mt][window.L]||map[mt].zh);}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
 </script>
 </body>
 </html>
