@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MU 东方航空 · 后返 KPI 完成进度</title>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts-more.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/modules/solid-gauge.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:#f4f6fb;color:#1a1a2e;padding:20px}
+.hero{background:linear-gradient(135deg,#0f3460,#16537e);color:#fff;border-radius:16px;padding:22px 28px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.hero h1{font-size:21px}.hero .sub{font-size:13px;opacity:.85;margin-top:6px}
+.hero .h-right{display:flex;align-items:center;gap:12px}
+.lang-seg{display:inline-flex;border:1px solid rgba(255,255,255,.3);border-radius:8px;overflow:hidden}
+.lang-seg button{background:transparent;color:#fff;border:none;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.lang-seg button.active{background:rgba(255,255,255,.9);color:#0f3460}
+.badge{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 16px;font-weight:700;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.col-5{grid-column:span 5}.col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-12{grid-column:span 12}.col-4{grid-column:span 4}.col-8{grid-column:span 8}
+.card h3{font-size:15px;margin-bottom:12px;color:#0f3460}
+.chart{height:260px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:#fff;border-radius:12px;padding:16px 18px;border-left:4px solid var(--c,#5083fb);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kpi .l{font-size:12px;color:#5b6b85;font-weight:600}
+.kpi .v{font-size:24px;font-weight:800;font-family:DIN,monospace;margin-top:4px}
+.kpi .s{font-size:11px;color:#94a3b8;margin-top:2px}
+table.dt{width:100%;border-collapse:collapse;font-size:13px}
+table.dt th,table.dt td{border:1px solid #e5e9f2;padding:8px 10px;text-align:center}
+table.dt th{background:#0f3460;color:#fff;font-weight:600}
+table.dt tr.active{background:#fff7e6;font-weight:700}
+.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700}
+.footer{margin-top:18px;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6}
+.rate-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(18,184,134,.16);border:1px solid rgba(18,184,134,.4);color:#4ade80;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.in-iframe .hero{padding:8px 0!important;background:transparent!important;box-shadow:none!important;display:flex;justify-content:flex-end;align-items:center}
+.in-iframe .hero h1{display:none!important}
+.in-iframe .hero .sub{display:none!important}
+.in-iframe .hero #hero-badge{display:none!important}
+.in-iframe .hero .lang-seg{display:none!important}
+.desc{margin:-4px 0 10px;font-size:13.5px;color:#64748b;font-weight:600}
+</style></head><body>
+<div class="hero"><div><h1 id="heroTitle"></h1><div class="sub" id="heroSub"></div></div>
+<div class="h-right"><span class="rate-badge" id="rateBadge"></span>
+<div class="lang-seg"><button data-lang="zh" id="langZh">中文</button><button data-lang="en" id="langEn">EN</button></div>
+<div class="badge" id="hero-badge"></div></div></div>
+
+<div class="kpis">
+  <div class="kpi" style="--c:#f59e0b"><div class="l" id="k1l"></div><div class="v" style="color:#f59e0b">20.9%</div><div class="s" id="k1s"></div></div>
+  <div class="kpi" style="--c:#5083fb"><div class="l" id="k2l"></div><div class="v">6,184 <span style="font-size:12px">SGD</span></div><div class="s" id="k2s"></div></div>
+  <div class="kpi" style="--c:#8b5cf6"><div class="l" id="k3l"></div><div class="v">29,578 <span style="font-size:12px">SGD</span></div><div class="s" id="k3s"></div></div>
+  <div class="kpi" style="--c:#12b886"><div class="l" id="k4l"></div><div class="v" style="color:#12b886">44,367</div><div class="s" id="k4s"></div></div>
+</div>
+
+<div class="grid">
+  <div class="card col-6"><h3 id="gaugeTitle"></h3><div class="desc" id="gauge-desc"></div><div id="gauge" class="chart"></div></div>
+  <div class="card col-6"><h3 id="cmpTitle"></h3><div id="cmp" class="chart"></div></div>
+  <div class="card col-7"><h3 id="bandTitle"></h3>
+    <table class="dt" id="bandtbl"><thead><tr id="bandHead"></tr></thead><tbody></tbody></table>
+    <div style="font-size:11px;color:#94a3b8;margin-top:8px" id="bandNote"></div></div>
+  <div class="card col-5"><h3 id="originTitle"></h3><div id="origin" class="chart"></div></div>
+</div>
+
+<div class="footer" id="footerText"></div>
+
+<script>
+var MU={"airline": "MU", "airlineName": "东方航空", "party": "中国东方航空 / Leading Holiday", "period": "2026.9.15-12.31", "basis": "Net Flown Revenue 净已飞行收入(同比增长率)", "rev_cur": 6184.31, "rev_base": 29578.3, "growth": 20.9, "targetTier": "T3", "curBand": "未达T0", "t3_threshold": 150, "need_rev_t3": 44367.45, "gap_rev": 38183.14, "sin": 6068.31, "nonsin": 116.0, "orders_cur": 12, "orders_base": 31, "byMonthCur": {"2026-09": 3457.65, "2026-10": 1946.78, "2026-11": 779.88}, "byMonthBase": {"2025-10": 11407.83, "2025-11": 6129.29, "2025-12": 12041.19}, "bands": [{"tier": "T0", "lo": 100, "hi": 110}, {"tier": "T1", "lo": 110, "hi": 130}, {"tier": "T2", "lo": 130, "hi": 150}, {"tier": "T3", "lo": 150, "hi": null}], "ratesT3": {"SIN_FB": 4.5, "SIN_PE": 3.5, "nonSIN": 1.0}, "rateInfo": {"cur": 0.191070, "base": 0.184024}, "asOf": "10.4", "today": "2026-10-09", "tp": 18.5};
+var G=20.9, GPCT=13.9;
+
+var I18N={
+ zh:{
+  title:"✈️ MU 东方航空 · 后返 KPI 完成进度",
+  sub:"适用期 2026.9.15-12.31(按飞行日期) · 目标 T3(同比增长率≥150%) · 截止 10.4 · 甲方中国东方航空 / 乙方 Leading Holiday",
+  heroBadge:"⚠️ 当前 未达T0",
+  rateBadge:"CNY→SGD 0.191070",
+  k1l:"同比增长率", k1s:"本期净飞行收入 / 2025同期",
+  k2l:"2026本期净飞行收入", k2s:"12单(排除A/O/X)",
+  k3l:"2025同期基数", k3s:"31单",
+  k4l:"达 T3 还需本期", k4s:"缺口 38,183 SGD(×150%基数)",
+  gaugeTitle:"🎯 T3 增长率完成进度(门槛150%)",
+  gaugeDesc:"目标 T3：本期净飞行收入 ≥ 44,367 SGD（同比增长率≥150%，=2025基数29,578×150%） · 销售期 26年9月15日-12月31日",
+  gaugeCenter:['增长率 / T3门槛150%','当前 未达T0','时间进度 18.5%'],
+  cmpTitle:"📊 2025 vs 2026 月度净飞行收入对比(SGD)",
+  cmpCats:['9月','10月','11月','12月'], cmpBase:'2025同期', cmpCur:'2026本期',
+  bandTitle:"📋 Achievement Band 档位表(按净飞行收入同比增长率)",
+  bandHead:['档位','同比增长率','SIN始发·头等/商务','SIN始发·高端/经济','非SIN始发'],
+  bandNote:"* 返点率按始发地×舱位×档位。非SIN始发(经/到SIN)固定1%。当前档位高亮。",
+  originTitle:"🧭 本期始发结构", originSeries:'净飞行收入', originSin:'SIN始发', originNon:'非SIN始发', originFmt:'{point.name}: {point.y:,.0f} SGD ({point.percentage:.1f}%)',
+  footer:"MU后返KPI · 适用期2026.9.15-12.31(按飞行日期·净已飞行收入) · 目标T3同比增长≥150% · 排除A/O/X舱、婴儿票、NDC(WEBL)、包机；G舱计收入不返点 · 新币账户票面不变，人民币账户 CNY×0.191070→SGD(2025基数×0.184024) · 2026本期截止10.4"
+ },
+ en:{
+  title:"✈️ MU China Eastern · Back-end Incentive KPI Progress",
+  sub:"Period 2026.9.15-12.31 (by flight date) · Target T3 (YoY growth ≥150%) · As of 10.4 · China Eastern Airlines / Leading Holiday",
+  heroBadge:"⚠️ Current: below T0",
+  rateBadge:"CNY→SGD 0.191070",
+  k1l:"YoY Growth Rate", k1s:"Current net flown rev / 2025 same period",
+  k2l:"2026 Net Flown Revenue", k2s:"12 orders (excl. A/O/X)",
+  k3l:"2025 Base (same period)", k3s:"31 orders",
+  k4l:"To reach T3, still need", k4s:"Gap 38,183 SGD (×150% base)",
+  gaugeTitle:"🎯 T3 Growth Completion (threshold 150%)",
+  gaugeDesc:"Target T3: net flown revenue ≥ 44,367 SGD (YoY growth ≥150%, = 2025 base 29,578 ×150%) · Sales period 15 Sep - 31 Dec 2026",
+  gaugeCenter:['Growth / T3 threshold 150%','Current: below T0','Time progress 18.5%'],
+  cmpTitle:"📊 2025 vs 2026 Monthly Net Flown Revenue (SGD)",
+  cmpCats:['Sep','Oct','Nov','Dec'], cmpBase:'2025 same period', cmpCur:'2026 current',
+  bandTitle:"📋 Achievement Band (by YoY growth of net flown revenue)",
+  bandHead:['Tier','YoY Growth','SIN origin · First/Business','SIN origin · Premium/Economy','Non-SIN origin'],
+  bandNote:"* Payout rate = origin × cabin × tier. Non-SIN origin (via/to SIN) fixed 1%. Current tier highlighted.",
+  originTitle:"🧭 Current Origin Structure", originSeries:'Net flown revenue', originSin:'SIN origin', originNon:'Non-SIN origin', originFmt:'{point.name}: {point.y:,.0f} SGD ({point.percentage:.1f}%)',
+  footer:"MU Back-end KPI · Period 2026.9.15-12.31 (by flight date · net flown revenue) · Target T3 YoY growth ≥150% · Excl. A/O/X cabins, infant tickets, NDC(WEBL), charter; G cabin counts revenue but no payout · SGD accounts face value unchanged, CNY accounts CNY×0.191070→SGD (2025 base ×0.184024) · 2026 as of 10.4"
+ }
+};
+
+var bandRates=[['T0','100%–110%','2.00%','1.00%','1.00%'],['T1','110%–130%','3.00%','2.50%','1.00%'],['T2','130%–150%','4.00%','3.00%','1.00%'],['T3','≥150%','4.50%','3.50%','1.00%']];
+var CURLANG='zh';
+
+function g(id){return document.getElementById(id);}
+
+function renderCharts(t){
+ // Gauge
+ Highcharts.chart('gauge',{chart:{type:'solidgauge',height:260,backgroundColor:'transparent',animation:false},tooltip:{enabled:false},title:null,credits:{enabled:false},
+  pane:{center:['50%','58%'],size:'95%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef2f9'}},
+  yAxis:{min:0,max:150,tickPositions:[0,100,110,130,150],labels:{distance:14,style:{fontSize:'10px'}},
+    plotBands:[{from:0,to:100,color:'#e5e9f2'},{from:100,to:110,color:'#fde68a'},{from:110,to:130,color:'#93c5fd'},{from:130,to:150,color:'#86efac'}]},
+  series:[{data:[20.9],animation:false,dataLabels:{format:'<div style="text-align:center"><span style="font-size:26px;font-weight:800;color:#f59e0b">20.9%</span><br><span style="font-size:12px;color:#5b6b85">'+t.gaugeCenter[0]+'</span><br><span style="font-size:11px;color:#94a3b8">'+t.gaugeCenter[1]+'</span><br><span style="font-size:11px;color:#f59e0b;font-weight:700">'+t.gaugeCenter[2]+'</span></div>'},
+    tooltip:{valueSuffix:'%'}}],
+  plotOptions:{solidgauge:{animation:false,rounded:true,innerRadius:'62%',dataLabels:{y:14,borderWidth:0,useHTML:true}}}});
+ // 月度对比
+ Highcharts.chart('cmp',{chart:{type:'column',height:260,animation:false},title:null,credits:{enabled:false},
+  xAxis:{categories:t.cmpCats},yAxis:{min:0,title:{text:'SGD'}},
+  series:[{name:t.cmpBase,data:[0, 11407.83, 6129.29, 12041.19],color:'#8b5cf6'},{name:t.cmpCur,data:[3457.65, 1946.78, 779.88, 0],color:'#f59e0b'}],
+  plotOptions:{column:{borderRadius:4,animation:false}}});
+ // 始发结构饼
+ Highcharts.chart('origin',{chart:{type:'pie',height:260,animation:false},title:null,credits:{enabled:false},tooltip:{enabled:false},
+  series:[{name:t.originSeries,animation:false,data:[{name:t.originSin,y:6068.31,color:'#5083fb'},{name:t.originNon,y:116.0,color:'#f59e0b'}],
+    dataLabels:{format:t.originFmt,style:{fontSize:'11px'}}}]});
+}
+
+function renderBand(t){
+ var head=g('bandHead'); head.innerHTML=t.bandHead.map(function(h){return '<th>'+h+'</th>';}).join('');
+ var tb=document.querySelector('#bandtbl tbody'); tb.innerHTML='';
+ bandRates.forEach(function(b){var tr=document.createElement('tr');if(b[0]===MU.targetTier)tr.className='active';
+   tr.innerHTML='<td><span class="pill" style="background:'+(b[0]==='T3'?'#12b886':'#e5e9f2')+';color:'+(b[0]==='T3'?'#fff':'#5b6b85')+'">'+b[0]+'</span></td><td>'+b[1]+'</td><td>'+b[2]+'</td><td>'+b[3]+'</td><td>'+b[4]+'</td>';
+   tb.appendChild(tr);});
+}
+
+function applyLang(lang){
+ CURLANG=(lang==='en')?'en':'zh';
+ var t=I18N[CURLANG];
+ document.documentElement.lang=CURLANG;
+ g('heroTitle').textContent=t.title;
+ g('heroSub').textContent=t.sub;
+ g('hero-badge').textContent=t.heroBadge;
+ g('rateBadge').innerHTML='<span style="font-size:inherit">✅</span> '+t.rateBadge;
+ g('k1l').textContent=t.k1l; g('k1s').textContent=t.k1s;
+ g('k2l').textContent=t.k2l; g('k2s').textContent=t.k2s;
+ g('k3l').textContent=t.k3l; g('k3s').textContent=t.k3s;
+ g('k4l').textContent=t.k4l; g('k4s').textContent=t.k4s;
+ g('gaugeTitle').textContent=t.gaugeTitle;
+ g('gauge-desc').textContent=t.gaugeDesc;
+ g('cmpTitle').textContent=t.cmpTitle;
+ g('bandTitle').textContent=t.bandTitle;
+ g('bandNote').textContent=t.bandNote;
+ g('originTitle').textContent=t.originTitle;
+ g('footerText').textContent=t.footer;
+ g('langZh').classList.toggle('active',CURLANG==='zh');
+ g('langEn').classList.toggle('active',CURLANG==='en');
+ renderBand(t);
+ renderCharts(t);
+}
+
+g('langZh').addEventListener('click',function(){applyLang('zh');});
+g('langEn').addEventListener('click',function(){applyLang('en');});
+// 门户语言联动
+window.addEventListener('message',function(ev){if(ev.data&&ev.data.lang){applyLang(ev.data.lang==='en'?'en':'zh');}});
+
+(function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();
+applyLang('zh');
+</script>
+</body></html>

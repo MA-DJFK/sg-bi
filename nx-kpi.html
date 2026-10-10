@@ -67,15 +67,26 @@ table.dt th:first-child,table.dt td:first-child{text-align:left}
 table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--mono);text-align:right;color:#334155;white-space:nowrap}
 .pos{color:#12b886;font-weight:700}.neg{color:#ef4444;font-weight:700}
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
+
+/* iframe嵌入: 隐藏冗余hero元素,仅显示汇率徽章 */
+.rate-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(18,184,134,.16);border:1px solid rgba(18,184,134,.4);color:#4ade80;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.in-iframe .hero{padding:8px 0!important;background:transparent!important;box-shadow:none!important}
+.in-iframe .hero .logo{display:none!important}
+.in-iframe .hero h1{display:none!important}
+.in-iframe .hero .sub{display:none!important}
+.in-iframe .hero .hl{display:none!important}
+.in-iframe .hero .badge{display:none!important}
+.in-iframe .hero .hero-in{justify-content:flex-end!important}
+.in-iframe .rate-badge{background:#eef4ff;color:#0f3460}
 </style></head><body>
 <div class="hero"><div class="hero-in"><div class="logo"><span style="font-size:inherit">⚡</span></div>
-<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 51,360 SGD · 销售日期 7.1-9.30 · 截止 9.27</div></div>
-<div class="badge"><span style="font-size:inherit">ℹ️</span> 基本持平</div></div></div>
+<div><h1>NX 澳门航空 · 后返 KPI 完成进度</h1><div class="sub">目标 17,995 SGD (T1) · 旅行期 2026.10.1-12.31 · 截止 10.9</div></div>
+<span class="rate-badge" id="rateBadge"><span style="font-size:inherit">✅</span> CNY→SGD 0.190592</span><div class="badge"><span style="font-size:inherit">ℹ️</span> 基本持平</div></div></div>
 <div class="wrap">
 <div class="kpis" id="kpis"></div>
     <div id="w3box" style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #12b886;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
       <div>
-        <div id="w3-title" style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（9.21-9.27）</div>
+        <div id="w3-title" style="font-size:13px;color:#5b6b85;font-weight:600">📅 本周完成（10.5-10.11）</div>
         <div id="w3-amount" style="font-size:28px;font-weight:800;color:#94a3b8;font-family:DIN,monospace;margin-top:4px">0 <span style="font-size:13px;color:#5b6b85">SGD</span></div>
       </div>
       <div style="text-align:right">
@@ -89,9 +100,9 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
   <div class="card col-6"><h3><span style="font-size:inherit">📊</span> 按销售月完成</h3><div id="c1" class="chart"></div></div>
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> 剩余分解 · 每月/每周需完成</h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
 </div>
-<div class="footer">NX后返KPI · 数据源:NX后返KPI截止到9.27 · 销售日期口径7.1-9.30 · 携程/去哪/同程CNY×0.190592→SGD · 新币账户直接取值</div>
+<div class="footer">NX后返KPI · Q4旅行期10.1-12.31(按飞行日期) · 目标T1 17,995 SGD · 三档累进1.0%/1.5%/3.0% · 排除I/X/K舱 · 携程/去哪/同程CNY×0.190592→SGD · 新币账户直接取值</div>
 </div>
-<script>window.NXKPI = {"target": 51360, "done": 28967.26, "remain": 22392.74, "done_pct": 56.4, "tp": 96.7, "perMonth": 226913.1, "perWeek": 55981.85, "remDays": 3, "remWeeks": 0.4, "byMonth": {"2026-07": 19503.03, "2026-08": 9464.23, "2026-09": 0.0}, "byWeek": {"07/01-07/05": 6351.29, "07/06-07/12": 7125.82, "07/13-07/19": 4249.21, "07/20-07/26": 0.0, "07/27-08/02": 2915.5, "08/03-08/09": 3665.85, "08/10-08/16": 3433.13, "08/17-08/23": 1226.46, "08/24-08/30": 0.0, "08/31-09/06": 0.0, "09/07-09/13": 0.0, "09/14-09/20": 0.0, "09/21-09/27": 0.0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/17-08/23", "08/24-08/30", "08/31-09/06", "09/07-09/13", "09/14-09/20", "09/21-09/27"], "remMonths": ["9月"], "monDays": [3], "period": "2026.7.1-9.30", "today": "2026-09-27", "w3": {"amount": 0.0, "orders": 0}, "status": "behind", "gap": 40.3, "meta": {"rate": 0.190592, "asOf": "9.27", "totalRows": 116}};</script>
+<script>window.NXKPI = {"target": 17995, "done": 0.0, "remain": 17995.0, "done_pct": 0.0, "tp": 9.8, "perMonth": 6590.94, "perWeek": 1512.18, "remDays": 83, "remWeeks": 11.9, "byMonth": {"2026-10": 0.0, "2026-11": 0.0, "2026-12": 0.0}, "byWeek": {"10/01-10/04": 0.0, "10/05-10/11": 0.0, "10/12-10/18": 0.0, "10/19-10/25": 0.0, "10/26-11/01": 0.0, "11/02-11/08": 0.0, "11/09-11/15": 0.0, "11/16-11/22": 0.0, "11/23-11/29": 0.0, "11/30-12/06": 0.0, "12/07-12/13": 0.0, "12/14-12/20": 0.0, "12/21-12/27": 0.0, "12/28-12/31": 0.0}, "weekList": ["10/01-10/04", "10/05-10/11", "10/12-10/18", "10/19-10/25", "10/26-11/01", "11/02-11/08", "11/09-11/15", "11/16-11/22", "11/23-11/29", "11/30-12/06", "12/07-12/13", "12/14-12/20", "12/21-12/27", "12/28-12/31"], "remMonths": ["10月", "11月", "12月"], "monDays": [31, 30, 31], "period": "2026.10.1-12.31", "today": "2026-10-09", "w3": {"amount": 0.0, "orders": 0}, "w3label": "10/05-10/11", "status": "behind", "gap": 9.8, "tiers": [{"tier": "T1", "target": 17995, "target_mop": 113750, "rate": 0.01}, {"tier": "T2", "target": 23135, "target_mop": 146250, "rate": 0.015}, {"tier": "T3", "target": 51410, "target_mop": 325000, "rate": 0.03}], "targetTier": "T1", "progressive": true, "meta": {"rate": 0.190592, "asOf": "10.9", "totalRows": 0, "currency": "SGD", "note": "Q4 travel period 10.1-12.31, by flown date, excl I/X/K, prog. payout"}};</script>
 <script>
 var LANG='zh';
 window.LANG=LANG;
@@ -99,7 +110,7 @@ function boot(){if(typeof Highcharts==='undefined')return setTimeout(boot,60);in
 function init(){var D=window.NXKPI,fmt=function(n){return Highcharts.numberFormat(n,0,'.',',');},fmt1=function(n){return Highcharts.numberFormat(n,1,'.',',');};
 var zh=LANG==='zh';
 document.querySelector('#g1').parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83c\udfaf</span> '+(zh?'\u76ee\u6807\u5b8c\u6210\u8fdb\u5ea6':'Target Progress');
-var g1Desc=document.querySelector('#g1').parentElement.querySelector('.desc');if(!g1Desc){g1Desc=document.createElement('p');g1Desc.className='desc';document.querySelector('#g1').parentElement.querySelector('h3').after(g1Desc);}g1Desc.textContent=zh?'\u76ee\u6807 '+fmt(D.target)+' SGD (26\u5e747\u6708-26\u5e749\u6708)':'Target '+fmt(D.target)+' SGD (Jul26 - Sep26)';
+var g1Desc=document.querySelector('#g1').parentElement.querySelector('.desc');if(!g1Desc){g1Desc=document.createElement('p');g1Desc.className='desc';document.querySelector('#g1').parentElement.querySelector('h3').after(g1Desc);}g1Desc.textContent=zh?'\u76ee\u6807 '+fmt(D.target)+' SGD (26\u5e7410\u6708-26\u5e7412\u6708)':'Target '+fmt(D.target)+' SGD (Oct26 - Dec26)';
 document.querySelector('#c1').parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83d\udcca</span> '+(zh?'\u6309\u9500\u552e\u6708\u5b8c\u6210':'Monthly Completion');
 document.querySelector('#tbl').parentElement.parentElement.querySelector('h3').innerHTML='<span style="font-size:inherit">\ud83d\udccb</span> '+(zh?'\u5269\u4f59\u5206\u89e3 \u00b7 \u6bcf\u6708/\u6bcf\u5468\u9700\u5b8c\u6210':'Remaining Breakdown \u00b7 Monthly/Weekly Target');
 document.getElementById('kpis').innerHTML=[
@@ -121,13 +132,13 @@ document.getElementById('tbl').innerHTML=h+'</tbody>';
 var heroEl=document.querySelector('.hero h1');if(heroEl)heroEl.textContent=zh?'NX \u6fb3\u95e8\u822a\u7a7a \u00b7 \u540e\u8fd4 KPI \u5b8c\u6210\u8fdb\u5ea6':'NX Macau Airlines \u00b7 Back-end Incentive KPI Progress';
 var subEl=document.querySelector('.hero .sub');if(subEl)subEl.textContent=zh?('\u76ee\u6807 '+fmt(D.target)+' SGD \u00b7 \u9500\u552e\u65e5\u671f '+D.period+' \u00b7 \u622a\u6b62 '+D.meta.asOf):('Target '+fmt(D.target)+' SGD \u00b7 Sales Period '+D.period+' \u00b7 As of '+D.meta.asOf);
 var badgeEl=document.querySelector('.badge');if(badgeEl){var st=D.status;badgeEl.innerHTML='<span style="font-size:inherit">\u2139\ufe0f</span> '+(zh?(st==='ahead'?'\u8d85\u524d':st==='behind'?'\u843d\u540e':'\u57fa\u672c\u6301\u5e73'):(st==='ahead'?'Ahead':st==='behind'?'Behind':'On Track'));}
-var footEl=document.querySelector('.footer');if(footEl)footEl.textContent=zh?'NX\u540e\u8fd4KPI \u00b7 \u6570\u636e\u6e90:NX\u540e\u8fd4KPI\u622a\u6b62\u5230'+D.meta.asOf+' \u00b7 \u9500\u552e\u65e5\u671f\u53e3\u5f84'+D.period+' \u00b7 \u643a\u7a0b/\u53bb\u54ea/\u540c\u7a0bCNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 \u65b0\u5e01\u8d26\u6237\u76f4\u63a5\u53d6\u503c':'NX Back-end Incentive KPI \u00b7 Data as of '+D.meta.asOf+' \u00b7 Sales period '+D.period+' \u00b7 Ctrip/Qunar/Tongcheng CNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 SGD accounts direct value';
+var footEl=document.querySelector('.footer');if(footEl)footEl.textContent=zh?'NX\u540e\u8fd4KPI \u00b7 \u6570\u636e\u6e90:NX\u540e\u8fd4KPI\u622a\u6b62\u5230'+D.meta.asOf+' \u00b7 Q4\u65c5\u884c\u671f'+D.period+' \u00b7 \u643a\u7a0b/\u53bb\u54ea/\u540c\u7a0bCNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 \u65b0\u5e01\u8d26\u6237\u76f4\u63a5\u53d6\u503c':'NX Back-end Incentive KPI \u00b7 Data as of '+D.meta.asOf+' \u00b7 Sales period '+D.period+' \u00b7 Ctrip/Qunar/Tongcheng CNY\u00d7'+D.meta.rate+'\u2192SGD \u00b7 SGD accounts direct value';
   // 本周完成横条 (参照TK) - 动态更新
   var w3=D.w3||{amount:0,orders:0};
   var wkTarget=D.perWeek||0;
   var w3pct=wkTarget>0?Math.round(w3.amount/wkTarget*1000)/10:0;
   var w3color=w3.amount>0?'#12b886':'#94a3b8';
-  var _t=document.getElementById('w3-title');if(_t)_t.textContent=(zh?'📅 本周完成（9.21-9.27）':'📅 This Week (9.21-9.27)');
+  var _t=document.getElementById('w3-title');if(_t)_t.textContent=(zh?'📅 本周完成（10.5-10.11）':'📅 This Week (10.5-10.11)');
   var _a=document.getElementById('w3-amount');if(_a){_a.innerHTML=fmt(w3.amount)+' <span style="font-size:13px;color:#5b6b85">SGD</span>';_a.style.color=w3color;}
   var _tg=document.getElementById('w3-target');if(_tg)_tg.textContent=(zh?'周目标 ':'Wk target ')+fmt(wkTarget);
   var _p=document.getElementById('w3-pct');if(_p){_p.textContent=w3pct+'%';_p.style.color=w3color;}
@@ -141,4 +152,5 @@ window.addEventListener('message',function(e){
   }
 });
 boot();
-</script></body></html>
+</script><script>(function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();</script>
+</body></html>
