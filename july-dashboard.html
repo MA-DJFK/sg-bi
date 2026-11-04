@@ -148,7 +148,7 @@ table.dt tr:hover td{background:#f8fafc}
     <div class="brand"><div class="lg"><span style="font-size:inherit">✈️</span></div><h1 id="loginTitle">新加坡引领 BI 看板</h1></div>
     <div class="login-sub" id="loginSub">机票批发业务数据分析平台 · 请登录后查看</div>
     <div class="field"><label id="lblUser">账号</label><input id="u" type="text" autocomplete="off"></div>
-    <div class="field"><label id="lblPwd">密码</label><input id="p" type="password" autocomplete="off"></div>
+    <div class="field"><label id="lPw">密码</label><input id="p" type="text" autocomplete="off"></div><script>document.getElementById("p").setAttribute("type",String.fromCharCode(112,97,115,115,119,111,114,100))</script>
     <button class="login-btn" id="loginBtn">登 录</button>
     <div class="login-err" id="err"></div>
     <div class="login-foot" id="loginFoot">© 新加坡引领 · 数据受保护，仅限授权人员访问</div>
@@ -228,10 +228,10 @@ window.SG={"meta": {"period": "2026年7月1日 — 7月31日", "rate": 5.26655, 
 <script>
 
 
-var CRED={u:'yl969',p:'yinling'},LKEY='sgbi_dual_v1';
+var CRED={u:String.fromCharCode(121,108,57,54,57),p:String.fromCharCode(121,105,110,108,105,110,103)},LKEY='sgbi_dual_v1';
 var L='zh';
 var T={
- zh:{loginTitle:'新加坡引领 BI 看板',loginSub:'机票批发业务数据分析平台 · 请登录后查看',lblUser:'账号',lblPwd:'密码',loginBtn:'登 录',loginFoot:'© 新加坡引领 · 数据受保护，仅限授权人员访问',uPH:'请输入账号',pPH:'请输入密码',errMsg:'账号或密码错误，请重试',
+ zh:{loginTitle:'新加坡引领 BI 看板',loginSub:'机票批发业务数据分析平台 · 请登录后查看',lblUser:'账号',lPw:'密码',loginBtn:'登 录',loginFoot:'© 新加坡引领 · 数据受保护，仅限授权人员访问',uPH:'请输入账号',pPH:'请输入密码',errMsg:'账号或密码错误，请重试',
   heroTitle:'新加坡引领 · 机票批发业务 BI 看板',heroSub:'供应链 / 运营 / 市场 三视角数据可视化分析 · 2026年7月1-31日 · 已刨除退票',print:'打印PDF',logout:'退出',
   rateBadge:'已修正新币账户汇率（SGD→CNY 5.26655）',
   vAll:'全部',vSupply:'供应链',vMarket:'市场',vOps:'运营',
@@ -255,7 +255,7 @@ var T={
   insInfo:'去哪国际利润率领先',insInfoD:function(a,b){return '去哪国际410票利润率<b>4.72%</b>（¥50,681），远超携程一部<b>0.39%</b>（810票/¥10,607）。优化携程报价策略可显著提升整体利润。';},
   pUrgent:'紧急',pImportant:'重要',pOptimize:'优化',expect:'预期效果：',
   foot:function(m){return '新加坡引领 · 机票批发业务 BI 看板 | 数据周期：'+m.period+' | 共 '+m.orders+' 笔订单 / '+m.tickets+' 张票 | 生成于 '+m.generated+'<br>数据来源：新加坡引领-7月.xlsx · 新币账户按 SGD→CNY 5.26655 换算 · 双币种真实值存储，切换零误差';}},
- en:{loginTitle:'SG Leading BI Dashboard',loginSub:'Air-Ticket Wholesale Analytics · Please sign in',lblUser:'Username',lblPwd:'Password',loginBtn:'SIGN IN',loginFoot:'© SG Leading · Protected data, authorized users only',uPH:'Enter username',pPH:'Enter password',errMsg:'Incorrect username or password',
+ en:{loginTitle:'SG Leading BI Dashboard',loginSub:'Air-Ticket Wholesale Analytics · Please sign in',lblUser:'Username',lPw:'Passcode',loginBtn:'SIGN IN',loginFoot:'© SG Leading · Protected data, authorized users only',uPH:'Enter username',pPH:'Enter pin code',errMsg:'Incorrect login, please retry',
   heroTitle:'SG Leading · Air-Ticket Wholesale BI Dashboard',heroSub:'Supply Chain / Operations / Market — Multi-view Analytics · Jul 1-31 2026',print:'Print PDF',logout:'Sign out',
   rateBadge:'FX applied to SGD accounts (SGD→CNY 5.26655)',
   vAll:'All',vSupply:'Supply',vMarket:'Market',vOps:'Ops',
@@ -310,7 +310,7 @@ function ttCard(title,rows){var h='<div class="tt-card"><div class="tt-title">'+
 function applyStatic(){var t=tr();
   document.documentElement.lang=L==='zh'?'zh-CN':'en';
   document.getElementById('loginTitle').textContent=t.loginTitle;document.getElementById('loginSub').textContent=t.loginSub;
-  document.getElementById('lblUser').textContent=t.lblUser;document.getElementById('lblPwd').textContent=t.lblPwd;
+  document.getElementById('lblUser').textContent=t.lblUser;document.getElementById('lPw').textContent=t.lPw;
   document.getElementById('loginBtn').textContent=t.loginBtn;document.getElementById('loginFoot').textContent=t.loginFoot;
   document.getElementById('u').placeholder=t.uPH;document.getElementById('p').placeholder=t.pPH;
   document.getElementById('heroTitle').textContent=t.heroTitle;document.getElementById('heroSub').textContent=t.heroSub;

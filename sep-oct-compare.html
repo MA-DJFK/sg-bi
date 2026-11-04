@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>9月 vs 10月 经营对比</title>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:#f4f6fb;color:#1a1a2e;padding:20px}
+.hero{background:linear-gradient(135deg,#0f3460,#16537e);color:#fff;border-radius:16px;padding:22px 28px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.hero h1{font-size:21px}.hero .sub{font-size:13px;opacity:.85;margin-top:6px}
+.h-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid rgba(255,255,255,.3);border-radius:8px;overflow:hidden}
+.seg button{background:transparent;color:#fff;border:none;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.seg button.active{background:rgba(255,255,255,.92);color:#0f3460}
+.rate-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(18,184,134,.16);border:1px solid rgba(18,184,134,.4);color:#4ade80;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.04);border-left:4px solid var(--c,#5083fb)}
+.kpi .l{font-size:12px;color:#5b6b85;font-weight:600}
+.kpi .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.kpi .m{font-size:11px;color:#94a3b8;font-weight:600}
+.kpi .v{font-size:15px;font-weight:700;font-family:DIN,monospace;color:#64748b}
+.kpi .v.o{font-size:22px;color:#0f3460}
+.kpi .d{margin-top:6px;font-size:12px;font-weight:700}
+.up{color:#12b886}.dn{color:#ef4444}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.col-4{grid-column:span 4}.col-5{grid-column:span 5}.col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
+.card h3{font-size:15px;color:#0f3460;margin-bottom:4px}
+.desc{font-size:12px;color:#94a3b8;margin-bottom:10px}
+.chart{height:300px}
+.ins{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ins div{background:#f8fafc;border-radius:10px;padding:12px 14px;border-top:3px solid #5083fb}
+.ins b{color:#0f3460}.ins .t{font-size:13px;font-weight:700;color:#0f3460;margin-bottom:6px}.ins .x{font-size:12px;color:#5b6b85;line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#f1f5f9;color:#5b6b85;font-weight:600;padding:8px 10px;text-align:right}th:first-child{text-align:left}
+td{padding:8px 10px;border-bottom:1px solid #eef2f7;text-align:right;font-family:DIN,monospace}td:first-child{text-align:left;font-weight:700;color:#152237;font-family:inherit}
+.footer{margin-top:18px;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6}
+.in-iframe .hero{padding:8px 0!important;background:transparent!important;justify-content:flex-end}
+.in-iframe .hero>div:first-child,.in-iframe .seg{display:none!important}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.ins{grid-template-columns:1fr}.grid>.card{grid-column:span 12}}
+</style></head><body>
+<div class="hero"><div><h1 id="title"></h1><div class="sub" id="sub"></div></div>
+<div class="h-right"><span class="rate-badge" id="rate"></span>
+<div class="seg" id="curSeg"><button data-c="CNY">CNY</button><button data-c="SGD">SGD</button></div>
+<div class="seg" id="langSeg"><button data-l="zh">中文</button><button data-l="en">EN</button></div></div></div>
+<div class="kpis" id="kpis"></div>
+<div class="card col-12" style="margin-bottom:16px"><h3 id="tIns"></h3><div class="desc" id="dIns"></div><div class="ins" id="ins"></div></div>
+<div class="grid">
+ <div class="card col-6"><h3 id="tWk"></h3><div class="desc" id="dWk"></div><div id="cWk" class="chart"></div></div>
+ <div class="card col-6"><h3 id="tCum"></h3><div class="desc" id="dCum"></div><div id="cCum" class="chart"></div></div>
+ <div class="card col-7"><h3 id="tAir"></h3><div class="desc" id="dAir"></div><div id="cAir" class="chart" style="height:380px"></div></div>
+ <div class="card col-5"><h3 id="tAirT"></h3><div class="desc" id="dAirT"></div><div id="airTbl"></div></div>
+ <div class="card col-7"><h3 id="tCh"></h3><div class="desc" id="dCh"></div><div id="cCh" class="chart" style="height:340px"></div></div>
+ <div class="card col-5"><h3 id="tSeg"></h3><div class="desc" id="dSeg"></div><div id="cSeg" class="chart" style="height:340px"></div></div>
+</div>
+<div class="footer" id="foot"></div>
+<script>
+var A={"sep": {"kpi": {"tickets": 3008, "orders": 2159, "receipt_cny": 6952961, "receipt_sgd": 1318465, "profit_cny": 115177, "profit_sgd": 21847, "margin": 1.66, "loss_pct": 13.5, "loss_orders": 292, "avg_ticket_profit": 38, "avg_ticket_profit_sgd": 7}, "weeks": [{"w": "W1", "range": "9.1-9.6", "t": 557, "rc": 1659530, "rs": 313146, "pc": 21919, "ps": 4136, "m": 1.32, "l": 23.4}, {"w": "W2", "range": "9.7-9.13", "t": 738, "rc": 1708709, "rs": 322821, "pc": 31545, "ps": 5960, "m": 1.85, "l": 12.5}, {"w": "W3", "range": "9.14-9.20", "t": 780, "rc": 1601581, "rs": 305040, "pc": 26430, "ps": 5034, "m": 1.65, "l": 8.0}, {"w": "W4", "range": "9.21-9.27", "t": 604, "rc": 1423541, "rs": 270774, "pc": 21279, "ps": 4048, "m": 1.49, "l": 15.1}, {"w": "W5", "range": "9.28-9.30", "t": 329, "rc": 559599, "rs": 106684, "pc": 14003, "ps": 2670, "m": 2.5, "l": 8.2}], "daily": [{"d": 1, "t": 91, "pc": 4358, "ps": 822}, {"d": 2, "t": 99, "pc": 3460, "ps": 653}, {"d": 3, "t": 97, "pc": 5557, "ps": 1049}, {"d": 4, "t": 105, "pc": 2062, "ps": 389}, {"d": 5, "t": 78, "pc": 2881, "ps": 544}, {"d": 6, "t": 87, "pc": 3601, "ps": 680}, {"d": 7, "t": 114, "pc": 5880, "ps": 1111}, {"d": 8, "t": 136, "pc": 7946, "ps": 1501}, {"d": 9, "t": 90, "pc": 3691, "ps": 697}, {"d": 10, "t": 67, "pc": 3634, "ps": 687}, {"d": 11, "t": 123, "pc": 5759, "ps": 1088}, {"d": 12, "t": 99, "pc": 2591, "ps": 490}, {"d": 13, "t": 109, "pc": 2044, "ps": 386}, {"d": 14, "t": 153, "pc": 3754, "ps": 715}, {"d": 15, "t": 128, "pc": 6968, "ps": 1327}, {"d": 16, "t": 71, "pc": 5048, "ps": 961}, {"d": 17, "t": 93, "pc": 2175, "ps": 414}, {"d": 18, "t": 104, "pc": 4691, "ps": 893}, {"d": 19, "t": 82, "pc": 1528, "ps": 291}, {"d": 20, "t": 149, "pc": 2266, "ps": 432}, {"d": 21, "t": 110, "pc": 2166, "ps": 412}, {"d": 22, "t": 72, "pc": 1680, "ps": 319}, {"d": 23, "t": 111, "pc": 2094, "ps": 398}, {"d": 24, "t": 105, "pc": 9153, "ps": 1741}, {"d": 25, "t": 50, "pc": 1169, "ps": 222}, {"d": 26, "t": 66, "pc": 2944, "ps": 560}, {"d": 27, "t": 90, "pc": 2075, "ps": 395}, {"d": 28, "t": 112, "pc": 822, "ps": 157}, {"d": 29, "t": 118, "pc": 4157, "ps": 793}, {"d": 30, "t": 99, "pc": 9024, "ps": 1720}], "seg": {"presale": {"pc": 114670, "ps": 21755}, "afterNet": {"pc": 507, "ps": 91}}, "rate": 5.2454}, "oct": {"kpi": {"tickets": 9581, "orders": 6111, "receipt_cny": 17186814, "receipt_sgd": 3298528, "profit_cny": 177923, "profit_sgd": 34128, "margin": 1.04, "loss_pct": 18.8, "loss_orders": 1149, "avg_ticket_profit": 19, "avg_ticket_profit_sgd": 4}, "weeks": [{"w": "W1", "range": "10.1-10.4", "t": 271, "rc": 569914, "rs": 108650, "pc": 18101, "ps": 3451, "m": 3.18, "l": 8.5}, {"w": "W2", "range": "10.5-10.11", "t": 643, "rc": 1465735, "rs": 280389, "pc": 17721, "ps": 3390, "m": 1.21, "l": 14.0}, {"w": "W3", "range": "10.12-10.18", "t": 843, "rc": 1725711, "rs": 331390, "pc": 42813, "ps": 8221, "m": 2.48, "l": 11.8}, {"w": "W4", "range": "10.19-10.25", "t": 2183, "rc": 4622542, "rs": 887670, "pc": 17863, "ps": 3430, "m": 0.39, "l": 37.8}, {"w": "W5", "range": "10.26-10.31", "t": 5641, "rc": 8802912, "rs": 1690429, "pc": 81425, "ps": 15636, "m": 0.92, "l": 14.2}], "daily": [{"d": 1, "t": 90, "pc": 4393, "ps": 837}, {"d": 2, "t": 53, "pc": 6751, "ps": 1287}, {"d": 3, "t": 45, "pc": 5126, "ps": 977}, {"d": 4, "t": 83, "pc": 1831, "ps": 349}, {"d": 5, "t": 57, "pc": 1850, "ps": 354}, {"d": 6, "t": 85, "pc": 3583, "ps": 685}, {"d": 7, "t": 55, "pc": 2366, "ps": 453}, {"d": 8, "t": 99, "pc": 2019, "ps": 386}, {"d": 9, "t": 122, "pc": 2690, "ps": 515}, {"d": 10, "t": 140, "pc": 2561, "ps": 490}, {"d": 11, "t": 85, "pc": 2651, "ps": 507}, {"d": 12, "t": 110, "pc": 6489, "ps": 1246}, {"d": 13, "t": 289, "pc": 18385, "ps": 3531}, {"d": 14, "t": 119, "pc": 7878, "ps": 1513}, {"d": 15, "t": 94, "pc": 1962, "ps": 377}, {"d": 16, "t": 133, "pc": 2330, "ps": 447}, {"d": 17, "t": 57, "pc": 2016, "ps": 387}, {"d": 18, "t": 41, "pc": 3753, "ps": 721}, {"d": 19, "t": 101, "pc": 2576, "ps": 495}, {"d": 20, "t": 147, "pc": 9916, "ps": 1904}, {"d": 21, "t": 136, "pc": 1949, "ps": 374}, {"d": 22, "t": 97, "pc": 1624, "ps": 312}, {"d": 23, "t": 656, "pc": -15008, "ps": -2882}, {"d": 24, "t": 457, "pc": 7374, "ps": 1416}, {"d": 25, "t": 589, "pc": 9432, "ps": 1811}, {"d": 26, "t": 669, "pc": 7337, "ps": 1409}, {"d": 27, "t": 683, "pc": 34773, "ps": 6678}, {"d": 28, "t": 3080, "pc": 10850, "ps": 2084}, {"d": 29, "t": 712, "pc": 22442, "ps": 4310}, {"d": 30, "t": 383, "pc": 15506, "ps": 2978}, {"d": 31, "t": 114, "pc": -9484, "ps": -1821}], "seg": {"presale": {"pc": 134916, "ps": 25870}, "afterNet": {"pc": 43007, "ps": 8259}}, "rate": 5.2075}, "air": [{"name": "EK", "sep": {"t": 662, "rc": 1800822, "rs": 341240, "pc": 44043, "ps": 8351}, "oct": {"t": 237, "rc": 419779, "rs": 80363, "pc": 13685, "ps": 2616}}, {"name": "SQ", "sep": {"t": 306, "rc": 731493, "rs": 138739, "pc": 8222, "ps": 1559}, "oct": {"t": 6260, "rc": 12219074, "rs": 2345801, "pc": 41944, "ps": 8054}}, {"name": "MU", "sep": {"t": 61, "rc": 189766, "rs": 35949, "pc": 4753, "ps": 901}, "oct": {"t": 837, "rc": 984864, "rs": 189088, "pc": 36916, "ps": 7088}}, {"name": "ZH", "sep": {"t": 99, "rc": 233642, "rs": 44295, "pc": 6714, "ps": 1275}, "oct": {"t": 120, "rc": 229046, "rs": 43886, "pc": 8686, "ps": 1661}}, {"name": "SC", "sep": {"t": 93, "rc": 198778, "rs": 37696, "pc": 5356, "ps": 1018}, "oct": {"t": 264, "rc": 339149, "rs": 65051, "pc": 9752, "ps": 1869}}, {"name": "QR", "sep": {"t": 206, "rc": 684154, "rs": 129578, "pc": 10100, "ps": 1914}, "oct": {"t": 25, "rc": 114271, "rs": 21894, "pc": 637, "ps": 122}}, {"name": "TK", "sep": {"t": 26, "rc": 478512, "rs": 90697, "pc": 8001, "ps": 1519}, "oct": {"t": 30, "rc": 255683, "rs": 49040, "pc": 1938, "ps": 372}}, {"name": "TR", "sep": {"t": 603, "rc": 797260, "rs": 151357, "pc": 9321, "ps": 1768}, "oct": {"t": 594, "rc": 650683, "rs": 124790, "pc": 139, "ps": 25}}, {"name": "TG", "sep": {"t": 26, "rc": 31899, "rs": 6052, "pc": 215, "ps": 41}, "oct": {"t": 26, "rc": 126272, "rs": 24219, "pc": 5008, "ps": 955}}, {"name": "NH", "sep": {"t": 9, "rc": 142919, "rs": 27198, "pc": 4330, "ps": 824}, "oct": {"t": 7, "rc": 20636, "rs": 3961, "pc": 289, "ps": 55}}, {"name": "EY", "sep": {"t": 50, "rc": 184843, "rs": 35100, "pc": 3867, "ps": 734}, "oct": {"t": 8, "rc": 27515, "rs": 5272, "pc": 671, "ps": 129}}, {"name": "MH", "sep": {"t": 178, "rc": 51151, "rs": 9704, "pc": 1296, "ps": 245}, "oct": {"t": 139, "rc": 122366, "rs": 23422, "pc": 2169, "ps": 415}}], "ch": [{"name": "2026携程国际一部", "sep": {"t": 1199, "rc": 3663650, "rs": 694210, "pc": 50343, "ps": 9542}, "oct": {"t": 4551, "rc": 9848814, "rs": 1890438, "pc": 58618, "ps": 11242}}, {"name": "新加坡引领-新币账户", "sep": {"t": 268, "rc": 1090863, "rs": 207123, "pc": 27719, "ps": 5268}, "oct": {"t": 380, "rc": 1439339, "rs": 275888, "pc": 28171, "ps": 5400}}, {"name": "2026去哪国际", "sep": {"t": 226, "rc": 623514, "rs": 118319, "pc": 14173, "ps": 2691}, "oct": {"t": 229, "rc": 551434, "rs": 105768, "pc": 19226, "ps": 3685}}, {"name": "2026同程国际", "sep": {"t": 200, "rc": 451535, "rs": 85673, "pc": 8409, "ps": 1595}, "oct": {"t": 181, "rc": 342835, "rs": 65721, "pc": 10399, "ps": 1993}}, {"name": "2026飞猪国际", "sep": {"t": 69, "rc": 152268, "rs": 28868, "pc": 2768, "ps": 525}, "oct": {"t": 128, "rc": 219703, "rs": 42165, "pc": 12055, "ps": 2314}}, {"name": "2026携程国际廉航", "sep": {"t": 438, "rc": 581145, "rs": 110403, "pc": 5924, "ps": 1124}, "oct": {"t": 555, "rc": 633045, "rs": 121439, "pc": -212, "ps": -42}}, {"name": "2026易旅行", "sep": {"t": 14, "rc": 71231, "rs": 13463, "pc": 1401, "ps": 265}, "oct": {"t": 20, "rc": 59239, "rs": 11331, "pc": 1868, "ps": 357}}, {"name": "新加坡-去哪(新币)", "sep": {"t": 2, "rc": 1031, "rs": 196, "pc": 11, "ps": 2}, "oct": {"t": 1201, "rc": 1215725, "rs": 233441, "pc": 2619, "ps": 503}}, {"name": "新加坡-小蜻蜓(新币)", "sep": {"t": 484, "rc": 5905, "rs": 1119, "pc": 412, "ps": 78}, "oct": {"t": 337, "rc": 187756, "rs": 35998, "pc": 1517, "ps": 291}}], "ins": {"zh": [["规模大幅扩张", "10月出票 <b>9,581<\/b> 票，较9月 3,008 票增长 <b>+219%<\/b>；实收 ¥1,719万，增长 +147%。增量主要来自月末活动（W4–W5 合计 7,824 票）。"], ["利润增长但毛利率摊薄", "实际利润 ¥177,923，较9月增长 <b>+54%<\/b>，但毛利率由 1.66% 降至 <b>1.04%<\/b>，单票利润由 ¥38 降至 ¥19。"], ["亏损率上升", "亏损率由 13.5% 升至 <b>18.8%<\/b>（+5.3pp），W4(10.19-10.25) 达 37.8%。活动期低价出票需加强管控。"], ["利润结构切换", "SQ 利润 ¥8,222 → <b>¥41,944<\/b>、MU ¥4,753 → <b>¥36,916<\/b> 成为主力；9月第一的 EK ¥44,043 → ¥13,685（-69%），QR、TR 利润几乎归零。"], ["售后贡献显著", "售后净值由 ¥507 增至 <b>¥43,007<\/b>，占10月利润 24%（退票利润增加）。"]], "en": [["Volume Expansion", "Oct tickets <b>9,581<\/b> vs Sep 3,008 (<b>+219%<\/b>); revenue S$3,299k (+150%). Growth driven by the month-end campaign (W4–W5: 7,824 tix)."], ["Profit Up, Margin Diluted", "Profit S$34,128 (<b>+56%<\/b>), but margin fell from 1.66% to <b>1.04%<\/b>; profit per ticket S$7 → S$4."], ["Loss Rate Up", "Loss rate 13.5% → <b>18.8%<\/b> (+5.3pp); W4 (Oct 19-25) peaked at 37.8%. Tighten low-fare ticketing during campaigns."], ["Profit Mix Shift", "SQ S$1,559 → <b>S$8,054<\/b>, MU S$901 → <b>S$7,088<\/b> now lead; Sep leader EK S$8,351 → S$2,616 (-69%), QR and TR near zero."], ["After-sales Contribution", "After-sales net S$91 → <b>S$8,259<\/b>, 24% of Oct profit (higher refund profit)."]]}};
+var T={zh:{title:'📊 9月 vs 10月 经营对比',sub:'2026.9.1-9.30 对比 2026.10.1-10.31 · 实际利润=售前利润+售后净值 · 已刨除退票/废票',
+ rate:'9月 SGD→CNY 5.245400 · 10月 5.207500',sep:'9月',oct:'10月',
+ k:['出票量','订单数','实收','实际利润','毛利率','亏损率','单票利润','亏损单'],
+ tIns:'对比洞察',dIns:'10月活动放量：规模翻倍增长，利润增长但毛利率、亏损率承压',
+ tWk:'周度利润对比',dWk:'按周序号对齐（W1-W5），柱=利润，线=票量',tick:'票量',prof:'利润',
+ tCum:'月内累计利润走势',dCum:'按日期对齐（1-31日）累计实际利润',day:'日',
+ tAir:'航司利润对比 TOP12',dAir:'按两月合计利润排序',
+ tAirT:'航司利润变化',dAirT:'利润(当前币种) · 变化额',air:'航司',chg:'变化',
+ tCh:'渠道利润对比',dCh:'实收超过10万元的渠道',
+ tSeg:'售前 vs 售后净值',dSeg:'实际利润构成',pre:'售前利润',aft:'售后净值',
+ foot:'数据来源：september-dashboard.html / october-dashboard.html 存储值 · 各周按当周汇率换算后存储双币种值 · 10月W1沿用原看板存量值'},
+ en:{title:'📊 Sep vs Oct Operations Comparison',sub:'2026.9.1-9.30 vs 2026.10.1-10.31 · Profit = pre-sale + after-sales net · Refunds/voids excluded',
+ rate:'Sep SGD→CNY 5.245400 · Oct 5.207500',sep:'Sep',oct:'Oct',
+ k:['Tickets','Orders','Revenue','Profit','Margin','Loss Rate','Profit / Ticket','Loss Orders'],
+ tIns:'Key Insights',dIns:'October campaign: volume more than doubled; profit grew while margin and loss rate came under pressure',
+ tWk:'Weekly Profit Comparison',dWk:'Aligned by week number (W1-W5); bars = profit, lines = tickets',tick:'Tickets',prof:'Profit',
+ tCum:'Cumulative Profit in Month',dCum:'Aligned by day of month (1-31)',day:'Day',
+ tAir:'Airline Profit TOP12',dAir:'Sorted by combined two-month profit',
+ tAirT:'Airline Profit Change',dAirT:'Profit (current currency) · change',air:'Airline',chg:'Change',
+ tCh:'Channel Profit Comparison',dCh:'Channels with revenue above CNY 100k',
+ tSeg:'Pre-sale vs After-sales Net',dSeg:'Profit composition',pre:'Pre-sale',aft:'After-sales net',
+ foot:'Source: stored values of september-dashboard.html / october-dashboard.html · dual currency stored at each week\'s rate · Oct W1 uses the original board values'}};
+var L='zh',CUR='CNY',CS='#94a3b8',CO='#5083fb';
+var ZH2EN={'2026携程国际一部':'Ctrip Intl-1','新加坡-悦途(新币)':'Yuetu (SGD)','新加坡引领-新币账户':'SG Leading (SGD)','新加坡-去哪(新币)':'Qunar (SGD)','2026携程国际廉航':'Ctrip LCC','2026去哪国际':'Qunar Intl','2026同程国际':'Tongcheng Intl','2026飞猪国际':'Fliggy Intl','新加坡-小蜻蜓(新币)':'Xiaoqingting (SGD)','新加坡-乐飞天下(新币)':'Lefei (SGD)','2026易旅行':'eTravel','新加坡引领账户':'SG Leading (CNY)'};
+function g(i){return document.getElementById(i);}
+function sym(){return CUR==='SGD'?'S$':'¥';}
+function f0(n){return Math.round(n).toLocaleString('en-US');}
+function P(o){return CUR==='SGD'?o.ps:o.pc;} function R(o){return CUR==='SGD'?o.rs:o.rc;}
+function nm(n){return L==='en'?(ZH2EN[n]||n):n;}
+function dl(a,b,mode){var t,c;if(mode==='pp'){var d=b-a;t=(d>=0?'+':'')+d.toFixed(2)+'pp';c=d>=0;}else{var d=(b-a)/Math.abs(a)*100;t=(d>=0?'+':'')+d.toFixed(1)+'%';c=d>=0;}return [t,c];}
+function base(){return {chart:{backgroundColor:'transparent',animation:false,style:{fontFamily:'inherit'}},title:null,credits:{enabled:false},
+ plotOptions:{series:{animation:false}},legend:{itemStyle:{color:'#5b6b85',fontWeight:'600'}},
+ tooltip:{shared:true,backgroundColor:'#fff',borderColor:'#e2e8f0'}};}
+function render(){
+ var t=T[L],s=A.sep.kpi,o=A.oct.kpi;document.documentElement.lang=L;
+ g('title').textContent=t.title;g('sub').textContent=t.sub;g('rate').innerHTML='✅ '+t.rate;
+ ['tIns','dIns','tWk','dWk','tCum','dCum','tAir','dAir','tAirT','dAirT','tCh','dCh','tSeg','dSeg','foot'].forEach(function(k){g(k).textContent=t[k];});
+ document.querySelectorAll('#curSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.c===CUR);});
+ document.querySelectorAll('#langSeg button').forEach(function(b){b.classList.toggle('active',b.dataset.l===L);});
+ var items=[[s.tickets,o.tickets,f0,'#5083fb',0],[s.orders,o.orders,f0,'#8b5cf6',0],
+  [R({rc:s.receipt_cny,rs:s.receipt_sgd}),R({rc:o.receipt_cny,rs:o.receipt_sgd}),function(v){return sym()+f0(v);},'#0ea5e9',0],
+  [P({pc:s.profit_cny,ps:s.profit_sgd}),P({pc:o.profit_cny,ps:o.profit_sgd}),function(v){return sym()+f0(v);},'#12b886',0],
+  [s.margin,o.margin,function(v){return v.toFixed(2)+'%';},'#f59e0b','pp'],[s.loss_pct,o.loss_pct,function(v){return v.toFixed(1)+'%';},'#ef4444','ppr'],
+  [CUR==='SGD'?s.avg_ticket_profit_sgd:s.avg_ticket_profit,CUR==='SGD'?o.avg_ticket_profit_sgd:o.avg_ticket_profit,function(v){return sym()+f0(v);},'#14b8a6',0],
+  [s.loss_orders,o.loss_orders,f0,'#f97316','r']];
+ g('kpis').innerHTML=items.map(function(x,i){var d=dl(x[0],x[1],x[4]==='pp'||x[4]==='ppr'?'pp':0);var good=(x[4]==='ppr'||x[4]==='r')?!d[1]:d[1];
+  return '<div class="kpi" style="--c:'+x[3]+'"><div class="l">'+t.k[i]+'</div><div class="row"><span class="m">'+t.sep+'</span><span class="v">'+x[2](x[0])+'</span></div><div class="row"><span class="m">'+t.oct+'</span><span class="v o">'+x[2](x[1])+'</span></div><div class="d '+(good?'up':'dn')+'">'+(d[1]?'▲ ':'▼ ')+d[0]+'</div></div>';}).join('');
+ g('ins').innerHTML=A.ins[L].map(function(x){return '<div><div class="t">'+x[0]+'</div><div class="x">'+x[1]+'</div></div>';}).join('');
+ // weekly
+ var wk=['W1','W2','W3','W4','W5'];
+ function wv(m,f){return wk.map(function(w){var x=A[m].weeks.filter(function(y){return y.w===w;})[0];return x?f(x):null;});}
+ Highcharts.chart('cWk',Highcharts.merge(base(),{xAxis:{categories:wk.map(function(w,i){var a=A.sep.weeks[i],b=A.oct.weeks[i];return w+'<br><span style="font-size:10px;color:#94a3b8">'+(a?a.range:'')+' / '+(b?b.range:'')+'</span>';})},
+  yAxis:[{title:{text:t.prof+' ('+sym()+')'}},{title:{text:t.tick},opposite:true}],
+  series:[{type:'column',name:t.sep+' '+t.prof,data:wv('sep',P),color:CS,borderRadius:4},{type:'column',name:t.oct+' '+t.prof,data:wv('oct',P),color:CO,borderRadius:4},
+   {type:'spline',name:t.sep+' '+t.tick,yAxis:1,data:wv('sep',function(x){return x.t;}),color:'#cbd5e1',dashStyle:'ShortDash'},{type:'spline',name:t.oct+' '+t.tick,yAxis:1,data:wv('oct',function(x){return x.t;}),color:'#f59e0b'}]}));
+ // cumulative
+ function cum(m){var c=0,r=[];for(var d=1;d<=31;d++){var x=A[m].daily.filter(function(y){return y.d===d;})[0];if(!x){r.push(m==='sep'&&d>30?null:(r.length?r[r.length-1]:0));continue;}c+=P(x);r.push(Math.round(c));}return r;}
+ var days=[];for(var d=1;d<=31;d++)days.push(d);
+ Highcharts.chart('cCum',Highcharts.merge(base(),{chart:{type:'areaspline'},xAxis:{categories:days,title:{text:t.day}},yAxis:{title:{text:sym()}},
+  plotOptions:{areaspline:{fillOpacity:.12,marker:{enabled:false}}},series:[{name:t.sep,data:cum('sep'),color:CS},{name:t.oct,data:cum('oct'),color:CO}]}));
+ // airlines
+ var air=A.air;
+ Highcharts.chart('cAir',Highcharts.merge(base(),{chart:{type:'bar'},xAxis:{categories:air.map(function(r){return r.name;})},yAxis:{title:{text:t.prof+' ('+sym()+')'}},
+  plotOptions:{bar:{borderRadius:3,groupPadding:.12}},series:[{name:t.sep,data:air.map(function(r){return P(r.sep);}),color:CS},{name:t.oct,data:air.map(function(r){return P(r.oct);}),color:CO}]}));
+ var srt=air.slice().sort(function(a,b){return (P(b.oct)-P(b.sep))-(P(a.oct)-P(a.sep));});
+ g('airTbl').innerHTML='<table><thead><tr><th>'+t.air+'</th><th>'+t.sep+'</th><th>'+t.oct+'</th><th>'+t.chg+'</th></tr></thead><tbody>'+srt.map(function(r){var c=P(r.oct)-P(r.sep);return '<tr><td>'+r.name+'</td><td>'+sym()+f0(P(r.sep))+'</td><td>'+sym()+f0(P(r.oct))+'</td><td class="'+(c>=0?'up':'dn')+'">'+(c>=0?'+':'-')+sym()+f0(Math.abs(c))+'</td></tr>';}).join('')+'</tbody></table>';
+ // channels
+ var ch=A.ch;
+ Highcharts.chart('cCh',Highcharts.merge(base(),{chart:{type:'column'},xAxis:{categories:ch.map(function(r){return nm(r.name);}),labels:{style:{fontSize:'10px'}}},yAxis:{title:{text:t.prof+' ('+sym()+')'}},
+  plotOptions:{column:{borderRadius:3}},series:[{name:t.sep,data:ch.map(function(r){return P(r.sep);}),color:CS},{name:t.oct,data:ch.map(function(r){return P(r.oct);}),color:CO}]}));
+ // seg
+ Highcharts.chart('cSeg',Highcharts.merge(base(),{chart:{type:'column'},xAxis:{categories:[t.sep,t.oct]},yAxis:{title:{text:sym()}},
+  plotOptions:{column:{stacking:'normal',borderRadius:3,dataLabels:{enabled:true,formatter:function(){return sym()+f0(this.y);},style:{fontSize:'10px',textOutline:'none'}}}},
+  series:[{name:t.pre,data:[P(A.sep.seg.presale),P(A.oct.seg.presale)],color:'#5083fb'},{name:t.aft,data:[P(A.sep.seg.afterNet),P(A.oct.seg.afterNet)],color:'#12b886'}]}));
+}
+document.querySelectorAll('#curSeg button').forEach(function(b){b.onclick=function(){CUR=b.dataset.c;render();};});
+document.querySelectorAll('#langSeg button').forEach(function(b){b.onclick=function(){L=b.dataset.l;CUR=L==='en'?'SGD':'CNY';render();};});
+window.addEventListener('message',function(e){if(e.data&&e.data.lang){var nl=e.data.lang==='en'?'en':'zh';L=nl;CUR=nl==='en'?'SGD':'CNY';render();}});
+(function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();
+render();
+</script></body></html>
