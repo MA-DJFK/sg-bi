@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VJ 越捷航空 · 后返激励</title>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/highcharts-more.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@12.1.2/modules/solid-gauge.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:#f4f6fb;color:#1a1a2e;padding:20px}
+.hero{background:linear-gradient(135deg,#0f3460,#16537e);color:#fff;border-radius:16px;padding:22px 28px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.hero h1{font-size:21px}.hero .sub{font-size:13px;opacity:.85;margin-top:6px}
+.hero .h-right{display:flex;align-items:center;gap:12px}
+.lang-seg{display:inline-flex;border:1px solid rgba(255,255,255,.3);border-radius:8px;overflow:hidden}
+.lang-seg button{background:transparent;color:#fff;border:none;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.lang-seg button.active{background:rgba(255,255,255,.9);color:#0f3460}
+.badge{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 16px;font-weight:700;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.col-4{grid-column:span 4}.col-5{grid-column:span 5}.col-6{grid-column:span 6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
+.card h3{font-size:15px;margin-bottom:12px;color:#0f3460}
+.chart{height:260px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:#fff;border-radius:12px;padding:16px 18px;border-left:4px solid var(--c,#5083fb);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kpi .l{font-size:12px;color:#5b6b85;font-weight:600}
+.kpi .v{font-size:24px;font-weight:800;font-family:DIN,monospace;margin-top:4px}
+.kpi .s{font-size:11px;color:#94a3b8;margin-top:2px}
+.w3{background:#fff;border:2px solid #12b886;border-radius:14px;padding:14px 22px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}
+.w3 .t{font-size:13px;color:#5b6b85;font-weight:600}.w3 .a{font-size:26px;font-weight:800;font-family:DIN,monospace;margin-top:4px}
+.w3 .n{font-size:12px;color:#94a3b8;text-align:right}
+table.dt{width:100%;border-collapse:collapse;font-size:13px}
+table.dt th,table.dt td{border:1px solid #e5e9f2;padding:8px 10px;text-align:center}
+table.dt th{background:#0f3460;color:#fff;font-weight:600}
+table.dt td.l{text-align:left}
+.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700;color:#fff}
+.footer{margin-top:18px;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6}
+.rate-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(18,184,134,.16);border:1px solid rgba(18,184,134,.4);color:#4ade80;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.desc{margin:-4px 0 10px;font-size:13.5px;color:#64748b;font-weight:600}
+.in-iframe .hero{padding:8px 0!important;background:transparent!important;box-shadow:none!important;display:flex;justify-content:flex-end;align-items:center}
+.in-iframe .hero h1,.in-iframe .hero .sub,.in-iframe .hero #hero-badge,.in-iframe .hero .lang-seg{display:none!important}
+.in-iframe .hero .rate-badge{display:inline-flex!important}
+</style></head><body>
+<div class="hero"><div><h1 id="heroTitle"></h1><div class="sub" id="heroSub"></div></div>
+<div class="h-right"><span class="rate-badge" id="rateBadge"></span>
+<div class="lang-seg"><button id="langZh">中文</button><button id="langEn">EN</button></div>
+<div class="badge" id="hero-badge"></div></div></div>
+
+<div class="kpis">
+ <div class="kpi" style="--c:#12b886"><div class="l" id="k1l"></div><div class="v" style="color:#12b886" id="k1v"></div><div class="s" id="k1s"></div></div>
+ <div class="kpi" style="--c:#5083fb"><div class="l" id="k2l"></div><div class="v" id="k2v"></div><div class="s" id="k2s"></div></div>
+ <div class="kpi" style="--c:#8b5cf6"><div class="l" id="k3l"></div><div class="v" id="k3v"></div><div class="s" id="k3s"></div></div>
+ <div class="kpi" style="--c:#f59e0b"><div class="l" id="k4l"></div><div class="v" style="color:#f59e0b" id="k4v"></div><div class="s" id="k4s"></div></div>
+</div>
+
+<div class="w3"><div><div class="t" id="w3-title"></div><div class="a" id="w3-amt"></div></div><div class="n" id="w3-note"></div></div>
+
+<div class="grid">
+ <div class="card col-6"><h3 id="gaugeTitle"></h3><div class="desc" id="gauge-desc"></div><div id="gauge" class="chart"></div></div>
+ <div class="card col-6"><h3 id="weekTitle"></h3><div id="week" class="chart"></div></div>
+ <div class="card col-7"><h3 id="tierTitle"></h3>
+  <table class="dt"><thead><tr id="tierHead"></tr></thead><tbody id="tierBody"></tbody></table>
+  <div style="font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.6" id="tierNote"></div></div>
+ <div class="card col-5"><h3 id="pieTitle"></h3><div id="pie" class="chart"></div></div>
+</div>
+<div class="footer" id="footerText"></div>
+
+<script>
+var VJ={"airline":"VJ","period":"2026.11.1-11.30","start":"2026-11-01","end":"2026-11-30","asOf":"11.2","rate":0.191679,
+"total":0,"tickets":0,"segments":0,"orders":0,
+"tiers":[{"key":"T1","rate":2.5,"tickets":0,"amount":0},{"key":"T2","rate":4,"tickets":0,"amount":0},{"key":"T3","rate":5,"tickets":0,"amount":0},{"key":"T4","rate":6.5,"tickets":0,"amount":0}],
+"weekList":["11/01-11/01","11/02-11/08","11/09-11/15","11/16-11/22","11/23-11/29","11/30-11/30"],
+"byWeek":{"11/01-11/01":0,"11/02-11/08":0,"11/09-11/15":0,"11/16-11/22":0,"11/23-11/29":0,"11/30-11/30":0},
+"w3":{"label":"11/02-11/08","amount":0,"tickets":0},
+"tp":6.7,"elapsedDays":2,"totalDays":30,"rows":0};
+
+var TIERCOL=['#93c5fd','#5083fb','#8b5cf6','#12b886'];
+var I18N={
+ zh:{title:"✈️ VJ 越捷航空 · 后返激励进度",
+  sub:"出票期 2026.11.1-11.30(按出票日期) · 每位旅客每航段固定返点 · 无销售目标 · 截止 11.2 · 本期暂无出票数据",
+  heroBadge:"🟡 框架已就绪 · 待导入数据", rate:"CNY→SGD 0.191679",
+  k1l:"累计激励金额", k1s:"按旅客×航段固定返点累计",
+  k2l:"计奖票数(人次)", k2s:"已剔除团队/退票/节假日出行",
+  k3l:"计奖航段数", k3s:"联程按最高返点段计",
+  k4l:"平均每人次激励", k4s:"累计激励 / 计奖人次",
+  w3:"📅 本周完成（11.2-11.8）", w3Zero:"本周暂无计奖出票", w3Has:"人次",
+  gaugeTitle:"🎯 累计激励 & 时间进度",
+  gaugeDesc:"无销售目标：按出票量累计返点 · 出票期 26年11月1日-11月30日 · 不含 12.27-1.6、1.27-2.15 出行",
+  gCenter:["累计激励 (SGD)","时间进度"],
+  weekTitle:"📊 按周激励金额 (SGD)", weekSeries:"激励金额",
+  tierTitle:"📋 返点档位表（每位旅客每航段，SGD）",
+  tierHead:["档位","舱位","适用航线","返点","人次","激励金额"],
+  tierRows:[["Eco/Deluxe","越南 ↔ 新加坡/马来西亚/柬埔寨/老挝/印尼/菲律宾 直飞"],["Eco/Deluxe","越南 ↔ 日本/韩国/台湾/印度/斯里兰卡/马尔代夫 直飞"],["Eco/Deluxe","越南 ↔ 澳大利亚；哈萨克斯坦 ↔ 捷克/越南；捷克 ↔ 哈萨克斯坦/越南 直飞"],["SkyBoss/Business","越南出发/到达所有国际航线；哈萨克斯坦 ↔ 捷克(VJ执飞)"]],
+  tierNote:"* 联程按返点最高段计（例：DEL-SGN-SYD 单程 5、往返 10）。仅限 OTA 通过 API 出票；不含团队票；公布结果前取消/退票不计；12.27-1.6 新年、1.27-2.15 春节出行不计。",
+  pieTitle:"🧭 激励档位分布", pieName:"激励金额", pieEmpty:"暂无数据", tierName:["2.5 档","4 档","5 档","6.5 档"],
+  footer:"VJ后返激励 · 出票期2026.11.1-11.30(按出票日期) · 每位旅客每航段固定返SGD(2.5/4/5/6.5) · 联程取最高段 · 排除团队票、退票、节假日出行 · 人民币账户 CNY×0.191679→SGD · 截止11.2"},
+ en:{title:"✈️ VJ Vietjet · Back-end Incentive Progress",
+  sub:"Ticketing 2026.11.1-11.30 (by issue date) · Fixed rate per pax per segment · No sales target · As of 11.2 · No ticket data yet",
+  heroBadge:"🟡 Framework ready · awaiting data", rate:"CNY→SGD 0.191679",
+  k1l:"Total Incentive", k1s:"Fixed rate × pax × segment",
+  k2l:"Eligible Pax", k2s:"Excl. group / refunds / holiday travel",
+  k3l:"Eligible Segments", k3s:"Connections use highest-rate segment",
+  k4l:"Avg Incentive / Pax", k4s:"Total incentive / eligible pax",
+  w3:"📅 This Week (Nov 2-8)", w3Zero:"No eligible tickets this week", w3Has:"pax",
+  gaugeTitle:"🎯 Total Incentive & Time Progress",
+  gaugeDesc:"No sales target: incentive accrues per ticket · Ticketing 1-30 Nov 2026 · Excl. travel 27 Dec-6 Jan & 27 Jan-15 Feb",
+  gCenter:["Total incentive (SGD)","Time progress"],
+  weekTitle:"📊 Weekly Incentive (SGD)", weekSeries:"Incentive",
+  tierTitle:"📋 Incentive Rates (per pax per segment, SGD)",
+  tierHead:["Tier","Cabin","Routes","Rate","Pax","Incentive"],
+  tierRows:[["Eco/Deluxe","Vietnam ↔ Singapore/Malaysia/Cambodia/Laos/Indonesia/Philippines direct"],["Eco/Deluxe","Vietnam ↔ Japan/Korea/Taiwan/India/Sri Lanka/Maldives direct"],["Eco/Deluxe","Vietnam ↔ Australia; Kazakhstan ↔ Czech/Vietnam; Czech ↔ Kazakhstan/Vietnam direct"],["SkyBoss/Business","All international flights from/to Vietnam; Kazakhstan ↔ Czech (VJ-operated)"]],
+  tierNote:"* Connections use the highest-rate segment (e.g. DEL-SGN-SYD one-way 5, return 10). OTA API ticketing only; no group bookings; tickets cancelled/refunded before results are excluded; travel 27 Dec-6 Jan and 27 Jan-15 Feb excluded.",
+  pieTitle:"🧭 Incentive by Tier", pieName:"Incentive", pieEmpty:"No data yet", tierName:["2.5 tier","4 tier","5 tier","6.5 tier"],
+  footer:"VJ Back-end Incentive · Ticketing 2026.11.1-11.30 (by issue date) · Fixed SGD per pax per segment (2.5/4/5/6.5) · Connections use highest segment · Excl. group, refunds, holiday travel · CNY accounts CNY×0.191679→SGD · As of 11.2"}
+};
+var CURLANG='zh';
+function g(id){return document.getElementById(id);}
+function fmt(n,d){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+
+function renderCharts(t){
+ Highcharts.chart('gauge',{chart:{type:'solidgauge',height:260,backgroundColor:'transparent',animation:false},tooltip:{enabled:false},title:null,credits:{enabled:false},
+  pane:{center:['50%','58%'],size:'95%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef2f9'}},
+  yAxis:{min:0,max:100,tickPositions:[0,25,50,75,100],labels:{distance:14,style:{fontSize:'10px'}}},
+  series:[{data:[{y:VJ.tp,color:'#f59e0b'}],animation:false,dataLabels:{format:'<div style="text-align:center"><span style="font-size:11px;color:#5b6b85">'+t.gCenter[0]+'</span><br><span style="font-size:26px;font-weight:800;color:#12b886">S$'+fmt(VJ.total,1)+'</span><br><span style="font-size:11px;color:#f59e0b;font-weight:700">'+t.gCenter[1]+' '+VJ.tp+'%</span></div>'}}],
+  plotOptions:{solidgauge:{animation:false,rounded:true,innerRadius:'62%',dataLabels:{y:14,borderWidth:0,useHTML:true}}}});
+ Highcharts.chart('week',{chart:{type:'column',height:260,animation:false},title:null,credits:{enabled:false},tooltip:{enabled:false},legend:{enabled:false},
+  xAxis:{categories:VJ.weekList},yAxis:{min:0,title:{text:'SGD'}},
+  series:[{name:t.weekSeries,animation:false,data:VJ.weekList.map(function(w){return VJ.byWeek[w]||0;}),color:'#12b886',dataLabels:{enabled:true,format:'{y:,.1f}'}}],
+  plotOptions:{column:{borderRadius:4,animation:false}}});
+ var pd=VJ.tiers.map(function(x,i){return {name:t.tierName[i],y:x.amount,color:TIERCOL[i]};}).filter(function(x){return x.y>0;});
+ Highcharts.chart('pie',{chart:{type:'pie',height:260,animation:false},title:pd.length?null:{text:t.pieEmpty,verticalAlign:'middle',style:{color:'#94a3b8',fontSize:'14px'}},credits:{enabled:false},tooltip:{enabled:false},
+  series:[{name:t.pieName,animation:false,innerSize:'55%',data:pd,dataLabels:{format:'{point.name}: S${point.y:,.1f} ({point.percentage:.1f}%)',style:{fontSize:'11px'}}}]});
+}
+function renderTier(t){
+ g('tierHead').innerHTML=t.tierHead.map(function(h){return '<th>'+h+'</th>';}).join('');
+ g('tierBody').innerHTML=VJ.tiers.map(function(x,i){return '<tr><td><span class="pill" style="background:'+TIERCOL[i]+'">'+x.key+'</span></td><td>'+t.tierRows[i][0]+'</td><td class="l">'+t.tierRows[i][1]+'</td><td><b>S$'+x.rate+'</b></td><td>'+fmt(x.tickets)+'</td><td>S$'+fmt(x.amount,1)+'</td></tr>';}).join('');
+}
+function applyLang(lang){
+ CURLANG=(lang==='en')?'en':'zh'; var t=I18N[CURLANG]; document.documentElement.lang=CURLANG;
+ g('heroTitle').textContent=t.title; g('heroSub').textContent=t.sub; g('hero-badge').textContent=t.heroBadge;
+ g('rateBadge').innerHTML='<span style="font-size:inherit">✅</span> '+t.rate;
+ g('k1l').textContent=t.k1l; g('k1v').innerHTML=fmt(VJ.total,1)+' <span style="font-size:12px">SGD</span>'; g('k1s').textContent=t.k1s;
+ g('k2l').textContent=t.k2l; g('k2v').textContent=fmt(VJ.tickets); g('k2s').textContent=t.k2s;
+ g('k3l').textContent=t.k3l; g('k3v').textContent=fmt(VJ.segments); g('k3s').textContent=t.k3s;
+ g('k4l').textContent=t.k4l; g('k4v').innerHTML=(VJ.tickets?fmt(VJ.total/VJ.tickets,2):'0')+' <span style="font-size:12px">SGD</span>'; g('k4s').textContent=t.k4s;
+ g('w3-title').textContent=t.w3;
+ var wa=VJ.w3.amount; g('w3-amt').innerHTML='<span style="color:'+(wa>0?'#12b886':'#94a3b8')+'">'+fmt(wa,1)+'</span> <span style="font-size:13px;color:#5b6b85">SGD</span>';
+ g('w3-note').textContent=wa>0?(fmt(VJ.w3.tickets)+' '+t.w3Has):t.w3Zero;
+ g('gaugeTitle').textContent=t.gaugeTitle; g('gauge-desc').textContent=t.gaugeDesc;
+ g('weekTitle').textContent=t.weekTitle; g('tierTitle').textContent=t.tierTitle; g('tierNote').textContent=t.tierNote;
+ g('pieTitle').textContent=t.pieTitle; g('footerText').textContent=t.footer;
+ g('langZh').classList.toggle('active',CURLANG==='zh'); g('langEn').classList.toggle('active',CURLANG==='en');
+ renderTier(t); renderCharts(t);
+}
+g('langZh').addEventListener('click',function(){applyLang('zh');});
+g('langEn').addEventListener('click',function(){applyLang('en');});
+window.addEventListener('message',function(ev){if(ev.data&&ev.data.lang){applyLang(ev.data.lang==='en'?'en':'zh');}});
+(function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();
+applyLang('zh');
+</script>
+</body></html>
