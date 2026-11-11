@@ -326,7 +326,7 @@ function applyStatic(){var t=tr();
 function renderKPI(){var k=D.kpi,t=tr();
   document.getElementById('kpis').innerHTML=[
     {label:t.kReceipt,c:'#5083fb',bg:'#eef4ff',ico:'fa-dollar-sign',val:moneyW(k,'receipt'),sub:t.kReceiptSub(k.orders)},
-    {label:t.kProfit,c:'#12b886',bg:'#e9f9f2',ico:'fa-arrow-trend-up',val:moneyW(k,'profit'),sub:t.kProfitSub},
+    {label:t.kProfit,c:'#12b886',bg:'#e9f9f2',ico:'fa-arrow-trend-up',val:sym()+fmt(Math.round(V(k,'profit'))),sub:t.kProfitSub},
     {label:t.kMargin,c:'#d4a017',bg:'#fdf6e3',ico:'fa-percent',val:fmt2(k.margin)+'%',sub:t.kMarginSub(moneyV(CUR==='SGD'?k.avg_ticket_profit_sgd:k.avg_ticket_profit))},
     {label:t.kLoss,c:'#ef4444',bg:'#fdeeee',ico:'fa-triangle-exclamation',val:fmt1(k.loss_pct)+'%',sub:t.kLossSub(k.loss_orders,k.loss_tickets,moneyWV(CUR==='SGD'?k.loss_amount_sgd:k.loss_amount))}
   ].map(function(x){return '<div class="kpi" style="--c:'+x.c+';--bbg:'+x.bg+'"><div class="badge"><span>•</span></div><div class="k-label">'+x.label+'</div><div class="k-val">'+x.val.replace(/^([\u00a5S$]+)/,'<span style="font-size:16px">$1</span>')+'</div><div class="k-sub">'+x.sub+'</div></div>';}).join('');

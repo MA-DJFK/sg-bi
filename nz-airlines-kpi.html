@@ -77,11 +77,13 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
 .in-iframe .hero .hero-in{justify-content:flex-end!important}
 .rate-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(18,184,134,.16);border:1px solid rgba(18,184,134,.4);color:#4ade80;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap}
 .in-iframe .hero .rate-badge{display:inline-flex!important}
+.asof-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(80,131,251,.12);border:1px solid rgba(80,131,251,.35);color:#5083fb;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap;margin-right:8px}
+.in-iframe .hero .asof-badge,.in-iframe .asof-badge{display:inline-flex!important}
 </style></head><body>
 <div class="hero"><div class="hero-in"><div class="logo"><span style="font-size:inherit">✈️</span></div>
-<div><h1 id="heroTitle">NZ 新西兰航空 · 后返 KPI 完成进度</h1><div class="sub" id="heroSub">激励门槛 116,000 SGD · 高端舱位 29,000 SGD · 销售日期 2026.7.1-2027.6.30 · 截止 10.31</div></div>
-<span class="rate-badge" id="rateBadge"><span style="font-size:inherit">✅</span> CNY→SGD 0.192415</span>
-<div class="badge" id="statusBadge">✅ 超前 34.7pct</div></div></div>
+<div><h1 id="heroTitle">NZ 新西兰航空 · 后返 KPI 完成进度</h1><div class="sub" id="heroSub">激励门槛 116,000 SGD · 高端舱位 29,000 SGD · 销售日期 2026.7.1-2027.6.30 · 截止 11.8</div></div>
+<span class="asof-badge" id="asOfBadge"></span><span class="rate-badge" id="rateBadge"><span style="font-size:inherit">✅</span> CNY→SGD 0.192522</span>
+<div class="badge" id="statusBadge">✅ 超前 35.0pct</div></div></div>
 <div class="wrap">
 <div class="kpis" id="kpis"></div>
 <div style="background:linear-gradient(135deg,#f8fafc,#fff);border:2px solid #12b886;border-radius:14px;padding:16px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px" id="thisWeekBox"></div>
@@ -94,9 +96,9 @@ table.dt td{padding:9px 12px;border-bottom:1px solid #eef1f6;font-family:var(--m
   <div class="card col-12"><h3><span style="font-size:inherit">📋</span> <span id="h3-remain">剩余分解 · 每月/每周需完成</span></h3><div style="overflow-x:auto"><table class="dt" id="tbl"></table></div></div>
   <div class="card col-12" style="background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #dbeafe"><h3 style="color:#1e3a5f"><span style="font-size:inherit">💡</span> <span id="h3-note">激励规则</span></h3><div id="noteBox" style="font-size:13px;color:#5b6b85;line-height:1.8">💡 达成116%+可获2%激励返还 · 仅LONGHAUL航线收入计入激励返还计算 · 基准目标 100,000/25,000 SGD</div></div>
 </div>
-<div class="footer" id="footerText">NZ后返KPI · 数据源:NZ后返KPI至10.31 · 销售日期口径7.1-27.6.30 · 携程CNY×0.192415→SGD</div>
+<div class="footer" id="footerText">NZ后返KPI · 数据源:NZ后返KPI至11.8 · 销售日期口径7.1-27.6.30 · 携程CNY×0.192522→SGD</div>
 </div>
-<script>window.NZKPI={"totalTarget": 116000, "premiumTarget": 29000, "totalDone": 79296.95, "premiumDone": 16065.69, "longhaulDone": 79144.94, "totalRemain": 36703, "premiumRemain": 12934, "totalPct": 68.4, "premiumPct": 55.4, "tp": 33.7, "aheadBehind": 34.7, "status": "ahead", "remDays": 242, "remWeeks": 34.6, "remMonths": ["11月", "12月", "1月", "2月", "3月", "4月", "5月", "6月"], "monDays": [30, 31, 31, 28, 31, 30, 31, 30], "perMonthTotal": 4587.88, "perWeekTotal": 1061.66, "perMonthPremium": 1616.75, "perWeekPremium": 374.12, "byMonth": {"2026-07": 14117.3, "2026-08": 6397.8, "2026-09": 36179.79, "2026-10": 22602.06}, "premByMonth": {"2026-09": 16065.69}, "byMonthOrders": {"2026-07": 11, "2026-08": 4, "2026-09": 9, "2026-10": 9}, "byWeek": {"07/01-07/05": 2804.64, "07/06-07/12": 1140.25, "07/13-07/19": 152.01, "07/20-07/26": 4518.67, "07/27-08/02": 8514.17, "08/03-08/09": 1121.01, "08/10-08/16": 2264.34, "08/31-09/06": 2196.8, "09/07-09/13": 3424.22, "09/14-09/20": 5729.35, "09/21-09/27": 24829.42, "09/28-10/04": 3246.62, "10/05-10/11": 6400.3, "10/12-10/18": 5641.61, "10/19-10/25": 5922.53, "10/26-10/31": 1391.0}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/31-09/06", "09/07-09/13", "09/14-09/20", "09/21-09/27", "09/28-10/04", "10/05-10/11", "10/12-10/18", "10/19-10/25", "10/26-10/31"], "thisWeek": {"label": "10/26-10/31", "totalAmount": 1391.0, "premiumAmount": 0.0, "orders": 1}, "rate": 0.192415, "asOf": "10.31", "totalOrders": 33, "elapsedDays": 123, "totalPeriodDays": 365};</script>
+<script>window.NZKPI={"totalTarget": 116000, "premiumTarget": 29000, "totalDone": 82198.72, "premiumDone": 16074.62, "longhaulDone": 81668.63, "totalRemain": 33801, "premiumRemain": 12925, "totalPct": 70.9, "premiumPct": 55.4, "tp": 35.9, "aheadBehind": 35.0, "status": "ahead", "remDays": 234, "remWeeks": 33.4, "remMonths": ["11月", "12月", "1月", "2月", "3月", "4月", "5月", "6月"], "monDays": [22, 31, 31, 28, 31, 30, 31, 30], "perMonthTotal": 4225.12, "perWeekTotal": 1011.14, "perMonthPremium": 1615.62, "perWeekPremium": 386.65, "byMonth": {"2026-07": 14125.15, "2026-08": 6401.36, "2026-09": 36199.91, "2026-10": 22613.86, "2026-11": 2858.45}, "premByMonth": {"2026-09": 16074.62}, "byMonthOrders": {"2026-07": 11, "2026-08": 4, "2026-09": 9, "2026-10": 9, "2026-11": 2}, "byWeek": {"07/01-07/05": 2806.2, "07/06-07/12": 1140.89, "07/13-07/19": 152.09, "07/20-07/26": 4521.19, "07/27-08/02": 8518.91, "08/03-08/09": 1121.63, "08/10-08/16": 2265.6, "08/31-09/06": 2198.02, "09/07-09/13": 3426.12, "09/14-09/20": 5732.54, "09/21-09/27": 24843.23, "09/28-10/04": 3248.42, "10/05-10/11": 6403.86, "10/12-10/18": 5644.75, "10/19-10/25": 5925.83, "10/26-11/01": 1391.0, "11/02-11/08": 2858.45}, "weekList": ["07/01-07/05", "07/06-07/12", "07/13-07/19", "07/20-07/26", "07/27-08/02", "08/03-08/09", "08/10-08/16", "08/31-09/06", "09/07-09/13", "09/14-09/20", "09/21-09/27", "09/28-10/04", "10/05-10/11", "10/12-10/18", "10/19-10/25", "10/26-11/01", "11/02-11/08"], "thisWeek": {"label": "11/02-11/08", "totalAmount": 2858.45, "premiumAmount": 0.0, "orders": 2}, "rate": 0.192522, "asOf": "11.8", "totalOrders": 35, "elapsedDays": 131, "totalPeriodDays": 365};</script>
 <script>
 var LANG='zh';
 function boot(){if(typeof Highcharts==='undefined')return setTimeout(boot,60);init();}
@@ -108,7 +110,7 @@ var fmt2=function(n){return Highcharts.numberFormat(n,2,'.',',');};
 var EN=LANG==='en';
 // Hero
 document.getElementById('heroTitle').textContent=EN?'NZ Air New Zealand · Back-end Incentive KPI Progress':'NZ 新西兰航空 · 后返 KPI 完成进度';
-document.getElementById('heroSub').textContent=EN?'Incentive threshold 116,000 SGD · Premium cabin 29,000 SGD · Sales date 2026.7.1-2027.6.30 · As of 10.31':'激励门槛 116,000 SGD · 高端舱位 29,000 SGD · 销售日期 2026.7.1-2027.6.30 · 截止 10.31';
+document.getElementById('heroSub').textContent=EN?'Incentive threshold 116,000 SGD · Premium cabin 29,000 SGD · Sales date 2026.7.1-2027.6.30 · As of 11.8':'激励门槛 116,000 SGD · 高端舱位 29,000 SGD · 销售日期 2026.7.1-2027.6.30 · 截止 11.8';
 document.getElementById('rateBadge').innerHTML=(EN?'CNY→SGD ':'CNY→SGD ')+D.rate;
 var statusText=D.status==='ahead'?(EN?'✅ Ahead '+D.aheadBehind+'pct':'✅ 超前 '+D.aheadBehind+'pct'):(EN?'⚠️ Behind '+Math.abs(D.aheadBehind)+'pct':'⚠️ 落后 '+Math.abs(D.aheadBehind)+'pct');
 document.getElementById('statusBadge').innerHTML=statusText;
@@ -125,7 +127,7 @@ document.getElementById('kpis').innerHTML=cards.map(function(x){return '<div cla
 
 // This week box
 var wb=document.getElementById('thisWeekBox');
-wb.innerHTML='<div><div style="font-size:13px;color:#5b6b85;font-weight:600">📅 '+(EN?'This week (10.26-10.31)':'本周完成（10.26-10.31）')+'</div><div style="font-size:22px;font-weight:800;color:#12b886;font-family:DIN,monospace;margin-top:4px">'+(EN?'Total: ':'总收入: ')+fmt(D.thisWeek.totalAmount)+' SGD</div><div style="font-size:15px;color:#5083fb;font-weight:700;margin-top:2px">'+(EN?'Premium: ':'高端舱: ')+fmt(D.thisWeek.premiumAmount)+' SGD</div></div><div style="text-align:right"><div style="font-size:12px;color:#94a3b8">'+D.thisWeek.orders+(EN?' orders':'单')+'</div></div>';
+wb.innerHTML='<div><div style="font-size:13px;color:#5b6b85;font-weight:600">📅 '+(EN?'This week (11.2-11.8)':'本周完成（11.2-11.8）')+'</div><div style="font-size:22px;font-weight:800;color:#12b886;font-family:DIN,monospace;margin-top:4px">'+(EN?'Total: ':'总收入: ')+fmt(D.thisWeek.totalAmount)+' SGD</div><div style="font-size:15px;color:#5083fb;font-weight:700;margin-top:2px">'+(EN?'Premium: ':'高端舱: ')+fmt(D.thisWeek.premiumAmount)+' SGD</div></div><div style="text-align:right"><div style="font-size:12px;color:#94a3b8">'+D.thisWeek.orders+(EN?' orders':'单')+'</div></div>';
 
 // Card titles
 document.getElementById('h3-gauge1').textContent=EN?'Total Revenue Progress':'总收入目标进度';
@@ -180,7 +182,7 @@ h+='<tr style="border-top:2px solid #e3e8f0;font-weight:700"><td>'+(EN?'Total':'
 document.getElementById('tbl').innerHTML=h+'</tbody>';
 
 // Footer
-document.getElementById('footerText').textContent=EN?'NZ Back-end Incentive KPI · Source: NZ KPI as of 10.31 · Sales date 7.1-27.6.30 · Ctrip/Fliggy CNY×0.192415→SGD':'NZ后返KPI · 数据源:NZ后返KPI至10.31 · 销售日期口径2026.7.1-2027.6.30 · 携程/飞猪 CNY×0.192415→SGD';
+document.getElementById('footerText').textContent=EN?'NZ Back-end Incentive KPI · Source: NZ KPI as of 11.8 · Sales date 7.1-27.6.30 · Ctrip/Fliggy CNY×0.192522→SGD':'NZ后返KPI · 数据源:NZ后返KPI至11.8 · 销售日期口径2026.7.1-2027.6.30 · 携程/飞猪 CNY×0.192522→SGD';
 document.title=EN?'NZ Air New Zealand · KPI Progress':'NZ 新西兰航空 · 后返 KPI 完成进度';
 }
 boot();
@@ -190,4 +192,5 @@ window.addEventListener('message',function(e){
 // iframe detection
 (function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();
 </script>
+<script>(function(){function y(){var s=((window.NZKPI||{}).asOf||'');s=String(s||'');var m=s.match(/(\d{1,2})\.(\d{1,2})/);if(!m)return null;var mo=+m[1],d=+m[2];return {mo:mo,d:d};}function en(){var l=(document.documentElement.lang||'').toLowerCase();if(l.indexOf('en')===0)return true;try{if(typeof LANG!=='undefined')return LANG==='en';}catch(e){}try{if(typeof CURLANG!=='undefined')return CURLANG==='en';}catch(e){}try{if(typeof EN!=='undefined'&&typeof EN==='boolean')return EN;}catch(e){}try{if(typeof zh!=='undefined'&&typeof zh==='boolean')return !zh;}catch(e){}return false;}var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];function r(){var el=document.getElementById('asOfBadge');if(!el)return;var a=y();if(!a){el.style.display='none';return;}el.textContent=en()?('📅 Data as of '+a.d+' '+M[a.mo-1]+' 2026'):('📅 数据截止 2026.'+a.mo+'.'+a.d);}r();window.addEventListener('message',function(){setTimeout(r,60);});document.addEventListener('click',function(){setTimeout(r,60);});})();</script>
 </body></html>

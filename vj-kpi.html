@@ -37,9 +37,11 @@ table.dt td.l{text-align:left}
 .in-iframe .hero{padding:8px 0!important;background:transparent!important;box-shadow:none!important;display:flex;justify-content:flex-end;align-items:center}
 .in-iframe .hero h1,.in-iframe .hero .sub,.in-iframe .hero #hero-badge,.in-iframe .hero .lang-seg{display:none!important}
 .in-iframe .hero .rate-badge{display:inline-flex!important}
+.asof-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(80,131,251,.12);border:1px solid rgba(80,131,251,.35);color:#5083fb;padding:7px 14px;border-radius:20px;font-size:12.5px;font-weight:600;white-space:nowrap;margin-right:8px}
+.in-iframe .hero .asof-badge,.in-iframe .asof-badge{display:inline-flex!important}
 </style></head><body>
 <div class="hero"><div><h1 id="heroTitle"></h1><div class="sub" id="heroSub"></div></div>
-<div class="h-right"><span class="rate-badge" id="rateBadge"></span>
+<div class="h-right"><span class="asof-badge" id="asOfBadge"></span><span class="rate-badge" id="rateBadge"></span>
 <div class="lang-seg"><button id="langZh">中文</button><button id="langEn">EN</button></div>
 <div class="badge" id="hero-badge"></div></div></div>
 
@@ -155,4 +157,5 @@ window.addEventListener('message',function(ev){if(ev.data&&ev.data.lang){applyLa
 (function(){try{if(window.self!==window.top)document.body.classList.add('in-iframe');}catch(e){document.body.classList.add('in-iframe');}})();
 applyLang('zh');
 </script>
+<script>(function(){function y(){var s=((typeof VJ!=='undefined'&&VJ.asOf)||'');s=String(s||'');var m=s.match(/(\d{1,2})\.(\d{1,2})/);if(!m)return null;var mo=+m[1],d=+m[2];return {mo:mo,d:d};}function en(){var l=(document.documentElement.lang||'').toLowerCase();if(l.indexOf('en')===0)return true;try{if(typeof LANG!=='undefined')return LANG==='en';}catch(e){}try{if(typeof CURLANG!=='undefined')return CURLANG==='en';}catch(e){}try{if(typeof EN!=='undefined'&&typeof EN==='boolean')return EN;}catch(e){}try{if(typeof zh!=='undefined'&&typeof zh==='boolean')return !zh;}catch(e){}return false;}var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];function r(){var el=document.getElementById('asOfBadge');if(!el)return;var a=y();if(!a){el.style.display='none';return;}el.textContent=en()?('📅 Data as of '+a.d+' '+M[a.mo-1]+' 2026'):('📅 数据截止 2026.'+a.mo+'.'+a.d);}r();window.addEventListener('message',function(){setTimeout(r,60);});document.addEventListener('click',function(){setTimeout(r,60);});})();</script>
 </body></html>

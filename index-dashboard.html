@@ -166,7 +166,8 @@ table.dt tr:hover td{background:#f8fafc}
   </div></div>
   <div class="wrap">
     <div class="maintabs">
-      <div class="maintab active" data-mt="octdash"><span style="font-size:inherit">📈</span> 10月经营看板</div>
+      <div class="maintab active" data-mt="novdash"><span style="font-size:inherit">📈</span> 11月经营看板</div>
+      <div class="maintab" data-mt="octdash"><span style="font-size:inherit">📈</span> 10月经营看板</div>
       <div class="maintab" data-mt="sepoct"><span style="font-size:inherit">📊</span> 9月vs10月对比</div>
       <div class="maintab" data-mt="septdash"><span style="font-size:inherit">📈</span> 9月经营看板</div>
       <div class="maintab" data-mt="sqkpi"><span style="font-size:inherit">⚡</span> SQ 后返 KPI</div>
@@ -181,7 +182,10 @@ table.dt tr:hover td{background:#f8fafc}
     <div class="mainpage" id="mp-septdash">
       <iframe class="sqframe" src="september-dashboard.html" title="9月经营看板"></iframe>
     </div>
-    <div class="mainpage active" id="mp-octdash">
+    <div class="mainpage active" id="mp-novdash">
+      <iframe class="sqframe" src="november-dashboard.html" title="11月经营看板"></iframe>
+    </div>
+    <div class="mainpage" id="mp-octdash">
       <iframe class="sqframe" src="october-dashboard.html" title="10月经营看板"></iframe>
     </div>
     <div class="mainpage" id="mp-sepoct">
@@ -608,7 +612,7 @@ _boot();
 
 <script>
 window.L=window.L||'zh';window.CUR=window.CUR||'CNY';
-(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});document.querySelectorAll('.maintab').forEach(function(t){var mt=t.dataset.mt;var map={octdash:{zh:'10月经营看板',en:'Oct Operations'},sepoct:{zh:'9月vs10月对比',en:'Sep vs Oct'},septdash:{zh:'9月经营看板',en:'Sep Operations'},sqkpi:{zh:'SQ 后返 KPI',en:'SQ Back-end Incentive KPI'},tkkpi:{zh:'TK 后返 KPI',en:'TK Back-end Incentive KPI'},nxkpi:{zh:'NX 后返 KPI',en:'NX Back-end Incentive KPI'},nzairkpi:{zh:'NZ航空 后返 KPI',en:'NZ Airlines Back-end Incentive KPI'},mukpi:{zh:'MU 后返 KPI',en:'MU Back-end Incentive KPI'},vjkpi:{zh:'VJ 后返 KPI',en:'VJ Back-end Incentive KPI'},julydash:{zh:'7月经营看板',en:'Jul Operations'},augdash:{zh:'8月经营看板',en:'Aug Operations'}};if(map[mt]){var sp=t.querySelector('span');var prefix=sp?sp.outerHTML:'';t.innerHTML=prefix+' '+(map[mt][window.L]||map[mt].zh);}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
+(function(){function bindCur(){var cs=document.getElementById('curSeg');if(!cs){return setTimeout(bindCur,80);}cs.addEventListener('click',function(e){if(e.target.dataset.cur){window.CUR=e.target.dataset.cur;window.L=(window.CUR==='SGD')?'en':'zh';cs.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.cur===window.CUR);});document.querySelectorAll('iframe').forEach(function(f){try{f.contentWindow.postMessage({lang:window.L},'*');}catch(e){}});document.querySelectorAll('.maintab').forEach(function(t){var mt=t.dataset.mt;var map={novdash:{zh:'11月经营看板',en:'Nov Operations'},octdash:{zh:'10月经营看板',en:'Oct Operations'},sepoct:{zh:'9月vs10月对比',en:'Sep vs Oct'},septdash:{zh:'9月经营看板',en:'Sep Operations'},sqkpi:{zh:'SQ 后返 KPI',en:'SQ Back-end Incentive KPI'},tkkpi:{zh:'TK 后返 KPI',en:'TK Back-end Incentive KPI'},nxkpi:{zh:'NX 后返 KPI',en:'NX Back-end Incentive KPI'},nzairkpi:{zh:'NZ航空 后返 KPI',en:'NZ Airlines Back-end Incentive KPI'},mukpi:{zh:'MU 后返 KPI',en:'MU Back-end Incentive KPI'},vjkpi:{zh:'VJ 后返 KPI',en:'VJ Back-end Incentive KPI'},julydash:{zh:'7月经营看板',en:'Jul Operations'},augdash:{zh:'8月经营看板',en:'Aug Operations'}};if(map[mt]){var sp=t.querySelector('span');var prefix=sp?sp.outerHTML:'';t.innerHTML=prefix+' '+(map[mt][window.L]||map[mt].zh);}});}});}bindCur();function bindMain(){var tabs=document.querySelectorAll(".maintab");if(!tabs.length){return setTimeout(bindMain,80);}tabs.forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".maintab").forEach(function(x){x.classList.remove("active");});t.classList.add("active");var v=t.dataset.mt;document.querySelectorAll(".mainpage").forEach(function(p){p.classList.toggle("active",p.id==="mp-"+v);});setTimeout(function(){window.dispatchEvent(new Event("resize"));document.querySelectorAll("iframe").forEach(function(f){try{f.contentWindow.postMessage({lang:(window.L||"zh")},"*");}catch(e){}});},60);});});}bindMain();})();
 </script>
 </body>
 </html>
