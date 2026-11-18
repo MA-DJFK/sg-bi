@@ -186,7 +186,7 @@ table.dt tr:hover td{background:#f8fafc}
       <div class="card col-6"><h3><span>•</span> <span id="t-seg"></span></h3><div class="desc" id="d-seg"></div><div id="c-seg" class="chart"></div></div>
       <div class="card col-6"><h3 class="between"><span><span style="font-size:inherit">⚖️</span> <span id="t-cmp"></span></span><span class="seg" id="cmpMode"><button data-m="total" class="active"></button><button data-m="avg"></button></span></h3><div class="desc" id="d-cmp"></div><div id="c-cmp" class="chart"></div><div class="wchips" id="wchips"></div></div>
       <div class="card col-5"><h3><span>•</span> <span id="t-ins"></span></h3><div class="desc" id="d-ins"></div><div class="insights" id="wkInsights"></div></div>
-      <div class="card col-7"><h3 class="between"><span><span style="font-size:inherit">✈️</span> <span id="t-air"></span></span><span class="seg" id="airMode"><button data-n="5" class="active">TOP5</button><button data-n="99"></button></span></h3><div class="desc" id="d-air"></div><div id="c-air" class="chart-lg"></div></div>
+      <div class="card col-7"><h3 class="between"><span><span style="font-size:inherit">✈️</span> <span id="t-air"></span></span><span class="seg" id="airMode"><button data-n="5" class="active">TOP5</button><button data-n="99"></button></span></h3><div class="desc" id="d-air"></div><div id="c-air" class="chart-lg" style="height:auto;min-height:380px"></div></div>
       <div class="card col-6"><h3><span style="font-size:inherit">🎯</span> <span id="t-ch"></span></h3><div class="desc" id="d-ch"></div><div id="c-channel" class="chart-lg"></div></div>
       <div class="card col-6"><h3><span>•</span> <span id="t-supplier"></span></h3><div class="desc" id="d-supplier"></div><div id="c-supplier" class="chart"></div></div>
       <div class="card col-12"><h3 class="between"><span><span style="font-size:inherit">🗺️</span> <span id="t-route"></span></span><span class="seg" id="routeMetric"><button data-rm="tickets" class="active"></button><button data-rm="receipt"></button><button data-rm="profit"></button></span></h3><div class="desc" id="d-route"></div><div id="c-route" class="chart-lg"></div></div>
@@ -414,10 +414,10 @@ function renderWkInsights(){var t=tr();var w=D.weeks;var wB=w[w.length-1]||{rece
 }
 var airN=5;
 function renderAir(){var t=tr();var a=D.airlines.slice().sort(function(x,y){return y.profit-x.profit;}).slice(0,airN);
-  Highcharts.chart('c-air',Highcharts.merge(base,{chart:{type:'bar'},xAxis:{categories:a.map(nm)},
+  Highcharts.chart('c-air',Highcharts.merge(base,{chart:{type:'bar',height:Math.max(380,a.length*30+90)},xAxis:{categories:a.map(nm),labels:{step:1,style:{fontSize:'11px',fontWeight:'700'}}},
     yAxis:{title:{text:t.yProfit(sym())},plotLines:[{value:0,color:'#cbd5e1',width:1.5}]},
     tooltip:{useHTML:true,formatter:function(){var d=a[this.point.index];return ttCard(nm(d),[[d.profit<0?'#ef4444':'#12b886',t.ttProfit,money(d,'profit')],['#5083fb',t.ttRevenue,money(d,'receipt')],['#8b5cf6',t.ttTicket,fmt(d.tickets)],['#d4a017',t.ttMargin,fmt2(d.profit/d.receipt*100)+'%']]);}},
-    plotOptions:{bar:{borderRadius:4,dataLabels:{enabled:true,formatter:function(){return moneyV(this.y);},style:{color:'#5b6b85',fontWeight:'600',textOutline:'none',fontSize:'10px'}}}},
+    plotOptions:{bar:{borderRadius:4,pointPadding:0.08,groupPadding:0.05,dataLabels:{enabled:true,formatter:function(){return '<b>'+nm(a[this.point.index])+'</b> '+moneyV(this.y);},style:{color:'#5b6b85',fontWeight:'600',textOutline:'none',fontSize:'10px'}}}},
     series:[{name:t.ttProfit,data:a.map(function(x){return {y:V(x,'profit'),color:x.profit<0?'#ef4444':'#12b886'};})}]}));
 }
 function renderChannel(){var c=D.channels,t=tr();
