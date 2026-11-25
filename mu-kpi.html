@@ -45,10 +45,10 @@ table.dt tr.active{background:#fff7e6;font-weight:700}
 <div class="badge" id="hero-badge"></div></div></div>
 
 <div class="kpis">
-  <div class="kpi" style="--c:#f59e0b"><div class="l" id="k1l"></div><div class="v" style="color:#12b886">692.4%</div><div class="s" id="k1s"></div></div>
-  <div class="kpi" style="--c:#5083fb"><div class="l" id="k2l"></div><div class="v">204,805 <span style="font-size:12px">SGD</span></div><div class="s" id="k2s"></div></div>
+  <div class="kpi" style="--c:#f59e0b"><div class="l" id="k1l"></div><div class="v" style="color:#12b886">919.4%</div><div class="s" id="k1s"></div></div>
+  <div class="kpi" style="--c:#5083fb"><div class="l" id="k2l"></div><div class="v">271,940 <span style="font-size:12px">SGD</span></div><div class="s" id="k2s"></div></div>
   <div class="kpi" style="--c:#8b5cf6"><div class="l" id="k3l"></div><div class="v">29,578 <span style="font-size:12px">SGD</span></div><div class="s" id="k3s"></div></div>
-  <div class="kpi" style="--c:#12b886"><div class="l" id="k4l"></div><div class="v" style="color:#12b886">+160,438</div><div class="s" id="k4s"></div></div>
+  <div class="kpi" style="--c:#12b886"><div class="l" id="k4l"></div><div class="v" style="color:#12b886">+227,573</div><div class="s" id="k4s"></div></div>
 </div>
 
 <div class="grid">
@@ -63,49 +63,49 @@ table.dt tr.active{background:#fff7e6;font-weight:700}
 <div class="footer" id="footerText"></div>
 
 <script>
-var MU={"airline": "MU", "airlineName": "东方航空", "party": "中国东方航空 / Leading Holiday", "period": "2026.9.15-12.31", "basis": "Net Flown Revenue 净已飞行收入(同比增长率)", "rev_cur": 204805.35, "rev_base": 29578.3, "growth": 692.4, "targetTier": "T3", "curBand": "T3", "t3_threshold": 150, "need_rev_t3": 44367.45, "gap_rev": 0, "sin": 148615.15, "nonsin": 56190.2, "orders_cur": 729, "orders_base": 31, "byMonthCur": {"2026-09": 25356.15, "2026-10": 85922.29, "2026-11": 69570.67, "2026-12": 23956.24}, "byMonthBase": {"2025-10": 11407.83, "2025-11": 6129.29, "2025-12": 12041.19}, "bands": [{"tier": "T0", "lo": 100, "hi": 110}, {"tier": "T1", "lo": 110, "hi": 130}, {"tier": "T2", "lo": 130, "hi": 150}, {"tier": "T3", "lo": 150, "hi": null}], "ratesT3": {"SIN_FB": 4.5, "SIN_PE": 3.5, "nonSIN": 1.0}, "rateInfo": {"cur": 0.192522, "base": 0.184024}, "asOf": "11.8", "today": "2026-11-11", "tp": 50.9, "surplus_t3": 160437.9};
-var G=692.4, GPCT=100;
+var MU={"airline": "MU", "airlineName": "东方航空", "party": "中国东方航空 / Leading Holiday", "period": "2026.9.15-12.31", "basis": "Net Flown Revenue 净已飞行收入(同比增长率)", "rev_cur": 271940.05, "rev_base": 29578.3, "growth": 919.4, "targetTier": "T3", "curBand": "T3", "t3_threshold": 150, "need_rev_t3": 44367.45, "gap_rev": 0, "sin": 206267.19, "nonsin": 65672.86, "orders_cur": 856, "orders_base": 31, "byMonthCur": {"2026-09": 26433.61, "2026-10": 89924.43, "2026-11": 109029.62, "2026-12": 46552.39}, "byMonthBase": {"2025-10": 11407.83, "2025-11": 6129.29, "2025-12": 12041.19}, "bands": [{"tier": "T0", "lo": 100, "hi": 110}, {"tier": "T1", "lo": 110, "hi": 130}, {"tier": "T2", "lo": 130, "hi": 150}, {"tier": "T3", "lo": 150, "hi": null}], "ratesT3": {"SIN_FB": 4.5, "SIN_PE": 3.5, "nonSIN": 1.0}, "rateInfo": {"cur": 0.193676, "base": 0.184024}, "asOf": "11.22", "today": "2026-11-24", "tp": 63.9, "surplus_t3": 227572.6};
+var G=919.4, GPCT=100;
 
 var I18N={
  zh:{
   title:"✈️ MU 东方航空 · 后返 KPI 完成进度",
-  sub:"适用期 2026.9.15-12.31(按飞行日期) · 目标 T3(同比增长率≥150%) · 截止 11.8 · 甲方中国东方航空 / 乙方 Leading Holiday",
+  sub:"适用期 2026.9.15-12.31(按飞行日期) · 目标 T3(同比增长率≥150%) · 截止 11.22 · 甲方中国东方航空 / 乙方 Leading Holiday",
   heroBadge:"✅ 已达 T3",
-  rateBadge:"CNY→SGD 0.192522", asOf:"📅 数据截止 2026.11.8",
+  rateBadge:"CNY→SGD 0.193676", asOf:"📅 数据截止 2026.11.22",
   k1l:"同比增长率", k1s:"本期净飞行收入 / 2025同期",
-  k2l:"2026本期净飞行收入", k2s:"729单(排除A/O/X) · 截至11.8",
+  k2l:"2026本期净飞行收入", k2s:"856单(排除A/O/X) · 截至11.22",
   k3l:"2025同期基数", k3s:"31单",
-  k4l:"已达 T3 · 超出门槛", k4s:"本期 204,805 ≥ T3门槛 44,367 SGD",
+  k4l:"已达 T3 · 超出门槛", k4s:"本期 271,940 ≥ T3门槛 44,367 SGD",
   gaugeTitle:"🎯 T3 增长率完成进度(门槛150%)",
   gaugeDesc:"目标 T3：本期净飞行收入 ≥ 44,367 SGD（同比增长率≥150%，=2025基数29,578×150%） · 销售期 26年9月15日-12月31日",
-  gaugeCenter:['增长率 / T3门槛150%','当前 已达T3','时间进度 50.9%'],
+  gaugeCenter:['增长率 / T3门槛150%','当前 已达T3','时间进度 63.9%'],
   cmpTitle:"📊 2025 vs 2026 月度净飞行收入对比(SGD)",
   cmpCats:['9月','10月','11月','12月'], cmpBase:'2025同期', cmpCur:'2026本期',
   bandTitle:"📋 Achievement Band 档位表(按净飞行收入同比增长率)",
   bandHead:['档位','同比增长率','SIN始发·头等/商务','SIN始发·高端/经济','非SIN始发'],
   bandNote:"* 返点率按始发地×舱位×档位。非SIN始发(经/到SIN)固定1%。当前档位高亮。",
   originTitle:"🧭 本期始发结构", originSeries:'净飞行收入', originSin:'SIN始发', originNon:'非SIN始发', originFmt:'{point.name}: {point.y:,.0f} SGD ({point.percentage:.1f}%)',
-  footer:"MU后返KPI · 适用期2026.9.15-12.31(按飞行日期·净已飞行收入) · 目标T3同比增长≥150% · 排除A/O/X舱、婴儿票、NDC(WEBL)、包机；G舱计收入不返点 · 新币账户票面不变，人民币账户 CNY×0.192522→SGD(2025基数×0.184024) · 2026本期截止11.8"
+  footer:"MU后返KPI · 适用期2026.9.15-12.31(按飞行日期·净已飞行收入) · 目标T3同比增长≥150% · 排除A/O/X舱、婴儿票、NDC(WEBL)、包机；G舱计收入不返点 · 新币账户票面不变，人民币账户 CNY×0.193676→SGD(2025基数×0.184024) · 2026本期截止11.22"
  },
  en:{
   title:"✈️ MU China Eastern · Back-end Incentive KPI Progress",
-  sub:"Period 2026.9.15-12.31 (by flight date) · Target T3 (YoY growth ≥150%) · As of 11.8 · China Eastern Airlines / Leading Holiday",
+  sub:"Period 2026.9.15-12.31 (by flight date) · Target T3 (YoY growth ≥150%) · As of 11.22 · China Eastern Airlines / Leading Holiday",
   heroBadge:"✅ T3 achieved",
-  rateBadge:"CNY→SGD 0.192522", asOf:"📅 Data as of 8 Nov 2026",
+  rateBadge:"CNY→SGD 0.193676", asOf:"📅 Data as of 22 Nov 2026",
   k1l:"YoY Growth Rate", k1s:"Current net flown rev / 2025 same period",
-  k2l:"2026 Net Flown Revenue", k2s:"729 orders (excl. A/O/X) · as of Nov 8",
+  k2l:"2026 Net Flown Revenue", k2s:"856 orders (excl. A/O/X) · as of Nov 8",
   k3l:"2025 Base (same period)", k3s:"31 orders",
-  k4l:"T3 achieved · above threshold", k4s:"204,805 ≥ T3 threshold 44,367 SGD",
+  k4l:"T3 achieved · above threshold", k4s:"271,940 ≥ T3 threshold 44,367 SGD",
   gaugeTitle:"🎯 T3 Growth Completion (threshold 150%)",
   gaugeDesc:"Target T3: net flown revenue ≥ 44,367 SGD (YoY growth ≥150%, = 2025 base 29,578 ×150%) · Sales period 15 Sep - 31 Dec 2026",
-  gaugeCenter:['Growth / T3 threshold 150%','Current: T3 achieved','Time progress 50.9%'],
+  gaugeCenter:['Growth / T3 threshold 150%','Current: T3 achieved','Time progress 63.9%'],
   cmpTitle:"📊 2025 vs 2026 Monthly Net Flown Revenue (SGD)",
   cmpCats:['Sep','Oct','Nov','Dec'], cmpBase:'2025 same period', cmpCur:'2026 current',
   bandTitle:"📋 Achievement Band (by YoY growth of net flown revenue)",
   bandHead:['Tier','YoY Growth','SIN origin · First/Business','SIN origin · Premium/Economy','Non-SIN origin'],
   bandNote:"* Payout rate = origin × cabin × tier. Non-SIN origin (via/to SIN) fixed 1%. Current tier highlighted.",
   originTitle:"🧭 Current Origin Structure", originSeries:'Net flown revenue', originSin:'SIN origin', originNon:'Non-SIN origin', originFmt:'{point.name}: {point.y:,.0f} SGD ({point.percentage:.1f}%)',
-  footer:"MU Back-end KPI · Period 2026.9.15-12.31 (by flight date · net flown revenue) · Target T3 YoY growth ≥150% · Excl. A/O/X cabins, infant tickets, NDC(WEBL), charter; G cabin counts revenue but no payout · SGD accounts face value unchanged, CNY accounts CNY×0.192522→SGD (2025 base ×0.184024) · 2026 as of 11.8"
+  footer:"MU Back-end KPI · Period 2026.9.15-12.31 (by flight date · net flown revenue) · Target T3 YoY growth ≥150% · Excl. A/O/X cabins, infant tickets, NDC(WEBL), charter; G cabin counts revenue but no payout · SGD accounts face value unchanged, CNY accounts CNY×0.193676→SGD (2025 base ×0.184024) · 2026 as of 11.22"
  }
 };
 
@@ -120,7 +120,7 @@ function renderCharts(t){
   pane:{center:['50%','58%'],size:'95%',startAngle:-120,endAngle:120,background:{innerRadius:'62%',outerRadius:'100%',shape:'arc',backgroundColor:'#eef2f9'}},
   yAxis:{min:0,max:150,tickPositions:[0,100,110,130,150],labels:{distance:14,style:{fontSize:'10px'}},
     plotBands:[{from:0,to:100,color:'#e5e9f2'},{from:100,to:110,color:'#fde68a'},{from:110,to:130,color:'#93c5fd'},{from:130,to:150,color:'#86efac'}]},
-  series:[{data:[150],animation:false,dataLabels:{format:'<div style="text-align:center"><span style="font-size:26px;font-weight:800;color:#12b886">692.4%</span><br><span style="font-size:12px;color:#5b6b85">'+t.gaugeCenter[0]+'</span><br><span style="font-size:11px;color:#94a3b8">'+t.gaugeCenter[1]+'</span><br><span style="font-size:11px;color:#f59e0b;font-weight:700">'+t.gaugeCenter[2]+'</span></div>'},
+  series:[{data:[150],animation:false,dataLabels:{format:'<div style="text-align:center"><span style="font-size:26px;font-weight:800;color:#12b886">919.4%</span><br><span style="font-size:12px;color:#5b6b85">'+t.gaugeCenter[0]+'</span><br><span style="font-size:11px;color:#94a3b8">'+t.gaugeCenter[1]+'</span><br><span style="font-size:11px;color:#f59e0b;font-weight:700">'+t.gaugeCenter[2]+'</span></div>'},
     tooltip:{valueSuffix:'%'}}],
   plotOptions:{solidgauge:{animation:false,rounded:true,innerRadius:'62%',dataLabels:{y:14,borderWidth:0,useHTML:true}}}});
  // 月度对比
